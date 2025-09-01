@@ -3,12 +3,21 @@
   "type": "module",
   "version": "0.0.1",
   "scripts": {
-    "dev": "astro dev",
+    "dev": "astro dev --host 0.0.0.0",
     "build": "astro build",
     "preview": "astro preview",
-    "astro": "astro"
+    "astro": "astro",
+    "build:css": "tailwindcss -i ./src/styles/global.css -o ./dist/styles.css --watch"
   },
   "dependencies": {
-    "astro": "^5.13.2"
+    "@astrojs/vue": "^5.1.0",
+    "astro": "^5.13.2",
+    "autoprefixer": "^10.4.21",
+    "tailwindcss": "^3.4.17",
+    "vue": "^3.5.20"
+  },
+  "devDependencies": {
+    "prettier": "^3.6.2",
+    "prettier-plugin-astro": "^0.14.1"
   }
 }

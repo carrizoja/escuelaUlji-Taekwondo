@@ -1,0 +1,428 @@
+---
+import Layout from '../layouts/Layout.astro';
+import GalleryHero from '../components/gallery/GalleryHero.astro';
+import FilterBar from '../components/gallery/FilterBar.vue';
+import PhotoGallery from '../components/gallery/PhotoGallery.vue';
+import VideoShowcase from '../components/gallery/VideoShowcase.astro';
+import StudentSpotlight from '../components/gallery/StudentSpotlight.astro';
+import CompetitionResults from '../components/gallery/CompetitionResults.astro';
+import AchievementGallery from '../components/gallery/AchievementGallery.astro';
+import EventTimeline from '../components/gallery/EventTimeline.astro';
+import TechniquesGallery from '../components/gallery/TechniquesGallery.astro';
+import SocialFeed from '../components/gallery/SocialFeed.astro';
+---
+
+<Layout title="Galería - Escuela Ul-ji Taekwondo">
+  <main class="bg-white dark:bg-gray-900 min-h-screen">
+    
+    <!-- Hero Section -->
+    <section class="bg-gradient-to-br from-purple-600 to-blue-600 dark:from-purple-800 dark:to-blue-800 py-20">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+        <h1 class="text-4xl md:text-6xl font-bold text-white mb-6">
+          Galería
+        </h1>
+        <p class="text-xl text-purple-100 max-w-2xl mx-auto">
+          Descubre momentos únicos, técnicas perfectas y el espíritu del Taekwondo
+        </p>
+      </div>
+    </section>
+
+    <!-- Navigation Tabs -->
+    <section class="bg-white dark:bg-gray-900 border-b border-gray-200 dark:border-gray-700 sticky top-0 z-50">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <nav class="flex space-x-8">
+          <button 
+            data-tab="fotos" 
+            class="tab-button py-4 px-1 border-b-2 border-red-500 text-red-600 dark:text-red-400 font-medium text-sm uppercase tracking-wide transition-colors duration-300"
+          >
+            Fotos
+          </button>
+          <button 
+            data-tab="videos" 
+            class="tab-button py-4 px-1 border-b-2 border-transparent text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-300 hover:border-gray-300 dark:hover:border-gray-600 font-medium text-sm uppercase tracking-wide transition-colors duration-300"
+          >
+            Videos
+          </button>
+        </nav>
+      </div>
+    </section>
+
+    <!-- Fotos Section -->
+    <div id="fotos-section" class="tab-content">
+      <!-- Filter Bar -->
+      <FilterBar client:load />
+      
+      <!-- Photo Gallery -->
+      <PhotoGallery client:load />
+      
+      <!-- Student Spotlight -->
+      <StudentSpotlight />
+      
+      <!-- Competition Results -->
+      <CompetitionResults />
+      
+      <!-- Achievement Gallery -->
+      <AchievementGallery />
+      
+      <!-- Event Timeline -->
+      <EventTimeline />
+      
+      <!-- Techniques Gallery -->
+      <TechniquesGallery />
+      
+      <!-- Social Feed -->
+      <SocialFeed />
+    </div>
+
+    <!-- Videos Section -->
+    <div id="videos-section" class="tab-content hidden">
+      <!-- Video Showcase -->
+      <VideoShowcase />
+      
+      <!-- Video Categories -->
+      <section class="py-16 bg-gray-50 dark:bg-gray-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div class="text-center mb-12">
+            <h2 class="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-6">
+              Categorías de Videos
+            </h2>
+            <div class="w-24 h-1 bg-red-600 mx-auto mb-8"></div>
+          </div>
+
+          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <!-- Training Videos -->
+            <div class="bg-white dark:bg-gray-900 rounded-xl shadow-lg overflow-hidden group hover:shadow-xl transition-shadow duration-300">
+              <div class="h-48 bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center">
+                <svg class="w-16 h-16 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.828 14.828a4 4 0 01-5.656 0M9 10h1m4 0h1m-6 4h8m-8-10v18a2 2 0 002 2h8a2 2 0 002-2V4a2 2 0 00-2-2H5a2 2 0 00-2 2z"></path>
+                </svg>
+              </div>
+              <div class="p-6">
+                <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-3">
+                  Entrenamientos
+                </h3>
+                <p class="text-gray-600 dark:text-gray-400 mb-4">
+                  Videos de sesiones de entrenamiento, técnicas básicas y rutinas de práctica
+                </p>
+                <div class="flex items-center text-sm text-gray-500 dark:text-gray-400">
+                  <svg class="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                    <path d="M10 12a2 2 0 100-4 2 2 0 000 4z"></path>
+                    <path fill-rule="evenodd" d="M.458 10C1.732 5.943 5.522 3 10 3s8.268 2.943 9.542 7c-1.274 4.057-5.064 7-9.542 7S1.732 14.057.458 10zM14 10a4 4 0 11-8 0 4 4 0 018 0z" clip-rule="evenodd"></path>
+                  </svg>
+                  24 videos disponibles
+                </div>
+              </div>
+            </div>
+
+            <!-- Competition Videos -->
+            <div class="bg-white dark:bg-gray-900 rounded-xl shadow-lg overflow-hidden group hover:shadow-xl transition-shadow duration-300">
+              <div class="h-48 bg-gradient-to-br from-red-500 to-orange-600 flex items-center justify-center">
+                <svg class="w-16 h-16 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z"></path>
+                </svg>
+              </div>
+              <div class="p-6">
+                <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-3">
+                  Competiciones
+                </h3>
+                <p class="text-gray-600 dark:text-gray-400 mb-4">
+                  Combates destacados, campeonatos y momentos épicos de nuestros atletas
+                </p>
+                <div class="flex items-center text-sm text-gray-500 dark:text-gray-400">
+                  <svg class="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                    <path d="M10 12a2 2 0 100-4 2 2 0 000 4z"></path>
+                    <path fill-rule="evenodd" d="M.458 10C1.732 5.943 5.522 3 10 3s8.268 2.943 9.542 7c-1.274 4.057-5.064 7-9.542 7S1.732 14.057.458 10zM14 10a4 4 0 11-8 0 4 4 0 018 0z" clip-rule="evenodd"></path>
+                  </svg>
+                  18 videos disponibles
+                </div>
+              </div>
+            </div>
+
+            <!-- Tutorials -->
+            <div class="bg-white dark:bg-gray-900 rounded-xl shadow-lg overflow-hidden group hover:shadow-xl transition-shadow duration-300">
+              <div class="h-48 bg-gradient-to-br from-green-500 to-teal-600 flex items-center justify-center">
+                <svg class="w-16 h-16 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.246 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path>
+                </svg>
+              </div>
+              <div class="p-6">
+                <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-3">
+                  Tutoriales
+                </h3>
+                <p class="text-gray-600 dark:text-gray-400 mb-4">
+                  Aprende paso a paso con nuestros maestros expertos
+                </p>
+                <div class="flex items-center text-sm text-gray-500 dark:text-gray-400">
+                  <svg class="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                    <path d="M10 12a2 2 0 100-4 2 2 0 000 4z"></path>
+                    <path fill-rule="evenodd" d="M.458 10C1.732 5.943 5.522 3 10 3s8.268 2.943 9.542 7c-1.274 4.057-5.064 7-9.542 7S1.732 14.057.458 10zM14 10a4 4 0 11-8 0 4 4 0 018 0z" clip-rule="evenodd"></path>
+                  </svg>
+                  15 videos disponibles
+                </div>
+              </div>
+            </div>
+
+            <!-- Events -->
+            <div class="bg-white dark:bg-gray-900 rounded-xl shadow-lg overflow-hidden group hover:shadow-xl transition-shadow duration-300">
+              <div class="h-48 bg-gradient-to-br from-yellow-500 to-orange-600 flex items-center justify-center">
+                <svg class="w-16 h-16 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
+                </svg>
+              </div>
+              <div class="p-6">
+                <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-3">
+                  Eventos
+                </h3>
+                <p class="text-gray-600 dark:text-gray-400 mb-4">
+                  Exhibiciones, ceremonias de graduación y eventos especiales
+                </p>
+                <div class="flex items-center text-sm text-gray-500 dark:text-gray-400">
+                  <svg class="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                    <path d="M10 12a2 2 0 100-4 2 2 0 000 4z"></path>
+                    <path fill-rule="evenodd" d="M.458 10C1.732 5.943 5.522 3 10 3s8.268 2.943 9.542 7c-1.274 4.057-5.064 7-9.542 7S1.732 14.057.458 10zM14 10a4 4 0 11-8 0 4 4 0 018 0z" clip-rule="evenodd"></path>
+                  </svg>
+                  12 videos disponibles
+                </div>
+              </div>
+            </div>
+
+            <!-- Demonstrations -->
+            <div class="bg-white dark:bg-gray-900 rounded-xl shadow-lg overflow-hidden group hover:shadow-xl transition-shadow duration-300">
+              <div class="h-48 bg-gradient-to-br from-indigo-500 to-purple-600 flex items-center justify-center">
+                <svg class="w-16 h-16 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+                </svg>
+              </div>
+              <div class="p-6">
+                <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-3">
+                  Demostraciones
+                </h3>
+                <p class="text-gray-600 dark:text-gray-400 mb-4">
+                  Técnicas avanzadas, formas y rompimientos espectaculares
+                </p>
+                <div class="flex items-center text-sm text-gray-500 dark:text-gray-400">
+                  <svg class="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                    <path d="M10 12a2 2 0 100-4 2 2 0 000 4z"></path>
+                    <path fill-rule="evenodd" d="M.458 10C1.732 5.943 5.522 3 10 3s8.268 2.943 9.542 7c-1.274 4.057-5.064 7-9.542 7S1.732 14.057.458 10zM14 10a4 4 0 11-8 0 4 4 0 018 0z" clip-rule="evenodd"></path>
+                  </svg>
+                  21 videos disponibles
+                </div>
+              </div>
+            </div>
+
+            <!-- Live Streams -->
+            <div class="bg-white dark:bg-gray-900 rounded-xl shadow-lg overflow-hidden group hover:shadow-xl transition-shadow duration-300">
+              <div class="h-48 bg-gradient-to-br from-pink-500 to-red-600 flex items-center justify-center">
+                <svg class="w-16 h-16 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"></path>
+                </svg>
+              </div>
+              <div class="p-6">
+                <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-3">
+                  Transmisiones
+                </h3>
+                <p class="text-gray-600 dark:text-gray-400 mb-4">
+                  Clases en vivo, seminarios y eventos transmitidos en directo
+                </p>
+                <div class="flex items-center text-sm text-gray-500 dark:text-gray-400">
+                  <svg class="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                    <path d="M10 12a2 2 0 100-4 2 2 0 000 4z"></path>
+                    <path fill-rule="evenodd" d="M.458 10C1.732 5.943 5.522 3 10 3s8.268 2.943 9.542 7c-1.274 4.057-5.064 7-9.542 7S1.732 14.057.458 10zM14 10a4 4 0 11-8 0 4 4 0 018 0z" clip-rule="evenodd"></path>
+                  </svg>
+                  8 videos disponibles
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Video Playlist -->
+      <section class="py-16 bg-white dark:bg-gray-900">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div class="text-center mb-12">
+            <h2 class="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-6">
+              Playlist Destacada
+            </h2>
+            <div class="w-24 h-1 bg-red-600 mx-auto mb-8"></div>
+            <p class="text-lg text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
+              Una selección especial de nuestros mejores videos para tu aprendizaje
+            </p>
+          </div>
+
+          <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+            <!-- Featured Video -->
+            <div class="space-y-6">
+              <div class="aspect-video bg-gray-200 dark:bg-gray-700 rounded-lg overflow-hidden">
+                <div class="w-full h-full flex items-center justify-center">
+                  <button class="w-20 h-20 bg-red-600 rounded-full flex items-center justify-center hover:bg-red-700 transition-colors duration-300">
+                    <svg class="w-8 h-8 text-white ml-1" fill="currentColor" viewBox="0 0 24 24">
+                      <path d="M8 5v14l11-7z"/>
+                    </svg>
+                  </button>
+                </div>
+              </div>
+              <div>
+                <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-2">
+                  Técnicas Fundamentales de Taekwondo
+                </h3>
+                <p class="text-gray-600 dark:text-gray-400 mb-4">
+                  Aprende las bases del Taekwondo con nuestro maestro principal. 
+                  Este video cubre las posturas básicas, técnicas de pateo y principios fundamentales.
+                </p>
+                <div class="flex items-center text-sm text-gray-500 dark:text-gray-400">
+                  <span class="mr-4">📹 25:30</span>
+                  <span class="mr-4">👀 1,234 visualizaciones</span>
+                  <span>📅 Hace 2 semanas</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Playlist -->
+            <div class="space-y-4">
+              <h4 class="text-lg font-semibold text-gray-900 dark:text-white">
+                Videos Relacionados
+              </h4>
+              
+              <div class="space-y-3 max-h-96 overflow-y-auto">
+                <div class="flex gap-4 p-3 bg-gray-50 dark:bg-gray-800 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors duration-300 cursor-pointer">
+                  <div class="w-20 h-12 bg-gray-300 dark:bg-gray-600 rounded flex-shrink-0 flex items-center justify-center">
+                    <svg class="w-4 h-4 text-gray-500" fill="currentColor" viewBox="0 0 24 24">
+                      <path d="M8 5v14l11-7z"/>
+                    </svg>
+                  </div>
+                  <div class="flex-1 min-w-0">
+                    <p class="text-sm font-medium text-gray-900 dark:text-white truncate">
+                      Formas Básicas - Taegeuk 1
+                    </p>
+                    <p class="text-xs text-gray-500 dark:text-gray-400">
+                      12:45 • Hace 1 semana
+                    </p>
+                  </div>
+                </div>
+
+                <div class="flex gap-4 p-3 bg-gray-50 dark:bg-gray-800 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors duration-300 cursor-pointer">
+                  <div class="w-20 h-12 bg-gray-300 dark:bg-gray-600 rounded flex-shrink-0 flex items-center justify-center">
+                    <svg class="w-4 h-4 text-gray-500" fill="currentColor" viewBox="0 0 24 24">
+                      <path d="M8 5v14l11-7z"/>
+                    </svg>
+                  </div>
+                  <div class="flex-1 min-w-0">
+                    <p class="text-sm font-medium text-gray-900 dark:text-white truncate">
+                      Combate Deportivo - Estrategias
+                    </p>
+                    <p class="text-xs text-gray-500 dark:text-gray-400">
+                      18:22 • Hace 3 días
+                    </p>
+                  </div>
+                </div>
+
+                <div class="flex gap-4 p-3 bg-gray-50 dark:bg-gray-800 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors duration-300 cursor-pointer">
+                  <div class="w-20 h-12 bg-gray-300 dark:bg-gray-600 rounded flex-shrink-0 flex items-center justify-center">
+                    <svg class="w-4 h-4 text-gray-500" fill="currentColor" viewBox="0 0 24 24">
+                      <path d="M8 5v14l11-7z"/>
+                    </svg>
+                  </div>
+                  <div class="flex-1 min-w-0">
+                    <p class="text-sm font-medium text-gray-900 dark:text-white truncate">
+                      Filosofía del Taekwondo
+                    </p>
+                    <p class="text-xs text-gray-500 dark:text-gray-400">
+                      15:10 • Hace 5 días
+                    </p>
+                  </div>
+                </div>
+
+                <div class="flex gap-4 p-3 bg-gray-50 dark:bg-gray-800 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors duration-300 cursor-pointer">
+                  <div class="w-20 h-12 bg-gray-300 dark:bg-gray-600 rounded flex-shrink-0 flex items-center justify-center">
+                    <svg class="w-4 h-4 text-gray-500" fill="currentColor" viewBox="0 0 24 24">
+                      <path d="M8 5v14l11-7z"/>
+                    </svg>
+                  </div>
+                  <div class="flex-1 min-w-0">
+                    <p class="text-sm font-medium text-gray-900 dark:text-white truncate">
+                      Examen de Cinta Amarilla
+                    </p>
+                    <p class="text-xs text-gray-500 dark:text-gray-400">
+                      22:33 • Hace 1 semana
+                    </p>
+                  </div>
+                </div>
+
+                <div class="flex gap-4 p-3 bg-gray-50 dark:bg-gray-800 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors duration-300 cursor-pointer">
+                  <div class="w-20 h-12 bg-gray-300 dark:bg-gray-600 rounded flex-shrink-0 flex items-center justify-center">
+                    <svg class="w-4 h-4 text-gray-500" fill="currentColor" viewBox="0 0 24 24">
+                      <path d="M8 5v14l11-7z"/>
+                    </svg>
+                  </div>
+                  <div class="flex-1 min-w-0">
+                    <p class="text-sm font-medium text-gray-900 dark:text-white truncate">
+                      Calentamiento y Estiramientos
+                    </p>
+                    <p class="text-xs text-gray-500 dark:text-gray-400">
+                      8:45 • Hace 2 días
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+
+  </main>
+</Layout>
+
+<script>
+  // Tab functionality
+  document.addEventListener('DOMContentLoaded', function() {
+    const tabButtons = document.querySelectorAll('.tab-button');
+    const tabContents = document.querySelectorAll('.tab-content');
+
+    function switchTab(targetTab: string): void {
+      // Update buttons
+      tabButtons.forEach(button => {
+        const buttonElement = button as HTMLElement;
+        const tabValue = buttonElement.getAttribute('data-tab');
+        const isActive = tabValue === targetTab;
+        
+        buttonElement.classList.toggle('border-red-500', isActive);
+        buttonElement.classList.toggle('text-red-600', isActive);
+        buttonElement.classList.toggle('dark:text-red-400', isActive);
+        buttonElement.classList.toggle('border-transparent', !isActive);
+        buttonElement.classList.toggle('text-gray-500', !isActive);
+        buttonElement.classList.toggle('dark:text-gray-400', !isActive);
+      });
+
+      // Update content
+      tabContents.forEach(content => {
+        const isActive = content.id === `${targetTab}-section`;
+        content.classList.toggle('hidden', !isActive);
+      });
+    }
+
+    tabButtons.forEach(button => {
+      button.addEventListener('click', (e: Event) => {
+        const target = e.currentTarget;
+        if (target instanceof HTMLElement) {
+          const tabValue = target.getAttribute('data-tab');
+          if (tabValue) {
+            switchTab(tabValue);
+          }
+        }
+      });
+    });
+
+    // Smooth scroll for hash links
+    const handleHashChange = (): void => {
+      const hash = window.location.hash.slice(1);
+      if (hash === 'fotos' || hash === 'videos') {
+        switchTab(hash);
+      }
+    };
+
+    window.addEventListener('hashchange', handleHashChange);
+    handleHashChange(); // Check on load
+  });
+</script>

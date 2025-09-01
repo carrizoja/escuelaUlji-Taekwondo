@@ -1,0 +1,155 @@
+---
+// Modern Hero component for Escuela Ul-ji Taekwondo
+import Stats from '../ui/Stats.astro';
+import PrimaryButton from '../ui/PrimaryButton.astro';
+import SecondaryButton from '../ui/SecondaryButton.astro';
+---
+
+<section class="relative min-h-screen flex items-center justify-center overflow-hidden bg-gradient-hero dark:bg-gradient-dark transition-colors duration-300">
+  
+  <!-- Background Pattern -->
+  <div class="absolute inset-0 opacity-10 dark:opacity-5">
+    <div class="absolute top-20 left-10 w-64 h-64 border-2 border-brand-red dark:border-brand-red-light rotate-45 animate-pulse"></div>
+    <div class="absolute bottom-20 right-10 w-48 h-48 border-2 border-white dark:border-gray-300 rotate-12 animate-pulse delay-1000"></div>
+    <div class="absolute top-1/2 left-1/4 w-32 h-32 border border-ulji-red-400 dark:border-ulji-red-300 rotate-45 animate-pulse delay-500"></div>
+    <div class="absolute bottom-1/3 left-1/2 w-24 h-24 border border-white dark:border-gray-400 rotate-12 animate-pulse delay-700"></div>
+  </div>
+
+  <!-- Taekwondo Silhouette Background -->
+  <div class="absolute inset-0 opacity-5 dark:opacity-3">
+    <svg class="absolute right-0 top-1/2 transform -translate-y-1/2 w-96 h-96 text-white dark:text-gray-300" viewBox="0 0 400 400" fill="currentColor">
+      <!-- Taekwondo Kick Silhouette -->
+      <path d="M200 50 C220 50 240 70 240 90 L240 120 C240 130 250 140 260 140 L280 140 C290 140 300 150 300 160 L300 180 C300 190 310 200 320 200 L340 200 C350 200 360 210 360 220 L360 240 C360 250 350 260 340 260 L320 260 C310 260 300 270 300 280 L300 300 C300 310 290 320 280 320 L260 320 C250 320 240 330 240 340 L240 360 C240 370 220 380 200 380 C180 380 160 370 160 360 L160 340 C160 330 150 320 140 320 L120 320 C110 320 100 310 100 300 L100 280 C100 270 90 260 80 260 L60 260 C50 260 40 250 40 240 L40 220 C40 210 50 200 60 200 L80 200 C90 200 100 190 100 180 L100 160 C100 150 110 140 120 140 L140 140 C150 140 160 130 160 120 L160 90 C160 70 180 50 200 50 Z"/>
+    </svg>
+  </div>
+
+  <!-- Main Content -->
+  <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+    
+    <!-- Logo Section -->
+    <div class="mb-8 animate-fade-in mt-4 md:mt-2">
+      <img 
+        src="https://res.cloudinary.com/dgvje1bpw/image/upload/v1756572320/logo_ulji_gkw0wn.png" 
+        alt="Logo Escuela Ul-ji" 
+        class="w-24 h-24 md:w-32 md:h-32 bg-brand-red rounded-full flex items-center justify-center mx-auto mb-4 shadow-lg"
+      />
+      <h1 class="text-5xl md:text-7xl lg:text-8xl font-bold text-white mb-4 leading-tight">
+        Escuela <span class="text-ulji-red-400 dark:text-ulji-red-300">Ul-ji</span>
+      </h1>
+      <p class="text-xl md:text-2xl text-ulji-red-300 dark:text-ulji-red-200 font-semibold mb-8 tracking-wide">
+        Siempre en crecimiento
+      </p>
+    </div>
+
+    <!-- Mission Statement -->
+    <div class="mb-12 max-w-4xl mx-auto animate-slide-up">
+      <h2 class="text-2xl md:text-3xl text-white mb-6 leading-relaxed">
+        Forjando <span class="text-ulji-red-400 dark:text-ulji-red-300 font-semibold">Guerreros</span> 
+        con <span class="text-ulji-red-400 dark:text-ulji-red-300 font-semibold">Disciplina</span>, 
+        <span class="text-ulji-red-400 dark:text-ulji-red-300 font-semibold">Respeto</span> y 
+        <span class="text-ulji-red-400 dark:text-ulji-red-300 font-semibold">Honor</span>
+      </h2>
+      <p class="text-lg md:text-xl text-gray-300 dark:text-gray-200 leading-relaxed max-w-3xl mx-auto">
+        Desde 1995, nuestra escuela ha sido el hogar de campeones. Aquí no solo enseñamos técnicas de combate, 
+        sino que desarrollamos el carácter, la confianza y el espíritu indomable del verdadero artista marcial.
+      </p>
+    </div>
+
+    <!-- Call to Action Buttons -->
+    <div class="flex flex-col sm:flex-row gap-6 justify-center items-center mb-16 animate-fade-in-up">
+      <PrimaryButton 
+        href="#contact"
+        text="Clase de Prueba Gratis"
+        icon="arrow"
+        size="lg"
+        variant="primary"
+      />
+      
+      <SecondaryButton 
+        href="/gallery"
+        text="Ver Galería"
+        icon="gallery"
+        size="lg"
+      />
+    </div>
+
+    <!-- Stats Section -->
+    <Stats />
+  </div>
+  <!-- Floating Elements -->
+  <div class="absolute top-20 right-20 w-4 h-4 bg-brand-red dark:bg-ulji-red-400 rounded-full animate-ping opacity-75 hidden lg:block"></div>
+  <div class="absolute bottom-40 left-20 w-3 h-3 bg-white dark:bg-gray-300 rounded-full animate-ping opacity-75 hidden lg:block delay-1000"></div>
+  <div class="absolute top-40 left-40 w-2 h-2 bg-ulji-red-300 dark:text-ulji-red-200 rounded-full animate-ping opacity-75 hidden lg:block delay-500"></div>
+</section>
+
+<style>
+  /* Custom animations */
+  @keyframes fade-in {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes slide-up {
+    from {
+      opacity: 0;
+      transform: translateY(40px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes fade-in-up {
+    from {
+      opacity: 0;
+      transform: translateY(30px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .animate-fade-in {
+    animation: fade-in 1s ease-out;
+  }
+
+  .animate-slide-up {
+    animation: slide-up 1s ease-out 0.3s both;
+  }
+
+  .animate-fade-in-up {
+    animation: fade-in-up 1s ease-out 0.6s both;
+  }
+
+  /* Responsive text scaling */
+  @media (max-width: 640px) {
+    h1 {
+      font-size: 2.5rem;
+      line-height: 1.1;
+    }
+  }
+
+  /* Smooth hover effects */
+  .group:hover .group-hover\:translate-x-1 {
+    transform: translateX(0.25rem);
+  }
+
+  .group:hover .group-hover\:scale-110 {
+    transform: scale(1.1);
+  }
+
+  /* Enhanced shadows for dark mode */
+  @media (prefers-color-scheme: dark) {
+    .shadow-2xl {
+      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.8);
+    }
+  }
+</style>

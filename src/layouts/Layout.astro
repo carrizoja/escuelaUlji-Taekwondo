@@ -1,3 +1,11 @@
+---
+import '../styles/global.css';
+import NavbarVue from '../components/NavbarVue.vue';
+import Footer from '../components/Footer.astro';
+import AiChatbot from '../components/AiChatbot.astro';
+
+---
+
 <!doctype html>
 <html lang="en">
 	<head>
@@ -5,18 +13,57 @@
 		<meta name="viewport" content="width=device-width" />
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 		<meta name="generator" content={Astro.generator} />
+		
+		<!-- Google Fonts - Poppins for titles and Barlow for text -->
+		<link rel="preconnect" href="https://fonts.googleapis.com">
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+		<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&family=Barlow:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+		
 		<title>Astro Basics</title>
 	</head>
-	<body>
+	<body class="bg-white dark:bg-gray-900 transition-colors duration-300">
+		<NavbarVue client:load />
 		<slot />
+		<AiChatbot />
+		<Footer />
 	</body>
 </html>
 
 <style>
+	html {
+		scroll-behavior: smooth;
+		scroll-padding-top: 4rem; /* Accounts for sticky navigation */
+		font-family: 'Barlow', sans-serif; /* Default font for text */
+	}
+	
 	html,
 	body {
 		margin: 0;
 		width: 100%;
 		height: 100%;
+	}
+
+	/* Font family utilities */
+	h1, h2, h3, h4, h5, h6,
+	.font-heading {
+		font-family: 'Poppins', sans-serif;
+	}
+
+	.font-text {
+		font-family: 'Barlow', sans-serif;
+	}
+
+	/* Enhanced smooth scrolling with custom timing */
+	@media (prefers-reduced-motion: no-preference) {
+		html {
+			scroll-behavior: smooth;
+		}
+	}
+
+	/* Respect user's motion preferences */
+	@media (prefers-reduced-motion: reduce) {
+		html {
+			scroll-behavior: auto;
+		}
 	}
 </style>

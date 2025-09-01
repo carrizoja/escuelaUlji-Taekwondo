@@ -1,0 +1,226 @@
+---
+// Institucional page - About Us section
+import Layout from '../layouts/Layout.astro';
+import Instructors from '../components/Instructors.astro';
+import About from '../components/blocks/About.astro';
+---
+
+<Layout title="Institucional - Escuela Ul-ji Taekwondo">
+  <main class="min-h-screen bg-white dark:bg-gray-900">
+    
+    <!-- Hero Section -->
+    <section class="bg-gradient-primary dark:bg-gradient-dark py-20">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+        <h1 class="text-4xl md:text-6xl font-bold text-white mb-6">
+          Institucional
+        </h1>
+        <p class="text-xl text-ulji-red-100 max-w-2xl mx-auto">
+          Conocé más sobre nuestra escuela, nuestra misión y nuestra visión
+        </p>
+      </div>
+    </section>
+
+    <!-- Navigation Tabs -->
+    <section class="bg-white dark:bg-gray-800 shadow-lg sticky top-0 z-40">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <nav class="flex space-x-8 overflow-x-auto py-4">
+          <a href="#nosotros" class="whitespace-nowrap text-brand-red dark:text-ulji-red-400 border-b-2 border-brand-red dark:border-ulji-red-400 px-4 py-2 font-semibold">
+            Nosotros
+          </a>
+          <a href="#instructores" class="whitespace-nowrap text-gray-600 dark:text-gray-400 hover:text-brand-red dark:hover:text-ulji-red-400 px-4 py-2 font-semibold transition-colors duration-300">
+            Instructores
+          </a>
+          <a href="#mision" class="whitespace-nowrap text-gray-600 dark:text-gray-400 hover:text-brand-red dark:hover:text-ulji-red-400 px-4 py-2 font-semibold transition-colors duration-300">
+            Misión
+          </a>
+          <a href="#vision" class="whitespace-nowrap text-gray-600 dark:text-gray-400 hover:text-brand-red dark:hover:text-ulji-red-400 px-4 py-2 font-semibold transition-colors duration-300">
+            Visión
+          </a>
+        </nav>
+      </div>
+    </section>
+
+    <!-- Nosotros Section -->
+    <!-- About Section -->
+    <About />
+
+    <!-- Instructores Component -->    <!-- Instructores Component -->
+    <Instructors />
+
+    <!-- Misión Section -->
+    <section id="mision" class="py-16 bg-gray-50 dark:bg-gray-800">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-12">
+          <h2 class="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-6">
+            Nuestra Misión
+          </h2>
+          <div class="w-24 h-1 bg-brand-red mx-auto mb-8"></div>
+        </div>
+        
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+          <div class="order-2 lg:order-1">
+            <img 
+              src="/api/placeholder/600/500" 
+              alt="Misión Escuela Ul-ji"
+              class="w-full h-96 object-cover rounded-xl shadow-lg"
+            />
+          </div>
+          <div class="order-1 lg:order-2">
+            <div class="bg-white dark:bg-gray-900 p-8 rounded-xl shadow-lg">
+              <h3 class="text-2xl font-bold text-brand-red dark:text-ulji-red-400 mb-6">
+                Formar personas con valores
+              </h3>
+              <p class="text-lg text-gray-700 dark:text-gray-300 mb-6 leading-relaxed">
+                Formar personas íntegras a través de la práctica del Taekwondo, transmitiendo sus valores (cortesía, autocontrol, espíritu indomable, integridad y perseverancia). Brindar un espacio inclusivo y seguro donde niños, niñas, jóvenes y adultos desarrollen sus habilidades físicas, mentales y emocionales, fortaleciendo el cuerpo y el carácter.
+              </p>
+              <p class="text-lg text-gray-700 dark:text-gray-300 mb-6 leading-relaxed">
+                Creemos que el verdadero arte marcial trasciende las técnicas de combate y se convierte en una filosofía de vida que promueve la paz, el respeto y el crecimiento personal continuo.
+              </p>
+              <div class="bg-ulji-red-50 dark:bg-ulji-red-900/20 p-4 rounded-lg border-l-4 border-brand-red">
+                <p class="text-gray-800 dark:text-gray-200 font-medium italic">
+                  "No formamos solo luchadores, formamos personas íntegras que utilizan el Taekwondo como herramienta de transformación personal y social."
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Visión Section -->
+    <section id="vision" class="py-16 bg-white dark:bg-gray-900">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-12">
+          <h2 class="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-6">
+            Nuestra Visión
+          </h2>
+          <div class="w-24 h-1 bg-brand-red mx-auto mb-8"></div>
+        </div>
+        
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+          <div>
+            <div class="bg-gradient-to-br from-ulji-red-50 to-orange-50 dark:from-ulji-red-900/20 dark:to-orange-900/20 p-8 rounded-xl">
+              <h3 class="text-2xl font-bold text-brand-red dark:text-ulji-red-400 mb-6">
+                Líderes en Excelencia Marcial
+              </h3>
+              <p class="text-lg text-gray-700 dark:text-gray-300 mb-6 leading-relaxed">
+                Aspiramos a ser reconocidos como la escuela de Taekwondo líder en nuestra región, no solo por la calidad técnica de nuestros estudiantes, sino por el impacto positivo que generamos en la comunidad.
+              </p>
+              <p class="text-lg text-gray-700 dark:text-gray-300 mb-6 leading-relaxed">
+                Visualizamos un futuro donde cada graduado de Ul-ji sea un embajador de los valores del Taekwondo, contribuyendo a crear una sociedad más disciplinada, respetuosa y pacífica.
+              </p>
+              
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-8">
+                <div class="text-center p-4 bg-white dark:bg-gray-800 rounded-lg shadow">
+                  <div class="text-3xl font-bold text-brand-red dark:text-ulji-red-400 mb-2">2030</div>
+                  <div class="text-sm text-gray-600 dark:text-gray-400">Meta: 1000+ estudiantes formados</div>
+                </div>
+                <div class="text-center p-4 bg-white dark:bg-gray-800 rounded-lg shadow">
+                  <div class="text-3xl font-bold text-brand-red dark:text-ulji-red-400 mb-2">100+</div>
+                  <div class="text-sm text-gray-600 dark:text-gray-400">Cinturones negro certificados</div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div>
+            <img 
+              src="/api/placeholder/600/500" 
+              alt="Visión Escuela Ul-ji"
+              class="w-full h-96 object-cover rounded-xl shadow-lg"
+            />
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Call to Action -->
+          <!-- Call to Action Section -->
+      <section class="mt-16 text-center">
+        <div class="bg-gradient-primary text-white py-16 px-8 rounded-lg">
+          <h2 class="text-3xl font-bold mb-4">¿Listo para comenzar tu viaje en el Taekwondo?</h2>
+          <p class="text-lg mb-8">Únete a nuestra familia ULJI y descubre todo tu potencial</p>
+          <div class="space-x-4">
+            <a href="/contacto" class="bg-white text-brand-red px-8 py-3 rounded-lg font-semibold hover:bg-gray-100 transition-colors">
+              Información de Clases
+            </a>
+            <a href="/gallery" class="border-2 border-white text-white px-8 py-3 rounded-lg font-semibold hover:bg-white hover:text-brand-red transition-colors">
+              Ver Galería
+            </a>
+          </div>
+        </div>
+      </section>
+
+  </main>
+</Layout>
+
+<script>
+  // Smooth scrolling for navigation links
+  document.addEventListener('DOMContentLoaded', function() {
+    const navLinks = document.querySelectorAll('nav a[href^="#"]');
+    
+    navLinks.forEach(link => {
+      link.addEventListener('click', function(e) {
+        e.preventDefault();
+        const clickedLink = e.currentTarget;
+        
+        if (clickedLink && clickedLink instanceof HTMLAnchorElement) {
+          const targetId = clickedLink.getAttribute('href')?.substring(1);
+          const targetElement = targetId ? document.getElementById(targetId) : null;
+          
+          if (targetElement && targetElement instanceof HTMLElement) {
+            const offsetTop = targetElement.offsetTop - 100; // Account for sticky nav
+            
+            window.scrollTo({
+              top: offsetTop,
+              behavior: 'smooth'
+            });
+            
+            // Update active nav item
+            navLinks.forEach(navLink => {
+              if (navLink instanceof HTMLElement) {
+                navLink.classList.remove('text-brand-red', 'dark:text-ulji-red-400', 'border-b-2', 'border-brand-red', 'dark:border-ulji-red-400');
+                navLink.classList.add('text-gray-600', 'dark:text-gray-400');
+              }
+            });
+            
+            clickedLink.classList.add('text-brand-red', 'dark:text-ulji-red-400', 'border-b-2', 'border-brand-red', 'dark:border-ulji-red-400');
+            clickedLink.classList.remove('text-gray-600', 'dark:text-gray-400');
+          }
+        }
+      });
+    });
+
+    // Update active nav item on scroll
+    const sections = document.querySelectorAll('section[id]');
+    
+    function updateActiveNav() {
+      const scrollY = window.pageYOffset;
+      
+      sections.forEach(section => {
+        if (section instanceof HTMLElement) {
+          const sectionTop = section.offsetTop - 150;
+          const sectionBottom = sectionTop + section.offsetHeight;
+          const sectionId = section.getAttribute('id');
+          
+          if (scrollY >= sectionTop && scrollY < sectionBottom && sectionId) {
+            navLinks.forEach(navLink => {
+              if (navLink instanceof HTMLElement) {
+                navLink.classList.remove('text-brand-red', 'dark:text-ulji-red-400', 'border-b-2', 'border-brand-red', 'dark:border-ulji-red-400');
+                navLink.classList.add('text-gray-600', 'dark:text-gray-400');
+                
+                if (navLink.getAttribute('href') === `#${sectionId}`) {
+                  navLink.classList.add('text-brand-red', 'dark:text-ulji-red-400', 'border-b-2', 'border-brand-red', 'dark:border-ulji-red-400');
+                  navLink.classList.remove('text-gray-600', 'dark:text-gray-400');
+                }
+              }
+            });
+          }
+        }
+      });
+    }
+
+    window.addEventListener('scroll', updateActiveNav);
+    updateActiveNav(); // Initial call
+  });
+</script>
+</Layout>

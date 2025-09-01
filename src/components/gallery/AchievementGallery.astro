@@ -1,0 +1,408 @@
+---
+// AchievementGallery.astro - Trophy display and school achievements
+---
+
+<section class="bg-gray-50 dark:bg-gray-800 py-16">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <!-- Section Header -->
+    <div class="text-center mb-12">
+      <div class="inline-flex items-center justify-center w-16 h-16 bg-yellow-100 dark:bg-yellow-900/30 rounded-full mb-4">
+        <svg class="w-8 h-8 text-yellow-600 dark:text-yellow-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m0 0l3-3m-3 3l-3-3m1-5V9a3 3 0 00-6 0v5a3 3 0 006 0z"></path>
+        </svg>
+      </div>
+      <h2 class="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-4">
+        Galería de Logros
+      </h2>
+      <p class="text-lg text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
+        Una colección de nuestros trofeos, certificados y momentos históricos que definen la excelencia de Ul-ji
+      </p>
+    </div>
+
+    <!-- Achievement Categories -->
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-16">
+      <!-- Trophies -->
+      <div class="bg-white dark:bg-gray-900 rounded-xl p-6 text-center shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1">
+        <div class="w-16 h-16 bg-yellow-100 dark:bg-yellow-900/30 rounded-full flex items-center justify-center mx-auto mb-4">
+          <svg class="w-8 h-8 text-yellow-600 dark:text-yellow-400" fill="currentColor" viewBox="0 0 20 20">
+            <path fill-rule="evenodd" d="M10 2L3 7v3c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V7l-7-5z" clip-rule="evenodd"></path>
+          </svg>
+        </div>
+        <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-2">Trofeos</h3>
+        <p class="text-3xl font-bold text-yellow-600 dark:text-yellow-400 mb-2">87</p>
+        <p class="text-gray-600 dark:text-gray-400 text-sm">Competencias ganadas</p>
+      </div>
+
+      <!-- Certificates -->
+      <div class="bg-white dark:bg-gray-900 rounded-xl p-6 text-center shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1">
+        <div class="w-16 h-16 bg-blue-100 dark:bg-blue-900/30 rounded-full flex items-center justify-center mx-auto mb-4">
+          <svg class="w-8 h-8 text-blue-600 dark:text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+          </svg>
+        </div>
+        <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-2">Certificados</h3>
+        <p class="text-3xl font-bold text-blue-600 dark:text-blue-400 mb-2">156</p>
+        <p class="text-gray-600 dark:text-gray-400 text-sm">Graduaciones completadas</p>
+      </div>
+
+      <!-- Recognition -->
+      <div class="bg-white dark:bg-gray-900 rounded-xl p-6 text-center shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1">
+        <div class="w-16 h-16 bg-purple-100 dark:bg-purple-900/30 rounded-full flex items-center justify-center mx-auto mb-4">
+          <svg class="w-8 h-8 text-purple-600 dark:text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z"></path>
+          </svg>
+        </div>
+        <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-2">Reconocimientos</h3>
+        <p class="text-3xl font-bold text-purple-600 dark:text-purple-400 mb-2">23</p>
+        <p class="text-gray-600 dark:text-gray-400 text-sm">Premios institucionales</p>
+      </div>
+
+      <!-- Years -->
+      <div class="bg-white dark:bg-gray-900 rounded-xl p-6 text-center shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1">
+        <div class="w-16 h-16 bg-red-100 dark:bg-red-900/30 rounded-full flex items-center justify-center mx-auto mb-4">
+          <svg class="w-8 h-8 text-red-600 dark:text-red-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+          </svg>
+        </div>
+        <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-2">Experiencia</h3>
+        <p class="text-3xl font-bold text-red-600 dark:text-red-400 mb-2">15+</p>
+        <p class="text-gray-600 dark:text-gray-400 text-sm">Años de excelencia</p>
+      </div>
+    </div>
+
+    <!-- Trophy Display -->
+    <div class="mb-16">
+      <h3 class="text-2xl font-bold text-gray-900 dark:text-white mb-8 text-center">
+        Galería de Trofeos
+      </h3>
+      
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <!-- Trophy 1 -->
+        <div class="bg-white dark:bg-gray-900 rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 group">
+          <div class="relative">
+            <img 
+              src="/api/placeholder/400/300" 
+              alt="Trofeo Campeonato Nacional"
+              class="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300"
+            />
+            <div class="absolute top-4 left-4">
+              <span class="bg-yellow-500 text-white px-3 py-1 text-xs font-bold rounded-full">
+                1° LUGAR
+              </span>
+            </div>
+            <div class="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-20 transition-all duration-300"></div>
+          </div>
+          <div class="p-6">
+            <h4 class="text-xl font-bold text-gray-900 dark:text-white mb-2">
+              Campeonato Nacional de España
+            </h4>
+            <p class="text-gray-600 dark:text-gray-400 text-sm mb-3">
+              Primer lugar en categoría por equipos senior
+            </p>
+            <div class="flex items-center justify-between">
+              <span class="text-yellow-600 dark:text-yellow-400 font-semibold">2024</span>
+              <span class="bg-yellow-100 dark:bg-yellow-900/30 text-yellow-800 dark:text-yellow-400 px-2 py-1 text-xs rounded">NACIONAL</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Trophy 2 -->
+        <div class="bg-white dark:bg-gray-900 rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 group">
+          <div class="relative">
+            <img 
+              src="/api/placeholder/400/300" 
+              alt="Copa Internacional Europa"
+              class="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300"
+            />
+            <div class="absolute top-4 left-4">
+              <span class="bg-red-500 text-white px-3 py-1 text-xs font-bold rounded-full">
+                INTERNACIONAL
+              </span>
+            </div>
+            <div class="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-20 transition-all duration-300"></div>
+          </div>
+          <div class="p-6">
+            <h4 class="text-xl font-bold text-gray-900 dark:text-white mb-2">
+              Copa Internacional de Europa
+            </h4>
+            <p class="text-gray-600 dark:text-gray-400 text-sm mb-3">
+              Mejor delegación extranjera en París
+            </p>
+            <div class="flex items-center justify-between">
+              <span class="text-red-600 dark:text-red-400 font-semibold">2024</span>
+              <span class="bg-red-100 dark:bg-red-900/30 text-red-800 dark:text-red-400 px-2 py-1 text-xs rounded">EUROPA</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Trophy 3 -->
+        <div class="bg-white dark:bg-gray-900 rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 group">
+          <div class="relative">
+            <img 
+              src="/api/placeholder/400/300" 
+              alt="Premio Mejor Escuela"
+              class="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300"
+            />
+            <div class="absolute top-4 left-4">
+              <span class="bg-purple-500 text-white px-3 py-1 text-xs font-bold rounded-full">
+                RECONOCIMIENTO
+              </span>
+            </div>
+            <div class="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-20 transition-all duration-300"></div>
+          </div>
+          <div class="p-6">
+            <h4 class="text-xl font-bold text-gray-900 dark:text-white mb-2">
+              Mejor Escuela de Taekwondo
+            </h4>
+            <p class="text-gray-600 dark:text-gray-400 text-sm mb-3">
+              Federación Española de Taekwondo
+            </p>
+            <div class="flex items-center justify-between">
+              <span class="text-purple-600 dark:text-purple-400 font-semibold">2023</span>
+              <span class="bg-purple-100 dark:bg-purple-900/30 text-purple-800 dark:text-purple-400 px-2 py-1 text-xs rounded">FEDERACIÓN</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Trophy 4 -->
+        <div class="bg-white dark:bg-gray-900 rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 group">
+          <div class="relative">
+            <img 
+              src="/api/placeholder/400/300" 
+              alt="Torneo Regional"
+              class="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300"
+            />
+            <div class="absolute top-4 left-4">
+              <span class="bg-green-500 text-white px-3 py-1 text-xs font-bold rounded-full">
+                CAMPEONES
+              </span>
+            </div>
+            <div class="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-20 transition-all duration-300"></div>
+          </div>
+          <div class="p-6">
+            <h4 class="text-xl font-bold text-gray-900 dark:text-white mb-2">
+              Torneo Regional de Madrid
+            </h4>
+            <p class="text-gray-600 dark:text-gray-400 text-sm mb-3">
+              Campeones absolutos en todas las categorías
+            </p>
+            <div class="flex items-center justify-between">
+              <span class="text-green-600 dark:text-green-400 font-semibold">2023</span>
+              <span class="bg-green-100 dark:bg-green-900/30 text-green-800 dark:text-green-400 px-2 py-1 text-xs rounded">REGIONAL</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Trophy 5 -->
+        <div class="bg-white dark:bg-gray-900 rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 group">
+          <div class="relative">
+            <img 
+              src="/api/placeholder/400/300" 
+              alt="Copa Inclusión"
+              class="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300"
+            />
+            <div class="absolute top-4 left-4">
+              <span class="bg-blue-500 text-white px-3 py-1 text-xs font-bold rounded-full">
+                INCLUSIÓN
+              </span>
+            </div>
+            <div class="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-20 transition-all duration-300"></div>
+          </div>
+          <div class="p-6">
+            <h4 class="text-xl font-bold text-gray-900 dark:text-white mb-2">
+              Premio Inclusión Deportiva
+            </h4>
+            <p class="text-gray-600 dark:text-gray-400 text-sm mb-3">
+              Reconocimiento por programa de Taekwondo adaptado
+            </p>
+            <div class="flex items-center justify-between">
+              <span class="text-blue-600 dark:text-blue-400 font-semibold">2022</span>
+              <span class="bg-blue-100 dark:bg-blue-900/30 text-blue-800 dark:text-blue-400 px-2 py-1 text-xs rounded">SOCIAL</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Trophy 6 -->
+        <div class="bg-white dark:bg-gray-900 rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 group">
+          <div class="relative">
+            <img 
+              src="/api/placeholder/400/300" 
+              alt="Aniversario 15 años"
+              class="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300"
+            />
+            <div class="absolute top-4 left-4">
+              <span class="bg-amber-500 text-white px-3 py-1 text-xs font-bold rounded-full">
+                ANIVERSARIO
+              </span>
+            </div>
+            <div class="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-20 transition-all duration-300"></div>
+          </div>
+          <div class="p-6">
+            <h4 class="text-xl font-bold text-gray-900 dark:text-white mb-2">
+              15 Años de Excelencia
+            </h4>
+            <p class="text-gray-600 dark:text-gray-400 text-sm mb-3">
+              Celebración de década y media formando campeones
+            </p>
+            <div class="flex items-center justify-between">
+              <span class="text-amber-600 dark:text-amber-400 font-semibold">2024</span>
+              <span class="bg-amber-100 dark:bg-amber-900/30 text-amber-800 dark:text-amber-400 px-2 py-1 text-xs rounded">HITO</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Certificates and Recognition -->
+    <div class="mb-16">
+      <h3 class="text-2xl font-bold text-gray-900 dark:text-white mb-8 text-center">
+        Certificaciones y Reconocimientos
+      </h3>
+      
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+        <!-- Certification 1 -->
+        <div class="bg-white dark:bg-gray-900 rounded-lg p-6 text-center shadow-lg">
+          <div class="w-16 h-16 bg-blue-100 dark:bg-blue-900/30 rounded-full flex items-center justify-center mx-auto mb-4">
+            <svg class="w-8 h-8 text-blue-600 dark:text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5-8a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+            </svg>
+          </div>
+          <h4 class="font-bold text-gray-900 dark:text-white mb-2">Escuela Certificada</h4>
+          <p class="text-blue-600 dark:text-blue-400 text-sm font-semibold mb-2">WTF Kukkiwon</p>
+          <p class="text-gray-600 dark:text-gray-400 text-xs">Certificación internacional oficial</p>
+        </div>
+
+        <!-- Certification 2 -->
+        <div class="bg-white dark:bg-gray-900 rounded-lg p-6 text-center shadow-lg">
+          <div class="w-16 h-16 bg-green-100 dark:bg-green-900/30 rounded-full flex items-center justify-center mx-auto mb-4">
+            <svg class="w-8 h-8 text-green-600 dark:text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.746 0 3.332.477 4.5 1.253v13C19.832 18.477 18.246 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path>
+            </svg>
+          </div>
+          <h4 class="font-bold text-gray-900 dark:text-white mb-2">Centro Formación</h4>
+          <p class="text-green-600 dark:text-green-400 text-sm font-semibold mb-2">FETE Oficial</p>
+          <p class="text-gray-600 dark:text-gray-400 text-xs">Federación Española reconocida</p>
+        </div>
+
+        <!-- Certification 3 -->
+        <div class="bg-white dark:bg-gray-900 rounded-lg p-6 text-center shadow-lg">
+          <div class="w-16 h-16 bg-purple-100 dark:bg-purple-900/30 rounded-full flex items-center justify-center mx-auto mb-4">
+            <svg class="w-8 h-8 text-purple-600 dark:text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path>
+            </svg>
+          </div>
+          <h4 class="font-bold text-gray-900 dark:text-white mb-2">Inclusión Social</h4>
+          <p class="text-purple-600 dark:text-purple-400 text-sm font-semibold mb-2">ONCE Madrid</p>
+          <p class="text-gray-600 dark:text-gray-400 text-xs">Programa adaptado certificado</p>
+        </div>
+
+        <!-- Certification 4 -->
+        <div class="bg-white dark:bg-gray-900 rounded-lg p-6 text-center shadow-lg">
+          <div class="w-16 h-16 bg-orange-100 dark:bg-orange-900/30 rounded-full flex items-center justify-center mx-auto mb-4">
+            <svg class="w-8 h-8 text-orange-600 dark:text-orange-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+            </svg>
+          </div>
+          <h4 class="font-bold text-gray-900 dark:text-white mb-2">Excelencia Deportiva</h4>
+          <p class="text-orange-600 dark:text-orange-400 text-sm font-semibold mb-2">CAR Madrid</p>
+          <p class="text-gray-600 dark:text-gray-400 text-xs">Centro alto rendimiento</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- School Timeline -->
+    <div class="mb-16">
+      <h3 class="text-2xl font-bold text-gray-900 dark:text-white mb-8 text-center">
+        Historia de la Escuela
+      </h3>
+      
+      <div class="bg-white dark:bg-gray-900 rounded-2xl p-8 shadow-lg">
+        <div class="space-y-8">
+          <!-- Milestone 1 -->
+          <div class="flex items-start">
+            <div class="flex-shrink-0 w-16 h-16 bg-red-100 dark:bg-red-900/30 rounded-full flex items-center justify-center mr-6">
+              <span class="text-red-600 dark:text-red-400 font-bold text-sm">2009</span>
+            </div>
+            <div>
+              <h4 class="text-xl font-bold text-gray-900 dark:text-white mb-2">Fundación de Escuela Ul-ji</h4>
+              <p class="text-gray-600 dark:text-gray-400">
+                Inicio de nuestra historia con 15 estudiantes y el sueño de formar campeones con valores tradicionales del Taekwondo.
+              </p>
+            </div>
+          </div>
+
+          <!-- Milestone 2 -->
+          <div class="flex items-start">
+            <div class="flex-shrink-0 w-16 h-16 bg-blue-100 dark:bg-blue-900/30 rounded-full flex items-center justify-center mr-6">
+              <span class="text-blue-600 dark:text-blue-400 font-bold text-sm">2012</span>
+            </div>
+            <div>
+              <h4 class="text-xl font-bold text-gray-900 dark:text-white mb-2">Primera Competencia Nacional</h4>
+              <p class="text-gray-600 dark:text-gray-400">
+                Nuestros primeros estudiantes compiten a nivel nacional, obteniendo 3 medallas de bronce en el Campeonato de España.
+              </p>
+            </div>
+          </div>
+
+          <!-- Milestone 3 -->
+          <div class="flex items-start">
+            <div class="flex-shrink-0 w-16 h-16 bg-yellow-100 dark:bg-yellow-900/30 rounded-full flex items-center justify-center mr-6">
+              <span class="text-yellow-600 dark:text-yellow-400 font-bold text-sm">2015</span>
+            </div>
+            <div>
+              <h4 class="text-xl font-bold text-gray-900 dark:text-white mb-2">Reconocimiento como Centro Oficial</h4>
+              <p class="text-gray-600 dark:text-gray-400">
+                La Federación Española nos reconoce como centro oficial de formación, consolidando nuestra metodología de enseñanza.
+              </p>
+            </div>
+          </div>
+
+          <!-- Milestone 4 -->
+          <div class="flex items-start">
+            <div class="flex-shrink-0 w-16 h-16 bg-green-100 dark:bg-green-900/30 rounded-full flex items-center justify-center mr-6">
+              <span class="text-green-600 dark:text-green-400 font-bold text-sm">2018</span>
+            </div>
+            <div>
+              <h4 class="text-xl font-bold text-gray-900 dark:text-white mb-2">Expansión Internacional</h4>
+              <p class="text-gray-600 dark:text-gray-400">
+                Primeras competencias internacionales y establecimiento de intercambios culturales con escuelas de Corea del Sur.
+              </p>
+            </div>
+          </div>
+
+          <!-- Milestone 5 -->
+          <div class="flex items-start">
+            <div class="flex-shrink-0 w-16 h-16 bg-purple-100 dark:bg-purple-900/30 rounded-full flex items-center justify-center mr-6">
+              <span class="text-purple-600 dark:text-purple-400 font-bold text-sm">2024</span>
+            </div>
+            <div>
+              <h4 class="text-xl font-bold text-gray-900 dark:text-white mb-2">15 Años de Excelencia</h4>
+              <p class="text-gray-600 dark:text-gray-400">
+                Celebramos década y media formando campeones, con más de 500 graduaciones y 87 trofeos en nuestro palmarés.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Call to Action -->
+    <div class="text-center">
+      <h3 class="text-2xl font-bold text-gray-900 dark:text-white mb-4">
+        Forma Parte de Nuestra Historia de Éxito
+      </h3>
+      <p class="text-gray-600 dark:text-gray-400 mb-8 max-w-2xl mx-auto">
+        Cada trofeo, cada medalla, cada graduación es el resultado del esfuerzo conjunto de estudiantes y maestros. Únete y contribuye a escribir los próximos capítulos de nuestra historia.
+      </p>
+      <a 
+        href="#contact" 
+        class="bg-red-600 hover:bg-red-700 text-white px-8 py-3 rounded-lg font-semibold transition-colors duration-300 inline-flex items-center"
+      >
+        <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m0 0l3-3m-3 3l-3-3m1-5V9a3 3 0 00-6 0v5a3 3 0 006 0z"></path>
+        </svg>
+        Ser Parte de la Historia
+      </a>
+    </div>
+  </div>
+</section>

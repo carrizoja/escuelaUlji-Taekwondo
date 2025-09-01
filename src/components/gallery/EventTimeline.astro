@@ -1,0 +1,417 @@
+---
+// EventTimeline.astro - Interactive timeline of major events and competitions
+---
+
+<section class="bg-white dark:bg-gray-900 py-16">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <!-- Section Header -->
+    <div class="text-center mb-12">
+      <div class="inline-flex items-center justify-center w-16 h-16 bg-blue-100 dark:bg-blue-900/30 rounded-full mb-4">
+        <svg class="w-8 h-8 text-blue-600 dark:text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+        </svg>
+      </div>
+      <h2 class="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-4">
+        Cronología de Eventos
+      </h2>
+      <p class="text-lg text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
+        Un viaje a través del tiempo mostrando los momentos más importantes y emocionantes de nuestra escuela
+      </p>
+    </div>
+
+    <!-- Year Navigation -->
+    <div class="flex flex-wrap justify-center gap-4 mb-12">
+      <button class="bg-red-600 text-white px-6 py-2 rounded-full font-medium text-sm">
+        2024
+      </button>
+      <button class="bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 hover:bg-red-50 dark:hover:bg-gray-700 px-6 py-2 rounded-full font-medium text-sm transition-colors duration-300">
+        2023
+      </button>
+      <button class="bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 hover:bg-red-50 dark:hover:bg-gray-700 px-6 py-2 rounded-full font-medium text-sm transition-colors duration-300">
+        2022
+      </button>
+      <button class="bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 hover:bg-red-50 dark:hover:bg-gray-700 px-6 py-2 rounded-full font-medium text-sm transition-colors duration-300">
+        2021
+      </button>
+      <button class="bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 hover:bg-red-50 dark:hover:bg-gray-700 px-6 py-2 rounded-full font-medium text-sm transition-colors duration-300">
+        Todos
+      </button>
+    </div>
+
+    <!-- Timeline Container -->
+    <div class="relative">
+      <!-- Central Timeline Line -->
+      <div class="absolute left-1/2 transform -translate-x-px h-full w-1 bg-gray-300 dark:bg-gray-600 hidden lg:block"></div>
+      
+      <!-- Timeline Events -->
+      <div class="space-y-16">
+        
+        <!-- Event 1 - March 2024 -->
+        <div class="relative lg:grid lg:grid-cols-2 lg:gap-8 items-center">
+          <!-- Left Content (Desktop) -->
+          <div class="lg:text-right lg:pr-8">
+            <div class="bg-white dark:bg-gray-800 rounded-xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1">
+              <div class="flex items-center justify-between mb-4 lg:flex-row-reverse">
+                <span class="bg-red-100 dark:bg-red-900/30 text-red-600 dark:text-red-400 px-3 py-1 text-sm font-semibold rounded-full">
+                  CAMPEONATO
+                </span>
+                <span class="text-gray-500 dark:text-gray-400 text-sm">Marzo 2024</span>
+              </div>
+              <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-3">
+                Campeonato Nacional de España
+              </h3>
+              <p class="text-gray-600 dark:text-gray-400 mb-4">
+                Nuestro mejor resultado histórico con 15 medallas conquistadas, incluyendo 5 oros en categorías senior. Ana García se proclama campeona nacional absoluta.
+              </p>
+              <div class="flex items-center lg:justify-end space-x-4">
+                <div class="flex items-center">
+                  <div class="w-6 h-6 bg-yellow-500 rounded-full flex items-center justify-center mr-2">
+                    <span class="text-white text-xs font-bold">5</span>
+                  </div>
+                  <span class="text-xs text-gray-600 dark:text-gray-400">Oro</span>
+                </div>
+                <div class="flex items-center">
+                  <div class="w-6 h-6 bg-gray-400 rounded-full flex items-center justify-center mr-2">
+                    <span class="text-white text-xs font-bold">3</span>
+                  </div>
+                  <span class="text-xs text-gray-600 dark:text-gray-400">Plata</span>
+                </div>
+                <div class="flex items-center">
+                  <div class="w-6 h-6 bg-amber-600 rounded-full flex items-center justify-center mr-2">
+                    <span class="text-white text-xs font-bold">7</span>
+                  </div>
+                  <span class="text-xs text-gray-600 dark:text-gray-400">Bronce</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Timeline Marker -->
+          <div class="absolute left-1/2 transform -translate-x-1/2 w-12 h-12 bg-red-600 rounded-full border-4 border-white dark:border-gray-900 flex items-center justify-center z-10 hidden lg:flex">
+            <svg class="w-6 h-6 text-white" fill="currentColor" viewBox="0 0 20 20">
+              <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path>
+            </svg>
+          </div>
+
+          <!-- Right Image (Desktop) -->
+          <div class="lg:pl-8 mt-6 lg:mt-0">
+            <img 
+              src="/api/placeholder/500/300" 
+              alt="Campeonato Nacional 2024"
+              class="w-full h-48 object-cover rounded-xl shadow-lg"
+            />
+          </div>
+        </div>
+
+        <!-- Event 2 - June 2024 -->
+        <div class="relative lg:grid lg:grid-cols-2 lg:gap-8 items-center">
+          <!-- Left Image (Desktop) -->
+          <div class="lg:pr-8 order-2 lg:order-1">
+            <img 
+              src="/api/placeholder/500/300" 
+              alt="Copa Internacional Europa"
+              class="w-full h-48 object-cover rounded-xl shadow-lg"
+            />
+          </div>
+
+          <!-- Timeline Marker -->
+          <div class="absolute left-1/2 transform -translate-x-1/2 w-12 h-12 bg-blue-600 rounded-full border-4 border-white dark:border-gray-900 flex items-center justify-center z-10 hidden lg:flex">
+            <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+            </svg>
+          </div>
+
+          <!-- Right Content (Desktop) -->
+          <div class="lg:pl-8 order-1 lg:order-2 mt-6 lg:mt-0">
+            <div class="bg-white dark:bg-gray-800 rounded-xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1">
+              <div class="flex items-center justify-between mb-4">
+                <span class="bg-blue-100 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400 px-3 py-1 text-sm font-semibold rounded-full">
+                  INTERNACIONAL
+                </span>
+                <span class="text-gray-500 dark:text-gray-400 text-sm">Junio 2024</span>
+              </div>
+              <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-3">
+                Copa Internacional de Europa
+              </h3>
+              <p class="text-gray-600 dark:text-gray-400 mb-4">
+                Primera participación internacional exitosa en París. Emma Wilson conquista el oro en la categoría open internacional, colocando a Ul-ji en el mapa europeo.
+              </p>
+              <div class="flex items-center space-x-4">
+                <div class="flex items-center">
+                  <div class="w-6 h-6 bg-yellow-500 rounded-full flex items-center justify-center mr-2">
+                    <span class="text-white text-xs font-bold">3</span>
+                  </div>
+                  <span class="text-xs text-gray-600 dark:text-gray-400">Oro</span>
+                </div>
+                <div class="flex items-center">
+                  <div class="w-6 h-6 bg-gray-400 rounded-full flex items-center justify-center mr-2">
+                    <span class="text-white text-xs font-bold">4</span>
+                  </div>
+                  <span class="text-xs text-gray-600 dark:text-gray-400">Plata</span>
+                </div>
+                <div class="flex items-center">
+                  <div class="w-6 h-6 bg-amber-600 rounded-full flex items-center justify-center mr-2">
+                    <span class="text-white text-xs font-bold">2</span>
+                  </div>
+                  <span class="text-xs text-gray-600 dark:text-gray-400">Bronce</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Event 3 - September 2024 -->
+        <div class="relative lg:grid lg:grid-cols-2 lg:gap-8 items-center">
+          <!-- Left Content (Desktop) -->
+          <div class="lg:text-right lg:pr-8">
+            <div class="bg-white dark:bg-gray-800 rounded-xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1">
+              <div class="flex items-center justify-between mb-4 lg:flex-row-reverse">
+                <span class="bg-purple-100 dark:bg-purple-900/30 text-purple-600 dark:text-purple-400 px-3 py-1 text-sm font-semibold rounded-full">
+                  GRADUACIÓN
+                </span>
+                <span class="text-gray-500 dark:text-gray-400 text-sm">Septiembre 2024</span>
+              </div>
+              <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-3">
+                Ceremonia de Graduación Otoño
+              </h3>
+              <p class="text-gray-600 dark:text-gray-400 mb-4">
+                Emotiva ceremonia donde 25 estudiantes avanzaron de grado, incluyendo 3 nuevos cinturones negro y la promoción de Pedro Sánchez a 4° Dan.
+              </p>
+              <div class="flex items-center lg:justify-end space-x-4">
+                <div class="flex items-center">
+                  <div class="w-8 h-8 bg-black rounded-full flex items-center justify-center mr-2">
+                    <span class="text-white text-xs font-bold">3</span>
+                  </div>
+                  <span class="text-xs text-gray-600 dark:text-gray-400">Cinturones Negro</span>
+                </div>
+                <div class="flex items-center">
+                  <div class="w-8 h-8 bg-red-600 rounded-full flex items-center justify-center mr-2">
+                    <span class="text-white text-xs font-bold">22</span>
+                  </div>
+                  <span class="text-xs text-gray-600 dark:text-gray-400">Promociones</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Timeline Marker -->
+          <div class="absolute left-1/2 transform -translate-x-1/2 w-12 h-12 bg-purple-600 rounded-full border-4 border-white dark:border-gray-900 flex items-center justify-center z-10 hidden lg:flex">
+            <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.746 0 3.332.477 4.5 1.253v13C19.832 18.477 18.246 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path>
+            </svg>
+          </div>
+
+          <!-- Right Image (Desktop) -->
+          <div class="lg:pl-8 mt-6 lg:mt-0">
+            <img 
+              src="/api/placeholder/500/300" 
+              alt="Ceremonia de Graduación"
+              class="w-full h-48 object-cover rounded-xl shadow-lg"
+            />
+          </div>
+        </div>
+
+        <!-- Event 4 - November 2024 -->
+        <div class="relative lg:grid lg:grid-cols-2 lg:gap-8 items-center">
+          <!-- Left Image (Desktop) -->
+          <div class="lg:pr-8 order-2 lg:order-1">
+            <img 
+              src="/api/placeholder/500/300" 
+              alt="Seminario Master Coreano"
+              class="w-full h-48 object-cover rounded-xl shadow-lg"
+            />
+          </div>
+
+          <!-- Timeline Marker -->
+          <div class="absolute left-1/2 transform -translate-x-1/2 w-12 h-12 bg-green-600 rounded-full border-4 border-white dark:border-gray-900 flex items-center justify-center z-10 hidden lg:flex">
+            <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.746 0 3.332.477 4.5 1.253v13C19.832 18.477 18.246 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path>
+            </svg>
+          </div>
+
+          <!-- Right Content (Desktop) -->
+          <div class="lg:pl-8 order-1 lg:order-2 mt-6 lg:mt-0">
+            <div class="bg-white dark:bg-gray-800 rounded-xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1">
+              <div class="flex items-center justify-between mb-4">
+                <span class="bg-green-100 dark:bg-green-900/30 text-green-600 dark:text-green-400 px-3 py-1 text-sm font-semibold rounded-full">
+                  SEMINARIO
+                </span>
+                <span class="text-gray-500 dark:text-gray-400 text-sm">Noviembre 2024</span>
+              </div>
+              <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-3">
+                Seminario con Maestro Coreano
+              </h3>
+              <p class="text-gray-600 dark:text-gray-400 mb-4">
+                Visita especial del Gran Maestro Kim Jung-Ho (9° Dan) desde Seúl. Seminario intensivo de técnicas tradicionales y filosofía del Taekwondo para 60 participantes.
+              </p>
+              <div class="flex items-center space-x-4">
+                <div class="flex items-center">
+                  <svg class="w-5 h-5 text-green-600 dark:text-green-400 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+                  </svg>
+                  <span class="text-sm text-gray-600 dark:text-gray-400">60 Participantes</span>
+                </div>
+                <div class="flex items-center">
+                  <svg class="w-5 h-5 text-green-600 dark:text-green-400 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+                  </svg>
+                  <span class="text-sm text-gray-600 dark:text-gray-400">12 Horas de Entrenamiento</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Event 5 - December 2024 -->
+        <div class="relative lg:grid lg:grid-cols-2 lg:gap-8 items-center">
+          <!-- Left Content (Desktop) -->
+          <div class="lg:text-right lg:pr-8">
+            <div class="bg-white dark:bg-gray-800 rounded-xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1">
+              <div class="flex items-center justify-between mb-4 lg:flex-row-reverse">
+                <span class="bg-amber-100 dark:bg-amber-900/30 text-amber-600 dark:text-amber-400 px-3 py-1 text-sm font-semibold rounded-full">
+                  ANIVERSARIO
+                </span>
+                <span class="text-gray-500 dark:text-gray-400 text-sm">Diciembre 2024</span>
+              </div>
+              <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-3">
+                15° Aniversario de Ul-ji
+              </h3>
+              <p class="text-gray-600 dark:text-gray-400 mb-4">
+                Celebración especial de década y media de excelencia. Gala benéfica, exhibiciones especiales y reconocimiento a fundadores, instructores y estudiantes destacados.
+              </p>
+              <div class="flex items-center lg:justify-end space-x-4">
+                <div class="flex items-center">
+                  <svg class="w-5 h-5 text-amber-600 dark:text-amber-400 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                    <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path>
+                  </svg>
+                  <span class="text-sm text-gray-600 dark:text-gray-400">15 Años</span>
+                </div>
+                <div class="flex items-center">
+                  <svg class="w-5 h-5 text-amber-600 dark:text-amber-400 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                    <path fill-rule="evenodd" d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z" clip-rule="evenodd"></path>
+                  </svg>
+                  <span class="text-sm text-gray-600 dark:text-gray-400">500+ Graduados</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Timeline Marker -->
+          <div class="absolute left-1/2 transform -translate-x-1/2 w-12 h-12 bg-amber-600 rounded-full border-4 border-white dark:border-gray-900 flex items-center justify-center z-10 hidden lg:flex">
+            <svg class="w-6 h-6 text-white" fill="currentColor" viewBox="0 0 20 20">
+              <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path>
+            </svg>
+          </div>
+
+          <!-- Right Image (Desktop) -->
+          <div class="lg:pl-8 mt-6 lg:mt-0">
+            <img 
+              src="/api/placeholder/500/300" 
+              alt="15° Aniversario"
+              class="w-full h-48 object-cover rounded-xl shadow-lg"
+            />
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Upcoming Events -->
+    <div class="mt-20">
+      <h3 class="text-2xl font-bold text-gray-900 dark:text-white mb-8 text-center">
+        Próximos Eventos 2025
+      </h3>
+      
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <!-- Upcoming Event 1 -->
+        <div class="bg-gradient-to-br from-red-50 to-red-100 dark:from-red-900/20 dark:to-red-800/20 rounded-xl p-6 border-l-4 border-red-500">
+          <div class="flex items-center justify-between mb-4">
+            <span class="bg-red-500 text-white px-3 py-1 text-xs font-bold rounded-full">
+              ENERO 2025
+            </span>
+            <svg class="w-5 h-5 text-red-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
+            </svg>
+          </div>
+          <h4 class="text-lg font-bold text-gray-900 dark:text-white mb-2">
+            Torneo de Año Nuevo
+          </h4>
+          <p class="text-gray-600 dark:text-gray-400 text-sm mb-3">
+            Competencia interna para comenzar el año con energía positiva
+          </p>
+          <p class="text-red-600 dark:text-red-400 text-sm font-semibold">
+            15 de Enero • Dojang Ul-ji
+          </p>
+        </div>
+
+        <!-- Upcoming Event 2 -->
+        <div class="bg-gradient-to-br from-blue-50 to-blue-100 dark:from-blue-900/20 dark:to-blue-800/20 rounded-xl p-6 border-l-4 border-blue-500">
+          <div class="flex items-center justify-between mb-4">
+            <span class="bg-blue-500 text-white px-3 py-1 text-xs font-bold rounded-full">
+              MARZO 2025
+            </span>
+            <svg class="w-5 h-5 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2-2v2m8 0V6l-8 8-8-8V4"></path>
+            </svg>
+          </div>
+          <h4 class="text-lg font-bold text-gray-900 dark:text-white mb-2">
+            Campeonato Regional
+          </h4>
+          <p class="text-gray-600 dark:text-gray-400 text-sm mb-3">
+            Clasificatorio para el Campeonato Nacional de España
+          </p>
+          <p class="text-blue-600 dark:text-blue-400 text-sm font-semibold">
+            20-22 Marzo • Madrid
+          </p>
+        </div>
+
+        <!-- Upcoming Event 3 -->
+        <div class="bg-gradient-to-br from-green-50 to-green-100 dark:from-green-900/20 dark:to-green-800/20 rounded-xl p-6 border-l-4 border-green-500">
+          <div class="flex items-center justify-between mb-4">
+            <span class="bg-green-500 text-white px-3 py-1 text-xs font-bold rounded-full">
+              MAYO 2025
+            </span>
+            <svg class="w-5 h-5 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.746 0 3.332.477 4.5 1.253v13C19.832 18.477 18.246 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path>
+            </svg>
+          </div>
+          <h4 class="text-lg font-bold text-gray-900 dark:text-white mb-2">
+            Graduación Primavera
+          </h4>
+          <p class="text-gray-600 dark:text-gray-400 text-sm mb-3">
+            Ceremonia de promoción de grados y cinturones
+          </p>
+          <p class="text-green-600 dark:text-green-400 text-sm font-semibold">
+            18 de Mayo • Dojang Ul-ji
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Call to Action -->
+    <div class="text-center mt-16">
+      <h3 class="text-2xl font-bold text-gray-900 dark:text-white mb-4">
+        Sé Parte de Nuestra Próxima Historia
+      </h3>
+      <p class="text-gray-600 dark:text-gray-400 mb-8 max-w-2xl mx-auto">
+        Cada evento es una oportunidad para crecer, competir y formar parte de momentos memorables. Únete y crea tus propios recuerdos en Ul-ji.
+      </p>
+      <div class="flex flex-col sm:flex-row gap-4 justify-center">
+        <a 
+          href="#contact" 
+          class="bg-red-600 hover:bg-red-700 text-white px-8 py-3 rounded-lg font-semibold transition-colors duration-300 inline-flex items-center justify-center"
+        >
+          <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
+          </svg>
+          Participar en Eventos
+        </a>
+        <a 
+          href="/schedule" 
+          class="bg-transparent border-2 border-red-600 text-red-600 dark:text-red-400 hover:bg-red-600 hover:text-white px-8 py-3 rounded-lg font-semibold transition-all duration-300 inline-flex items-center justify-center"
+        >
+          Ver Calendario Completo
+        </a>
+      </div>
+    </div>
+  </div>
+</section>

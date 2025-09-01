@@ -1,0 +1,454 @@
+---
+// SocialFeed.astro - Social media feed and community updates
+---
+
+<section class="bg-white dark:bg-gray-900 py-16">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <!-- Section Header -->
+    <div class="text-center mb-12">
+      <div class="inline-flex items-center justify-center w-16 h-16 bg-blue-100 dark:bg-blue-900/30 rounded-full mb-4">
+        <svg class="w-8 h-8 text-blue-600 dark:text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8h2a2 2 0 012 2v6a2 2 0 01-2 2h-2v4l-4-4H9a2 2 0 01-2-2v-6a2 2 0 012-2h8z"></path>
+        </svg>
+      </div>
+      <h2 class="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-4">
+        Comunidad Ul-ji
+      </h2>
+      <p class="text-lg text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
+        Mantente conectado con nuestra comunidad y sigue las últimas noticias y logros
+      </p>
+    </div>
+
+    <!-- Social Platform Links -->
+    <div class="flex flex-wrap justify-center gap-4 mb-12">
+      <a 
+        href="#" 
+        class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-full font-medium text-sm transition-all duration-300 inline-flex items-center"
+      >
+        <svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 24 24">
+          <path d="M24 4.557c-.883.392-1.832.656-2.828.775 1.017-.609 1.798-1.574 2.165-2.724-.951.564-2.005.974-3.127 1.195-.897-.957-2.178-1.555-3.594-1.555-3.179 0-5.515 2.966-4.797 6.045-4.091-.205-7.719-2.165-10.148-5.144-1.29 2.213-.669 5.108 1.523 6.574-.806-.026-1.566-.247-2.229-.616-.054 2.281 1.581 4.415 3.949 4.89-.693.188-1.452.232-2.224.084.626 1.956 2.444 3.379 4.6 3.419-2.07 1.623-4.678 2.348-7.29 2.04 2.179 1.397 4.768 2.212 7.548 2.212 9.142 0 14.307-7.721 13.995-14.646.962-.695 1.797-1.562 2.457-2.549z"/>
+        </svg>
+        Twitter
+      </a>
+      <a 
+        href="#" 
+        class="bg-pink-600 hover:bg-pink-700 text-white px-6 py-3 rounded-full font-medium text-sm transition-all duration-300 inline-flex items-center"
+      >
+        <svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 24 24">
+          <path d="M12.017 0C5.396 0 .029 5.367.029 11.987c0 5.079 3.158 9.417 7.618 11.174-.105-.949-.199-2.403.041-3.439.219-.937 1.406-5.957 1.406-5.957s-.359-.72-.359-1.781c0-1.663.967-2.911 2.168-2.911 1.024 0 1.518.769 1.518 1.688 0 1.029-.653 2.567-.992 3.992-.285 1.193.6 2.165 1.775 2.165 2.128 0 3.768-2.245 3.768-5.487 0-2.861-2.063-4.869-5.008-4.869-3.41 0-5.409 2.562-5.409 5.199 0 1.033.394 2.143.889 2.739.099.120.112.225.085.345-.09.375-.293 1.199-.334 1.363-.053.225-.172.271-.402.165-1.495-.69-2.433-2.878-2.433-4.646 0-3.776 2.748-7.252 7.92-7.252 4.158 0 7.392 2.967 7.392 6.923 0 4.135-2.607 7.462-6.233 7.462-1.214 0-2.357-.629-2.750-1.378l-.748 2.853c-.271 1.043-1.002 2.35-1.492 3.146C9.57 23.812 10.763 24.009 12.017 24.009c6.624 0 11.99-5.367 11.99-11.988C24.007 5.367 18.641.001.012.001z"/>
+        </svg>
+        Instagram
+      </a>
+      <a 
+        href="#" 
+        class="bg-blue-800 hover:bg-blue-900 text-white px-6 py-3 rounded-full font-medium text-sm transition-all duration-300 inline-flex items-center"
+      >
+        <svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 24 24">
+          <path d="M22.46 6c-.77.35-1.6.58-2.46.69.88-.53 1.56-1.37 1.88-2.38-.83.5-1.75.85-2.72 1.05C18.37 4.5 17.26 4 16 4c-2.35 0-4.27 1.92-4.27 4.29 0 .34.04.67.11.98C8.28 9.09 5.11 7.38 3 4.79c-.37.63-.58 1.37-.58 2.15 0 1.49.75 2.81 1.91 3.56-.71 0-1.37-.2-1.95-.5v.03c0 2.08 1.48 3.82 3.44 4.21a4.22 4.22 0 0 1-1.93.07 4.28 4.28 0 0 0 4 2.98 8.521 8.521 0 0 1-5.33 1.84c-.34 0-.68-.02-1.02-.06C3.44 20.29 5.7 21 8.12 21 16 21 20.33 14.46 20.33 8.79c0-.19 0-.37-.01-.56.84-.6 1.56-1.36 2.14-2.23z"/>
+        </svg>
+        Facebook
+      </a>
+      <a 
+        href="#" 
+        class="bg-red-600 hover:bg-red-700 text-white px-6 py-3 rounded-full font-medium text-sm transition-all duration-300 inline-flex items-center"
+      >
+        <svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 24 24">
+          <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
+        </svg>
+        YouTube
+      </a>
+    </div>
+
+    <!-- Feed Content -->
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+      
+      <!-- Recent Posts Column -->
+      <div class="lg:col-span-2 space-y-6">
+        <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-6">
+          Publicaciones Recientes
+        </h3>
+
+        <!-- Post 1 - Competition Success -->
+        <article class="bg-white dark:bg-gray-800 rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300">
+          <div class="p-6">
+            <div class="flex items-center mb-4">
+              <img 
+                src="/api/placeholder/40/40" 
+                alt="Escuela Ul-ji"
+                class="w-10 h-10 rounded-full mr-3"
+              />
+              <div>
+                <h4 class="font-semibold text-gray-900 dark:text-white">Escuela Ul-ji</h4>
+                <p class="text-sm text-gray-500 dark:text-gray-400">hace 2 horas</p>
+              </div>
+              <div class="ml-auto">
+                <span class="bg-blue-100 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400 px-3 py-1 text-xs font-semibold rounded-full">
+                  Instagram
+                </span>
+              </div>
+            </div>
+            
+            <p class="text-gray-700 dark:text-gray-300 mb-4">
+              🥇 ¡INCREÍBLE! Ana García acaba de conquistar el ORO en el Campeonato Nacional de España. Su técnica y dedicación han dado frutos. ¡Estamos muy orgullosos! 💪🇪🇸
+              
+              #Taekwondo #CampeonNacional #OroEspaña #UljiPride #울지 #TaekwondoEspaña
+            </p>
+
+            <img 
+              src="/api/placeholder/600/400" 
+              alt="Ana García - Campeona Nacional"
+              class="w-full h-64 object-cover rounded-lg mb-4"
+            />
+
+            <div class="flex items-center justify-between text-sm text-gray-500 dark:text-gray-400">
+              <div class="flex items-center space-x-4">
+                <button class="flex items-center hover:text-red-500 transition-colors duration-300">
+                  <svg class="w-5 h-5 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path>
+                  </svg>
+                  248 likes
+                </button>
+                <button class="flex items-center hover:text-blue-500 transition-colors duration-300">
+                  <svg class="w-5 h-5 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"></path>
+                  </svg>
+                  32 comentarios
+                </button>
+                <button class="flex items-center hover:text-green-500 transition-colors duration-300">
+                  <svg class="w-5 h-5 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.367 2.684 3 3 0 00-5.367-2.684z"></path>
+                  </svg>
+                  15 compartidos
+                </button>
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <!-- Post 2 - Training Video -->
+        <article class="bg-white dark:bg-gray-800 rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300">
+          <div class="p-6">
+            <div class="flex items-center mb-4">
+              <img 
+                src="/api/placeholder/40/40" 
+                alt="Escuela Ul-ji"
+                class="w-10 h-10 rounded-full mr-3"
+              />
+              <div>
+                <h4 class="font-semibold text-gray-900 dark:text-white">Escuela Ul-ji</h4>
+                <p class="text-sm text-gray-500 dark:text-gray-400">hace 1 día</p>
+              </div>
+              <div class="ml-auto">
+                <span class="bg-red-100 dark:bg-red-900/30 text-red-600 dark:text-red-400 px-3 py-1 text-xs font-semibold rounded-full">
+                  YouTube
+                </span>
+              </div>
+            </div>
+            
+            <p class="text-gray-700 dark:text-gray-300 mb-4">
+              🎥 NUEVO VIDEO: Técnicas de Patada Circular (Dollyo Chagi) - Tutorial paso a paso con nuestro Maestro Principal. Perfecto para estudiantes de cinturón amarillo y naranja.
+              
+              ¡Dale like y suscríbete para más contenido! 🥋
+            </p>
+
+            <div class="relative">
+              <img 
+                src="/api/placeholder/600/350" 
+                alt="Tutorial Dollyo Chagi"
+                class="w-full h-48 object-cover rounded-lg"
+              />
+              <div class="absolute inset-0 bg-black/30 rounded-lg flex items-center justify-center">
+                <button class="bg-red-600 hover:bg-red-700 text-white p-4 rounded-full transition-colors duration-300">
+                  <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 20 20">
+                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z" clip-rule="evenodd"></path>
+                  </svg>
+                </button>
+              </div>
+              <div class="absolute bottom-2 right-2 bg-black/70 text-white px-2 py-1 rounded text-sm">
+                8:45
+              </div>
+            </div>
+
+            <div class="flex items-center justify-between text-sm text-gray-500 dark:text-gray-400 mt-4">
+              <div class="flex items-center space-x-4">
+                <span class="flex items-center">
+                  <svg class="w-5 h-5 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path>
+                  </svg>
+                  1.2K visualizaciones
+                </span>
+                <span class="flex items-center">
+                  <svg class="w-5 h-5 mr-1 text-red-500" fill="currentColor" viewBox="0 0 20 20">
+                    <path fill-rule="evenodd" d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z" clip-rule="evenodd"></path>
+                  </svg>
+                  94 likes
+                </span>
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <!-- Post 3 - Student Achievement -->
+        <article class="bg-white dark:bg-gray-800 rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300">
+          <div class="p-6">
+            <div class="flex items-center mb-4">
+              <img 
+                src="/api/placeholder/40/40" 
+                alt="Escuela Ul-ji"
+                class="w-10 h-10 rounded-full mr-3"
+              />
+              <div>
+                <h4 class="font-semibold text-gray-900 dark:text-white">Escuela Ul-ji</h4>
+                <p class="text-sm text-gray-500 dark:text-gray-400">hace 3 días</p>
+              </div>
+              <div class="ml-auto">
+                <span class="bg-blue-800/10 dark:bg-blue-900/30 text-blue-800 dark:text-blue-400 px-3 py-1 text-xs font-semibold rounded-full">
+                  Facebook
+                </span>
+              </div>
+            </div>
+            
+            <p class="text-gray-700 dark:text-gray-300 mb-4">
+              👏 ¡Felicitaciones a nuestros 8 estudiantes que alcanzaron su cinturón negro 1° Dan en la ceremonia de graduación de este mes!
+              
+              Su dedicación, disciplina y perseverancia son un ejemplo para toda nuestra comunidad. 🥋🖤
+              
+              #CinturonNegro #Graduacion #Taekwondo #Ulji #Pride #울지태권도
+            </p>
+
+            <div class="grid grid-cols-2 gap-2 mb-4">
+              <img 
+                src="/api/placeholder/300/200" 
+                alt="Ceremonia de Graduación 1"
+                class="w-full h-32 object-cover rounded-lg"
+              />
+              <img 
+                src="/api/placeholder/300/200" 
+                alt="Ceremonia de Graduación 2"
+                class="w-full h-32 object-cover rounded-lg"
+              />
+            </div>
+
+            <div class="flex items-center justify-between text-sm text-gray-500 dark:text-gray-400">
+              <div class="flex items-center space-x-4">
+                <span class="flex items-center">
+                  <svg class="w-5 h-5 mr-1 text-blue-500" fill="currentColor" viewBox="0 0 20 20">
+                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+                  </svg>
+                  186 reacciones
+                </span>
+                <span>24 comentarios</span>
+                <span>8 compartidos</span>
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <!-- Load More Button -->
+        <div class="text-center pt-6">
+          <button class="bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 text-gray-700 dark:text-gray-300 px-8 py-3 rounded-lg font-semibold transition-colors duration-300">
+            Cargar más publicaciones
+          </button>
+        </div>
+      </div>
+
+      <!-- Sidebar -->
+      <div class="space-y-8">
+        
+        <!-- Community Stats -->
+        <div class="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-6">
+          <h3 class="text-lg font-bold text-gray-900 dark:text-white mb-4">
+            Estadísticas de la Comunidad
+          </h3>
+          
+          <div class="space-y-4">
+            <div class="flex items-center justify-between">
+              <div class="flex items-center">
+                <div class="w-10 h-10 bg-blue-100 dark:bg-blue-900/30 rounded-full flex items-center justify-center mr-3">
+                  <svg class="w-5 h-5 text-blue-600 dark:text-blue-400" fill="currentColor" viewBox="0 0 20 20">
+                    <path d="M13 6a3 3 0 11-6 0 3 3 0 016 0zM18 8a2 2 0 11-4 0 2 2 0 014 0zM14 15a4 4 0 00-8 0v3h8v-3z"></path>
+                  </svg>
+                </div>
+                <div>
+                  <p class="font-semibold text-gray-900 dark:text-white">Seguidores</p>
+                  <p class="text-sm text-gray-500 dark:text-gray-400">Todas las plataformas</p>
+                </div>
+              </div>
+              <span class="text-xl font-bold text-blue-600 dark:text-blue-400">2.4K</span>
+            </div>
+
+            <div class="flex items-center justify-between">
+              <div class="flex items-center">
+                <div class="w-10 h-10 bg-green-100 dark:bg-green-900/30 rounded-full flex items-center justify-center mr-3">
+                  <svg class="w-5 h-5 text-green-600 dark:text-green-400" fill="currentColor" viewBox="0 0 20 20">
+                    <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                  </svg>
+                </div>
+                <div>
+                  <p class="font-semibold text-gray-900 dark:text-white">Estudiantes Activos</p>
+                  <p class="text-sm text-gray-500 dark:text-gray-400">En nuestro dojang</p>
+                </div>
+              </div>
+              <span class="text-xl font-bold text-green-600 dark:text-green-400">156</span>
+            </div>
+
+            <div class="flex items-center justify-between">
+              <div class="flex items-center">
+                <div class="w-10 h-10 bg-yellow-100 dark:bg-yellow-900/30 rounded-full flex items-center justify-center mr-3">
+                  <svg class="w-5 h-5 text-yellow-600 dark:text-yellow-400" fill="currentColor" viewBox="0 0 20 20">
+                    <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path>
+                  </svg>
+                </div>
+                <div>
+                  <p class="font-semibold text-gray-900 dark:text-white">Medallas 2024</p>
+                  <p class="text-sm text-gray-500 dark:text-gray-400">En competencias</p>
+                </div>
+              </div>
+              <span class="text-xl font-bold text-yellow-600 dark:text-yellow-400">28</span>
+            </div>
+
+            <div class="flex items-center justify-between">
+              <div class="flex items-center">
+                <div class="w-10 h-10 bg-red-100 dark:bg-red-900/30 rounded-full flex items-center justify-center mr-3">
+                  <svg class="w-5 h-5 text-red-600 dark:text-red-400" fill="currentColor" viewBox="0 0 20 20">
+                    <path fill-rule="evenodd" d="M12.395 2.553a1 1 0 00-1.45-.385c-.345.23-.614.558-.822.88-.214.33-.403.713-.57 1.116-.334.804-.614 1.768-.84 2.734a31.365 31.365 0 00-.613 3.58 2.64 2.64 0 01-.945-1.067c-.328-.68-.398-1.534-.398-2.654A1 1 0 005.05 6.05 6.981 6.981 0 003 11a7 7 0 1011.95-4.95c-.592-.591-.98-.985-1.348-1.467-.363-.476-.724-1.063-1.207-2.03zM12.12 15.12A3 3 0 017 13s.879.5 2.5.5c0-1 .5-4 1.25-4.5.5 1 .786 1.293 1.371 1.879A2.99 2.99 0 0113 13a2.99 2.99 0 01-.879 2.121z" clip-rule="evenodd"></path>
+                  </svg>
+                </div>
+                <div>
+                  <p class="font-semibold text-gray-900 dark:text-white">Años de Historia</p>
+                  <p class="text-sm text-gray-500 dark:text-gray-400">Desde nuestra fundación</p>
+                </div>
+              </div>
+              <span class="text-xl font-bold text-red-600 dark:text-red-400">15</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Upcoming Events -->
+        <div class="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-6">
+          <h3 class="text-lg font-bold text-gray-900 dark:text-white mb-4">
+            Próximos Eventos
+          </h3>
+          
+          <div class="space-y-4">
+            <div class="border-l-4 border-red-500 pl-4">
+              <h4 class="font-semibold text-gray-900 dark:text-white">Seminario de Formas</h4>
+              <p class="text-sm text-gray-500 dark:text-gray-400">15 Enero, 2025</p>
+              <p class="text-sm text-gray-600 dark:text-gray-400">Perfeccionamiento de Poomsae</p>
+            </div>
+
+            <div class="border-l-4 border-blue-500 pl-4">
+              <h4 class="font-semibold text-gray-900 dark:text-white">Torneo Regional</h4>
+              <p class="text-sm text-gray-500 dark:text-gray-400">20-22 Marzo, 2025</p>
+              <p class="text-sm text-gray-600 dark:text-gray-400">Madrid, España</p>
+            </div>
+
+            <div class="border-l-4 border-green-500 pl-4">
+              <h4 class="font-semibold text-gray-900 dark:text-white">Graduación Primavera</h4>
+              <p class="text-sm text-gray-500 dark:text-gray-400">18 Mayo, 2025</p>
+              <p class="text-sm text-gray-600 dark:text-gray-400">Ceremonia de promoción</p>
+            </div>
+          </div>
+
+          <button class="w-full bg-gray-100 dark:bg-gray-700 hover:bg-gray-200 dark:hover:bg-gray-600 text-gray-700 dark:text-gray-300 py-2 rounded-lg font-medium transition-colors duration-300 mt-4">
+            Ver todos los eventos
+          </button>
+        </div>
+
+        <!-- Community Guidelines -->
+        <div class="bg-gradient-to-br from-red-50 to-orange-50 dark:from-red-900/20 dark:to-orange-900/20 rounded-xl p-6">
+          <h3 class="text-lg font-bold text-gray-900 dark:text-white mb-4">
+            Normas de la Comunidad
+          </h3>
+          
+          <div class="space-y-3 text-sm text-gray-600 dark:text-gray-400">
+            <div class="flex items-start">
+              <svg class="w-5 h-5 text-green-500 mr-2 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+              </svg>
+              <span>Respeta a todos los miembros de la comunidad</span>
+            </div>
+            
+            <div class="flex items-start">
+              <svg class="w-5 h-5 text-green-500 mr-2 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+              </svg>
+              <span>Comparte contenido relacionado con Taekwondo</span>
+            </div>
+            
+            <div class="flex items-start">
+              <svg class="w-5 h-5 text-green-500 mr-2 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+              </svg>
+              <span>Apoya y celebra los logros de otros</span>
+            </div>
+            
+            <div class="flex items-start">
+              <svg class="w-5 h-5 text-green-500 mr-2 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+              </svg>
+              <span>Mantén un ambiente positivo y constructivo</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Newsletter Signup -->
+        <div class="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-6">
+          <h3 class="text-lg font-bold text-gray-900 dark:text-white mb-4">
+            Newsletter Ul-ji
+          </h3>
+          
+          <p class="text-sm text-gray-600 dark:text-gray-400 mb-4">
+            Recibe las últimas noticias, eventos y consejos de entrenamiento directamente en tu email.
+          </p>
+          
+          <form class="space-y-3">
+            <input 
+              type="email" 
+              placeholder="Tu email"
+              class="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-400 focus:ring-2 focus:ring-red-500 focus:border-transparent"
+            />
+            <button 
+              type="submit"
+              class="w-full bg-red-600 hover:bg-red-700 text-white py-2 rounded-lg font-semibold transition-colors duration-300"
+            >
+              Suscribirse
+            </button>
+          </form>
+          
+          <p class="text-xs text-gray-500 dark:text-gray-400 mt-3">
+            No spam. Te puedes desuscribir en cualquier momento.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Call to Action -->
+    <div class="text-center mt-16 bg-gradient-to-r from-red-50 to-orange-50 dark:from-red-900/20 dark:to-orange-900/20 rounded-2xl p-8">
+      <h3 class="text-2xl font-bold text-gray-900 dark:text-white mb-4">
+        Únete a Nuestra Comunidad
+      </h3>
+      <p class="text-gray-600 dark:text-gray-400 mb-8 max-w-2xl mx-auto">
+        Sigue nuestras redes sociales para estar al día con los últimos eventos, técnicas y logros de nuestra escuela de Taekwondo.
+      </p>
+      <div class="flex flex-col sm:flex-row gap-4 justify-center">
+        <a 
+          href="#contact" 
+          class="bg-red-600 hover:bg-red-700 text-white px-8 py-3 rounded-lg font-semibold transition-colors duration-300 inline-flex items-center justify-center"
+        >
+          <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8h2a2 2 0 012 2v6a2 2 0 01-2 2h-2v4l-4-4H9a2 2 0 01-2-2v-6a2 2 0 012-2h8z"></path>
+          </svg>
+          Contactar
+        </a>
+        <a 
+          href="#" 
+          class="bg-transparent border-2 border-red-600 text-red-600 dark:text-red-400 hover:bg-red-600 hover:text-white px-8 py-3 rounded-lg font-semibold transition-all duration-300 inline-flex items-center justify-center"
+        >
+          Seguir en Redes Sociales
+        </a>
+      </div>
+    </div>
+  </div>
+</section>

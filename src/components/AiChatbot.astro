@@ -1,0 +1,611 @@
+---
+// AI Chatbot Component for Escuela Ul-ji Taekwondo
+import { quickQuestions } from "../data/questions.js";
+
+interface Props {
+  position?: "bottom-right" | "bottom-left" | "top-right" | "top-left";
+}
+
+const { position = "bottom-right" } = Astro.props;
+
+// Position classes
+const positionClasses = {
+  "bottom-right": "bottom-4 right-4",
+  "bottom-left": "bottom-4 left-4",
+  "top-right": "top-4 right-4",
+  "top-left": "top-4 left-4",
+};
+---
+
+<!-- AI Chatbot Button and Window -->
+<div id="ai-chatbot" class={`fixed ${positionClasses[position]} z-50`}>
+  <!-- Floating Chat Button -->
+  <button
+    id="chat-toggle"
+    class="w-12 h-12 md:w-14 md:h-14 bg-gradient-to-r from-brand-red to-ulji-red-600 hover:from-brand-red-deep hover:to-ulji-red-700 rounded-full shadow-lg hover:shadow-xl flex items-center justify-center transition-all duration-300 transform hover:scale-110 active:scale-95 relative"
+    aria-label="Abrir chat de asistente virtual"
+  >
+    <!-- Robot Icon -->
+    <svg
+      id="chat-icon"
+      class="w-7 h-7 md:w-8 md:h-8 text-white absolute transition-all duration-300"
+      style="opacity: 1; transform: rotate(0deg) scale(1);"
+      xmlns="http://www.w3.org/2000/svg"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      stroke-width="2"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+      ><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g
+        id="SVGRepo_tracerCarrier"
+        stroke-linecap="round"
+        stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier">
+        <rect x="3" y="11" width="18" height="10" rx="2"></rect>
+        <circle cx="12" cy="5" r="2"></circle>
+        <path d="M12 7v4"></path>
+        <line x1="8" y1="16" x2="8" y2="16"></line>
+        <line x1="16" y1="16" x2="16" y2="16"></line>
+      </g></svg>
+    
+    <!-- Close Icon -->
+    <svg
+      id="close-icon"
+      class="w-6 h-6 md:w-7 md:h-7 text-white absolute transition-all duration-300"
+      style="opacity: 0; transform: rotate(180deg) scale(0.8);"
+      fill="none"
+      stroke="currentColor"
+      viewBox="0 0 24 24"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        stroke-width="2"
+        d="M6 18L18 6M6 6l12 12"></path>
+    </svg>
+
+    <!-- Notification Dot -->
+    <div
+      id="notification-dot"
+      class="absolute -top-1 -right-1 w-3 h-3 md:w-4 md:h-4 bg-green-500 rounded-full"
+    >
+      <div class="w-full h-full bg-green-400 rounded-full animate-ping"></div>
+    </div>
+  </button>
+
+  <!-- Chat Window -->
+  <div
+    id="chat-window"
+    class="hidden fixed bottom-16 right-4 md:bottom-20 md:right-4 w-80 md:w-96 h-96 bg-white dark:bg-gray-900 rounded-xl shadow-2xl border border-gray-200 dark:border-gray-700 flex flex-col overflow-hidden transform transition-all duration-300 opacity-0 scale-90"
+  >
+    <!-- Header -->
+    <div class="bg-gradient-to-r from-brand-red to-ulji-red-600 p-4 text-white">
+      <div class="flex items-center gap-3">
+        <div
+          class="w-10 h-10 bg-white/20 rounded-full flex items-center justify-center relative"
+        >
+          <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+            <path
+              d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"
+            ></path>
+          </svg>
+          <div
+            class="absolute -top-1 -right-1 w-3 h-3 bg-green-400 rounded-full"
+          >
+          </div>
+        </div>
+        <div>
+          <h3 class="font-heading font-semibold">Ul-ji Assistant</h3>
+          <p class="text-sm opacity-90 font-text">
+            Asistente Virtual de Taekwondo
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Messages Container -->
+    <div id="messages-container" class="flex-1 overflow-y-auto p-4 space-y-4">
+      <!-- Initial message -->
+      <div class="flex justify-start">
+        <div
+          class="max-w-[80%] p-3 rounded-lg bg-gray-100 dark:bg-gray-800 text-gray-900 dark:text-white rounded-bl-none"
+        >
+          <p class="text-sm font-text">
+            ¡Hola! Soy el asistente virtual de la Escuela Ul-ji de Taekwondo.
+            Estoy aquí para ayudarte con información sobre nuestras clases,
+            horarios, exámenes y todo lo relacionado con el Taekwondo. ¿En qué
+            puedo ayudarte hoy?
+          </p>
+          <p class="text-xs opacity-70 mt-1" id="initial-time"></p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Quick Questions (shown initially) -->
+    <div
+      id="quick-questions"
+      class="p-4 border-t border-gray-200 dark:border-gray-700"
+    >
+      <p class="text-xs text-gray-500 dark:text-gray-400 mb-2 font-text">
+        Preguntas frecuentes:
+      </p>
+      <div class="flex flex-wrap gap-2">
+        {
+          quickQuestions.map((q) => (
+            <button
+              class="quick-question text-xs bg-gray-100 dark:bg-gray-800 dark:text-white hover:bg-gray-200 dark:hover:bg-gray-700 px-2 py-1 rounded-full transition-colors font-text"
+              data-question={q.question}
+            >
+              {q.text}
+            </button>
+          ))
+        }
+      </div>
+    </div>
+
+    <!-- Typing Indicator (hidden by default) -->
+    <div id="typing-indicator" class="hidden px-4 pb-2">
+      <div class="flex justify-start">
+        <div
+          class="bg-gray-100 dark:bg-gray-800 p-3 rounded-lg rounded-bl-none"
+        >
+          <div class="flex space-x-1">
+            <div class="w-2 h-2 bg-gray-400 rounded-full animate-bounce"></div>
+            <div
+              class="w-2 h-2 bg-gray-400 rounded-full animate-bounce"
+              style="animation-delay: 0.1s;"
+            >
+            </div>
+            <div
+              class="w-2 h-2 bg-gray-400 rounded-full animate-bounce"
+              style="animation-delay: 0.2s;"
+            >
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Input Area -->
+    <div class="p-4 border-t border-gray-200 dark:border-gray-700">
+      <div class="flex gap-2">
+        <input
+          type="text"
+          id="chat-input"
+          placeholder="Escribe tu pregunta..."
+          class="flex-1 px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-brand-red dark:bg-gray-800 dark:text-white text-sm font-text"
+        />
+        <button
+          id="send-button"
+          class="px-3 py-2 bg-brand-red hover:bg-brand-red-deep disabled:bg-gray-300 text-white rounded-lg transition-colors"
+        >
+          <svg
+            class="w-4 h-4"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"></path>
+          </svg>
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  // @ts-nocheck
+  class UljiChatbot {
+    constructor() {
+      this.isOpen = false;
+      this.messageCount = 1;
+      this.isTyping = false;
+
+      // DOM element properties will be initialized in initializeElements
+      this.toggleButton = null;
+      this.chatWindow = null;
+      this.messagesContainer = null;
+      this.chatInput = null;
+      this.sendButton = null;
+      this.quickQuestions = null;
+      this.typingIndicator = null;
+      this.notificationDot = null;
+      this.chatIcon = null;
+      this.closeIcon = null;
+
+      this.initializeElements();
+      this.bindEvents();
+      this.setInitialTime();
+    }
+
+    initializeElements() {
+      this.toggleButton = document.getElementById("chat-toggle");
+      this.chatWindow = document.getElementById("chat-window");
+      this.messagesContainer = document.getElementById("messages-container");
+      this.chatInput = document.getElementById("chat-input");
+      this.sendButton = document.getElementById("send-button");
+      this.quickQuestions = document.getElementById("quick-questions");
+      this.typingIndicator = document.getElementById("typing-indicator");
+      this.notificationDot = document.getElementById("notification-dot");
+      this.chatIcon = document.getElementById("chat-icon");
+      this.closeIcon = document.getElementById("close-icon");
+    }
+
+    bindEvents() {
+      if (this.toggleButton)
+        this.toggleButton.addEventListener("click", () => this.toggleChat());
+      if (this.sendButton)
+        this.sendButton.addEventListener("click", () => this.sendMessage());
+      if (this.chatInput) {
+        this.chatInput.addEventListener("keypress", (e) => {
+          if (e.key === "Enter") this.sendMessage();
+        });
+      }
+
+      // Quick questions
+      document.querySelectorAll(".quick-question").forEach((button) => {
+        button.addEventListener("click", (e) => {
+          const question = e.target.getAttribute("data-question");
+          if (this.chatInput && question) {
+            this.chatInput.value = question;
+            this.sendMessage();
+          }
+        });
+      });
+    }
+
+    setInitialTime() {
+      const now = new Date();
+      const timeString = now.toLocaleTimeString("es-AR", {
+        hour: "2-digit",
+        minute: "2-digit",
+      });
+      const initialTimeElement = document.getElementById("initial-time");
+      if (initialTimeElement) {
+        initialTimeElement.textContent = timeString;
+      }
+    }
+
+    toggleChat() {
+      this.isOpen = !this.isOpen;
+
+      if (this.isOpen) {
+        this.openChat();
+      } else {
+        this.closeChat();
+      }
+    }
+
+    openChat() {
+      if (this.chatWindow) this.chatWindow.classList.remove("hidden");
+      if (this.notificationDot) this.notificationDot.style.display = "none";
+
+      // Animate icon transition using inline styles
+      if (this.chatIcon) {
+        this.chatIcon.style.opacity = "0";
+        this.chatIcon.style.transform = "rotate(180deg) scale(0.8)";
+      }
+      if (this.closeIcon) {
+        this.closeIcon.style.opacity = "1";
+        this.closeIcon.style.transform = "rotate(0deg) scale(1)";
+      }
+
+      // Animate opening
+      setTimeout(() => {
+        if (this.chatWindow) {
+          this.chatWindow.classList.remove("opacity-0", "scale-90");
+          this.chatWindow.classList.add("opacity-100", "scale-100");
+        }
+      }, 10);
+    }
+
+    closeChat() {
+      if (this.chatWindow) {
+        this.chatWindow.classList.add("opacity-0", "scale-90");
+        this.chatWindow.classList.remove("opacity-100", "scale-100");
+      }
+
+      // Animate icon transition using inline styles
+      if (this.closeIcon) {
+        this.closeIcon.style.opacity = "0";
+        this.closeIcon.style.transform = "rotate(180deg) scale(0.8)";
+      }
+      if (this.chatIcon) {
+        this.chatIcon.style.opacity = "1";
+        this.chatIcon.style.transform = "rotate(0deg) scale(1)";
+      }
+
+      setTimeout(() => {
+        if (this.chatWindow) this.chatWindow.classList.add("hidden");
+        if (this.notificationDot) this.notificationDot.style.display = "block";
+      }, 300);
+    }
+
+    async sendMessage() {
+      if (!this.chatInput) return;
+
+      const message = this.chatInput.value.trim();
+      if (!message || this.isTyping) return;
+
+      // Add user message
+      this.addMessage(message, true);
+      this.chatInput.value = "";
+
+      // Hide quick questions after first message
+      if (this.messageCount === 2 && this.quickQuestions) {
+        this.quickQuestions.style.display = "none";
+      }
+
+      // Show typing indicator
+      this.showTyping();
+
+      // Get AI response
+      setTimeout(
+        async () => {
+          const response = await this.getAIResponse(message);
+          this.hideTyping();
+          this.addMessage(response, false);
+        },
+        1000 + Math.random() * 1000
+      );
+    }
+
+    addMessage(text, isUser) {
+      if (!this.messagesContainer) return;
+
+      const messageDiv = document.createElement("div");
+      messageDiv.className = `flex ${isUser ? "justify-end" : "justify-start"}`;
+
+      const now = new Date();
+      const timeString = now.toLocaleTimeString("es-AR", {
+        hour: "2-digit",
+        minute: "2-digit",
+      });
+
+      messageDiv.innerHTML = `
+        <div class="max-w-[80%] p-3 rounded-lg ${
+          isUser
+            ? "bg-brand-red text-white rounded-br-none"
+            : "bg-gray-100 dark:bg-gray-800 text-gray-900 dark:text-white rounded-bl-none"
+        }">
+          <p class="text-sm font-text whitespace-pre-line">${text}</p>
+          <p class="text-xs opacity-70 mt-1">${timeString}</p>
+        </div>
+      `;
+
+      this.messagesContainer.appendChild(messageDiv);
+      this.scrollToBottom();
+      this.messageCount++;
+    }
+
+    showTyping() {
+      this.isTyping = true;
+      if (this.typingIndicator) this.typingIndicator.classList.remove("hidden");
+      this.scrollToBottom();
+    }
+
+    hideTyping() {
+      this.isTyping = false;
+      if (this.typingIndicator) this.typingIndicator.classList.add("hidden");
+    }
+
+    scrollToBottom() {
+      setTimeout(() => {
+        if (this.messagesContainer) {
+          this.messagesContainer.scrollTop =
+            this.messagesContainer.scrollHeight;
+        }
+      }, 100);
+    }
+
+    async getAIResponse(userMessage) {
+      const message = userMessage.toLowerCase();
+
+      // Quick questions - instant responses
+      if (
+        message.includes("preguntas frecuentes") ||
+        message.includes("quick questions") ||
+        message.includes("pregunta rápida") ||
+        message.includes("consulta rápida") ||
+        message.includes("ayuda rápida")
+      ) {
+        return "🚀 **Preguntas Frecuentes - Respuestas Rápidas**:\n\n• **Horarios**: Escribe 'horarios' para ver todos los horarios\n• **Precios**: Escribe 'precios' para ver las cuotas\n• **Contacto**: Escribe 'contacto' para info de WhatsApp\n• **Primera clase**: Escribe 'primera clase' para empezar\n• **Cinturones**: Escribe 'grados' para el sistema de cinturones\n• **Beneficios**: Escribe 'beneficios' para ventajas del Taekwondo\n• **Ubicación**: Escribe 'dónde' para la dirección\n\n💬 También podés usar las preguntas rápidas de abajo para respuestas instantáneas.";
+      }
+
+      // Clases y horarios
+      if (
+        message.includes("clase") ||
+        message.includes("horario") ||
+        message.includes("cuando") ||
+        message.includes("día")
+      ) {
+        return "⏰ **Horarios de Clases**:\n\n🥋 ** Infantiles (5-12 años)**:\n• lunes y miércoles: 18:30 - 19:40 h\n🥋 **Juveniles y adultos (13 años en adelante)**:\n• lunes y miércoles: 19:40 - 21 h";
+      }
+
+      // Precios y costos
+      if (
+        message.includes("precio") ||
+        message.includes("costo") ||
+        message.includes("cuota") ||
+        message.includes("cuanto cuesta") ||
+        message.includes("mensualidad")
+      ) {
+        return "Nuestros precios mensuales son:\n\n💰 **Niños (4-12 años)**: $25.000 ARS/mes\n💰 **Adolescentes (13-17 años)**: $30.000 ARS/mes\n💰 **Adultos (18+ años)**: $35.000 ARS/mes\n\n✨ **Incluye**:\n• Todas las clases del mes\n• Seguro de accidentes\n• Exámenes de grado (materiales aparte)\n\n🎁 **Primera clase gratuita**\n📞 Para más información: +54 9 11 6595-1634";
+      }
+
+      // Contacto y ubicación
+      if (
+        message.includes("contacto") ||
+        message.includes("teléfono") ||
+        message.includes("whatsapp") ||
+        message.includes("donde") ||
+        message.includes("ubicación") ||
+        message.includes("dirección")
+      ) {
+        return "📞 **Contacto Escuela Ul-ji**:\n\n📱 WhatsApp: +54 9 11 6595-1634\n📍 **Dojang Principal**: Aserejé - Don Bosco 3834, Capital Federal\n📧 Email: info@escuelaul-ji.com.ar\n\n🚇 **Cómo llegar**:\n• Subte Línea E - Estación Boedo\n• Colectivos: 4, 23, 50, 168\n\n¿Necesitas indicaciones específicas?";
+      }
+
+      // Cinturones y grados
+      if (
+        message.includes("cinturón") ||
+        message.includes("cinturon") ||
+        message.includes("grado") ||
+        message.includes("dan") ||
+        message.includes("kup") ||
+        message.includes("examen")
+      ) {
+        return "🥋 **Sistema de Grados - Taekwondo WTF**:\n\n**Cinturones Kup (Color)**:\n🟡 10° Kup - Cinturón Amarillo\n🟠 9° Kup - Amarillo/Naranja\n🟠 8° Kup - Cinturón Naranja\n🟢 7° Kup - Naranja/Verde\n🟢 6° Kup - Cinturón Verde\n🔵 5° Kup - Verde/Azul\n🔵 4° Kup - Cinturón Azul\n🟤 3° Kup - Azul/Marrón\n🟤 2° Kup - Cinturón Marrón\n⚫ 1° Kup - Marrón/Negro\n\n**Cinturones Dan (Negro)**:\n⚫ 1° a 9° Dan\n\n¿Te interesa saber sobre los próximos exámenes?";
+      }
+
+      // Beneficios del Taekwondo
+      if (
+        message.includes("beneficio") ||
+        message.includes("para qué sirve") ||
+        message.includes("por qué") ||
+        message.includes("ventaja")
+      ) {
+        return "🌟 **Beneficios del Taekwondo**:\n\n**Para Niños:**\n• Disciplina y respeto\n• Mejora la concentración\n• Desarrollo motor y coordinación\n• Autoconfianza y autoestima\n• Defensa personal\n\n**Para Adolescentes:**\n• Control del estrés escolar\n• Trabajo en equipo\n• Liderazgo y responsabilidad\n• Actividad física saludable\n\n**Para Adultos:**\n• Excelente ejercicio cardiovascular\n• Flexibilidad y fuerza\n• Liberación de tensiones\n• Arte marcial tradicional\n• Comunidad y amistad\n\n¡El Taekwondo es para toda la vida!";
+      }
+      if (
+        message.includes("precio") ||
+        message.includes("costo") ||
+        message.includes("cuota") ||
+        message.includes("cuanto cuesta") ||
+        message.includes("mensualidad")
+      ) {
+        return "Nuestros precios mensuales son:\n\n💰 **Infantiles, juveniles y adultos; dos veces por semana**: $22.000 ARS/mes\n💰 **Infantiles, juveniles y adultos; una vez por semana**: $15.000 ARS/mes\n💰 **Grupo familiar (dos integrantes); dos veces por semana**: $36.000 ARS/mes\n\n✨ **Incluye**:\n• Todas las clases del mes\n• Exámenes de grado (materiales aparte)\n\n🎁 **Primeras dos clases gratuitas**\n📞 Para más información: +54 9 11 6595-1634";
+      }
+
+      // Primera clase
+      if (
+        message.includes("primera clase") ||
+        message.includes("empezar") ||
+        message.includes("comenzar") ||
+        message.includes("nuevo") ||
+        message.includes("principiante")
+      ) {
+        return "🎯 **Tu Primera Clase en Ul-Ji**:\n\n**¿Qué necesitas traer?**\n• Ropa cómoda y deportiva. En lo posible, evita ropa muy ajustada o jeans.\n• Botella de agua\n• Toalla pequeña\n• ¡Muchas ganas de aprender!\n\n**¿Qué haremos?**\n• Calentamiento y estiramiento\n• Técnicas básicas de patadas y puños\n• Posiciones fundamentales\n• Filosofía del Taekwondo\n• Saludo y protocolo\n\n**¡La primera clase es GRATUITA!**\n📞 Reserva tu lugar: +54 9 11 6595-1634\n\n¿Qué edad tenés? Te asigno el mejor horario.";
+      }
+
+      // Saludos
+      if (
+        message.includes("hola") ||
+        message.includes("buenos días") ||
+        message.includes("buenas tardes") ||
+        message.includes("buenas noches")
+      ) {
+        return "¡Hola! 👋🥋 ¡Bienvenido/a a la Escuela Ul-ji de Taekwondo!\n\nSomos una escuela de Taekwondo con más de 30 años de experiencia formando taekwondistas de todas las edades.\n\n**Especialidades:**\n• Taekwondo ITF tradicional\n• Formación integral en valores\n• Preparación para competencias\n• Defensa personal\n• Mejoramos la confianza en uno mismo\n\n¿En qué podemos ayudarte hoy?";
+      }
+
+      // Quick single-word responses
+      if (message.trim() === "horarios") {
+        return "⏰ **Horarios de Clases**:\n\n🥋 **infantiles (5-12 años)**:\n• lunes y miércoles: 18:30 - 19:40 h\n🥋 **Juveniles y adultos (13 años en adelante)**:\n• lunes y miércoles: 19:40 - 21 h";
+      }
+
+      if (message.trim() === "precios" || message.trim() === "precio") {
+        return "💰 **Precios Mensuales**:\n\n• **Infantiles, juveniles y adultos; dos veces por semana**: $22.000 ARS/mes\n• **Infantiles, juveniles y adultos; una vez por semana**: $15.000 ARS/mes\n• **Grupo familiar (dos integrantes); dos veces por semana**: $36.000 ARS/mes\n\n🎁 **Primeras dos clases gratuitas**\n📞 WhatsApp: +54 9 11 6595-1634";
+      }
+
+      if (message.trim() === "contacto" || message.trim() === "whatsapp") {
+        return "📞 **Contacto Directo**:\n\n📱 **WhatsApp**: +54 9 11 6595-1634\n📧 **Email**: info@escuelaulji.com.ar\n📍 **Dirección**: Centro Cultural La Grieta - Alsina 2143, Capital Federal\n\n💬 ¡Escribinos por WhatsApp para consultas inmediatas!";
+      }
+
+      if (message.trim() === "grados" || message.trim() === "cinturones") {
+        return "🥋 **Sistema de Grados**:\n\n**Cinturones Kup (Color)**:\n🟡 10° Kup - Amarillo\n🟠 9°-8° Kup - Naranja\n🟢 7°-6° Kup - Verde\n🔵 5°-4° Kup - Azul\n🟤 3°-2° Kup - Marrón\n⚫ 1° Kup - Marrón/Negro\n\n**Cinturones Dan (Negro)**:\n⚫ 1° a 9° Dan";
+      }
+
+      if (message.trim() === "ubicación" || message.trim() === "dónde" || message.trim() === "donde") {
+        return "📍 **Ubicación Escuela Ul-ji**:\n\n🏢 **Centro Cultural La Grieta**\nAlsina 2143, Capital Federal\n\n🚇 **Transporte**:\n• Subte Línea E - Estación Boedo\n• Colectivos: 4, 23, 50, 168\n\n📱 Para indicaciones específicas: +54 9 11 6595-1634";
+      }
+
+      if (message.trim() === "beneficios") {
+        return "🌟 **Beneficios del Taekwondo**:\n\n**Físicos**: Flexibilidad, fuerza, coordinación\n**Mentales**: Disciplina, concentración, autocontrol\n**Sociales**: Respeto, trabajo en equipo\n**Personales**: Autoconfianza, autoestima\n**Prácticos**: Defensa personal, actividad saludable\n\n¡Es mucho más que un deporte!";
+      }
+
+      // Default response
+      return "¡Excelente pregunta! 🤔🥋\n\nPara darte la información más precisa sobre Taekwondo, te recomiendo:\n\n📱 **WhatsApp**: +54 9 11 6595-1634 (respuesta inmediata)\n📧 **Email**: info@escuelaulji.com.ar\n🏢 **Visitanos**: Centro Cultural La Grieta - Alsina 2143, Capital Federal\n\nTambién podés preguntarme sobre:\n• Horarios de clases\n• Precios y promociones\n• Beneficios del Taekwondo\n• Próximos exámenes\n• Competencias\n\n¿Hay algo específico sobre el Taekwondo que te gustaría saber?";
+    }
+  }
+
+  // Initialize chatbot when DOM is loaded
+  document.addEventListener("DOMContentLoaded", () => {
+    new UljiChatbot();
+  });
+</script>
+
+<style>
+  /* Custom animations and styles */
+  @keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  #chat-window {
+    animation: fadeInUp 0.3s ease-out;
+  }
+
+  /* Scrollbar styling */
+  #messages-container {
+    scrollbar-width: thin;
+    scrollbar-color: rgba(156, 163, 175, 0.5) transparent;
+  }
+
+  #messages-container::-webkit-scrollbar {
+    width: 4px;
+  }
+
+  #messages-container::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  #messages-container::-webkit-scrollbar-thumb {
+    background-color: rgba(156, 163, 175, 0.5);
+    border-radius: 2px;
+  }
+
+  #messages-container::-webkit-scrollbar-thumb:hover {
+    background-color: rgba(156, 163, 175, 0.7);
+  }
+
+  /* Bounce animation for notification dot */
+  @keyframes pulse {
+    0%,
+    100% {
+      transform: scale(1);
+    }
+    50% {
+      transform: scale(1.2);
+    }
+  }
+
+  #notification-dot {
+    animation: pulse 2s infinite;
+  }
+
+  /* Typing indicator animation */
+  @keyframes bounce {
+    0%,
+    80%,
+    100% {
+      transform: translateY(0);
+    }
+    40% {
+      transform: translateY(-8px);
+    }
+  }
+
+  .animate-bounce {
+    animation: bounce 1s infinite;
+  }
+</style>

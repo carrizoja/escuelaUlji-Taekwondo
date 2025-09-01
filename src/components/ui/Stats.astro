@@ -1,0 +1,176 @@
+---
+// Dynamic Stats component with animated counters
+interface Props {
+  stats?: Array<{
+    value: number;
+    label: string;
+    suffix?: string;
+  }>;
+}
+
+const { stats = [
+  { value: 30, label: "Años de Experiencia", suffix: "+" },
+  { value: 100, label: "Estudiantes Formados", suffix: "+" },
+  { value: 50, label: "Exámenes Realizados", suffix: "+" }
+] } = Astro.props;
+---
+
+<div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-4xl mx-auto animate-slide-up">
+  {stats.map((stat, index) => (
+    <div class="text-center group">
+      <div 
+        class="text-4xl md:text-5xl font-bold text-ulji-red-400 dark:text-ulji-red-300 mb-2 group-hover:scale-110 transition-transform duration-300"
+        data-target={stat.value}
+        data-suffix={stat.suffix || ""}
+        data-index={index}
+      >
+        0{stat.suffix || ""}
+      </div>
+      <div class="text-white text-lg font-semibold">
+        {stat.label}
+      </div>
+    </div>
+  ))}
+</div>
+
+<script>
+  class StatsCounter {
+    counters: NodeListOf<Element>;
+    animationDuration: number;
+    isAnimated: boolean;
+
+    constructor() {
+      this.counters = document.querySelectorAll('[data-target]');
+      this.animationDuration = 5000; // 2 seconds
+      this.isAnimated = false;
+      
+      this.init();
+    }
+
+    init() {
+      // Use Intersection Observer to trigger animation when stats come into view
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting && !this.isAnimated) {
+            this.animateCounters();
+            this.isAnimated = true;
+          }
+        });
+      }, {
+        threshold: 0.5,
+        rootMargin: '0px 0px -100px 0px'
+      });
+
+      // Observe the first counter element (representative of the whole stats section)
+      if (this.counters.length > 0) {
+        const firstCounter = this.counters[0];
+        const parentElement = firstCounter.parentElement;
+        const grandParentElement = parentElement?.parentElement;
+        
+        if (grandParentElement) {
+          observer.observe(grandParentElement);
+        }
+      }
+    }
+
+    animateCounters() {
+      this.counters.forEach((counter, index) => {
+        const target = parseInt(counter.getAttribute('data-target') || '0');
+        const suffix = counter.getAttribute('data-suffix') || '';
+        const animationIndex = parseInt(counter.getAttribute('data-index') || '0');
+        
+        // Add staggered delay for each counter
+        const delay = animationIndex * 200;
+        
+        setTimeout(() => {
+          this.animateCounter(counter, target, suffix);
+        }, delay);
+      });
+    }
+
+    animateCounter(element: Element, target: number, suffix: string) {
+      const startTime = performance.now();
+      const startValue = 0;
+
+      const animate = (currentTime: number) => {
+        const elapsed = currentTime - startTime;
+        const progress = Math.min(elapsed / this.animationDuration, 1);
+        
+        // Use easeOutExpo for smooth deceleration
+        const easeOutExpo = progress === 1 ? 1 : 1 - Math.pow(2, -10 * progress);
+        const currentValue = Math.floor(startValue + (target - startValue) * easeOutExpo);
+        
+        element.textContent = currentValue + suffix;
+        
+        if (progress < 1) {
+          requestAnimationFrame(animate);
+        } else {
+          element.textContent = target + suffix;
+          
+          // Add a subtle pulse effect when animation completes
+          (element as HTMLElement).style.transform = 'scale(1.1)';
+          setTimeout(() => {
+            (element as HTMLElement).style.transform = 'scale(1)';
+          }, 200);
+        }
+      };
+
+      requestAnimationFrame(animate);
+    }
+  }
+
+  // Initialize when DOM is loaded
+  document.addEventListener('DOMContentLoaded', () => {
+    new StatsCounter();
+  });
+
+  // Re-initialize for client-side navigation (if using View Transitions or SPA routing)
+  document.addEventListener('astro:page-load', () => {
+    new StatsCounter();
+  });
+</script>
+
+<style>
+  /* Animation keyframes */
+  @keyframes slide-up {
+    from {
+      opacity: 0;
+      transform: translateY(40px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .animate-slide-up {
+    animation: slide-up 1s ease-out 0.3s both;
+  }
+
+  /* Smooth transitions for hover effects */
+  .group div[data-target] {
+    transition: transform 0.3s ease;
+  }
+
+  /* Add a subtle glow effect when hovering */
+  .group:hover div[data-target] {
+    text-shadow: 0 0 20px rgba(239, 68, 68, 0.5);
+  }
+
+  /* Enhanced responsive design */
+  @media (max-width: 768px) {
+    .grid {
+      gap: 1.5rem;
+    }
+    
+    div[data-target] {
+      font-size: 2.5rem;
+    }
+  }
+
+  @media (max-width: 640px) {
+    div[data-target] {
+      font-size: 2rem;
+    }
+  }
+</style>
