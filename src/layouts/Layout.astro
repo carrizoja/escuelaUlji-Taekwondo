@@ -3,29 +3,69 @@ import '../styles/global.css';
 import NavbarVue from '../components/NavbarVue.vue';
 import Footer from '../components/Footer.astro';
 import AiChatbot from '../components/AiChatbot.astro';
+import SEO from '../components/SEO.astro';
+
+export interface Props {
+	title?: string;
+	description?: string;
+	keywords?: string;
+}
+
+const { title, description, keywords } = Astro.props;
 
 ---
 
 <!doctype html>
-<html lang="en">
+<html lang="es">
 	<head>
+		
 		<meta charset="UTF-8" />
-		<meta name="viewport" content="width=device-width" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		
+		<!-- Favicon - Ulji Logo -->
+		<link rel="icon" type="image/png" href="/ulji-logo.png" />
+		<link rel="icon" type="image/x-icon" href="/favicon.ico" />
+		<link rel="apple-touch-icon" href="/ulji-logo.png" />
+		<link rel="manifest" href="/manifest.json" />
+		
 		<meta name="generator" content={Astro.generator} />
+		<meta name="theme-color" content="#1e40af" />
+		
+		<!-- SEO Component -->
+		<SEO 
+			title={title}
+			description={description}
+			keywords={keywords}
+		/>
 		
 		<!-- Google Fonts - Poppins for titles and Barlow for text -->
 		<link rel="preconnect" href="https://fonts.googleapis.com">
 		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 		<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&family=Barlow:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 		
-		<title>Astro Basics</title>
+		<!-- Google Analytics (gtag.js) -->
+		<script async src="https://www.googletagmanager.com/gtag/js?id=G-SFRSR3MB1F"></script>
+		<script is:inline>
+			window.dataLayer = window.dataLayer || [];
+			function gtag(){dataLayer.push(arguments);}
+			gtag('js', new Date());
+			
+			// Configure Google Analytics for Escuela Ul-ji
+			gtag('config', 'G-SFRSR3MB1F', {
+				send_page_view: true,
+				anonymize_ip: true,
+				cookie_flags: 'SameSite=None;Secure'
+			});
+		</script>
+		
+		<script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
 	</head>
 	<body class="bg-white dark:bg-gray-900 transition-colors duration-300">
 		<NavbarVue client:load />
 		<slot />
 		<AiChatbot />
 		<Footer />
+		
 	</body>
 </html>
 

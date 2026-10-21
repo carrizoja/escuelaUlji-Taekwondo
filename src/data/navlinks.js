@@ -2,8 +2,8 @@
 export const navLinks = [
   { name: 'Inicio', href: '/' },
   { name: 'Institucional', href: '/institucional' },
-  { name: 'Taekwondo', href: '/taekwondo' },
+  { name: 'Taekwon-do', href: '/taekwondo' },
   { name: 'Eventos', href: '/eventos' },
   { name: 'Galería', href: '/gallery' },
-  { name: 'Contacto', href: '/contacto' }
+  { name: 'Contacto', href: '/#contact' }
 ]

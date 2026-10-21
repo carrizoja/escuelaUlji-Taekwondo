@@ -2,9 +2,17 @@
 import Hero from '../components/blocks/Hero.astro';
 import Layout from '../layouts/Layout.astro';
 import Contact from '../components/Contact.astro';
+import Carousel from '../components/ui/Carousel.astro';
+import StudentSpotlight from '../components/blocks/StudentSpotlight.astro';
 ---
 
-<Layout>
+<Layout 
+	title="Escuela Ul-ji Taekwondo - Academia de Artes Marciales en Buenos Aires"
+	description="Aprende Taekwondo en la Escuela Ul-ji con instructores certificados. Clases para todas las edades en Buenos Aires. Filosofía, disciplina y técnica en un ambiente familiar."
+	keywords="taekwondo, artes marciales, Buenos Aires, escuela Ul-ji, clases taekwondo, autodefensa, disciplina, filosofía marcial, instructores certificados, cinturones"
+>
 	<Hero />
+	<Carousel />
+	<StudentSpotlight />
 	<Contact />
 </Layout>

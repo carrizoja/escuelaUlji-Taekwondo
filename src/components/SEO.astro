@@ -1,0 +1,122 @@
+---
+// SEO Component for Escuela Ul-ji Taekwondo
+interface Props {
+  title?: string;
+  description?: string;
+  keywords?: string;
+  ogImage?: string;
+  ogType?: string;
+  canonicalURL?: string;
+  noindex?: boolean;
+  schema?: object;
+}
+
+const {
+  title = "Escuela Ul-ji Taekwondo - Clases de Taekwondo ITF en Buenos Aires",
+  description = "Escuela de Taekwondo ITF en Buenos Aires. Clases para niños, jóvenes y adultos. Instructores certificados, ambiente familiar. ¡Primera clase gratis! Contactanos por WhatsApp.",
+  keywords = "taekwondo, taekwondo ITF, artes marciales, clases taekwondo, escuela taekwondo Buenos Aires, escuela taekwondo congreso, escuela taekwondo balvanera, escuela taekwondo once, taekwondo niños, taekwondo adultos, defensa personal, disciplina, autoestima, competencias taekwondo",
+  ogImage = "https://res.cloudinary.com/dgvje1bpw/image/upload/v1756572320/logo_ulji_gkw0wn.png",
+  ogType = "website",
+  canonicalURL = Astro.url.href,
+  noindex = false,
+  schema
+} = Astro.props;
+
+const siteName = "Escuela Ul-ji Taekwondo";
+const siteURL = "https://escuelaulji.com"; // Update with actual domain
+const fullTitle = title.includes("Escuela Ul-ji") ? title : `${title} | ${siteName}`;
+
+// Default JSON-LD Schema for Organization
+const defaultSchema = {
+  "@context": "https://schema.org",
+  "@type": "SportsClub",
+  "name": "Escuela Ul-ji Taekwondo",
+  "description": "Escuela de Taekwondo ITF en Buenos Aires con instructores certificados",
+  "url": siteURL,
+  "logo": "https://res.cloudinary.com/dgvje1bpw/image/upload/v1756572320/logo_ulji_gkw0wn.png",
+  "image": ogImage,
+  "sameAs": [
+    "https://www.facebook.com/EscuelaUlji",
+    "https://www.instagram.com/escuela.ulji",
+    "https://wa.me/5491165951634"
+  ],
+  "address": {
+    "@type": "PostalAddress",
+    "addressLocality": "Buenos Aires",
+    "addressCountry": "AR"
+  },
+  "contactPoint": {
+    "@type": "ContactPoint",
+    "telephone": "+54-11-6595-1634",
+    "contactType": "customer service"
+  },
+  "sport": "Taekwondo",
+  "memberOf": {
+    "@type": "Organization",
+    "name": "International Taekwon-Do Federation (ITF)"
+  }
+};
+
+const finalSchema = schema || defaultSchema;
+---
+
+<!-- Primary Meta Tags -->
+<title>{fullTitle}</title>
+<meta name="title" content={fullTitle} />
+<meta name="description" content={description} />
+<meta name="keywords" content={keywords} />
+<meta name="author" content="Escuela Ul-ji Taekwondo" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta charset="UTF-8" />
+
+<!-- Canonical URL -->
+<link rel="canonical" href={canonicalURL} />
+
+<!-- Robots Meta -->
+{noindex ? (
+  <meta name="robots" content="noindex, nofollow" />
+) : (
+  <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
+)}
+
+<!-- Open Graph / Facebook -->
+<meta property="og:type" content={ogType} />
+<meta property="og:url" content={canonicalURL} />
+<meta property="og:title" content={fullTitle} />
+<meta property="og:description" content={description} />
+<meta property="og:image" content={ogImage} />
+<meta property="og:site_name" content={siteName} />
+<meta property="og:locale" content="es_AR" />
+
+<!-- Twitter -->
+<meta property="twitter:card" content="summary_large_image" />
+<meta property="twitter:url" content={canonicalURL} />
+<meta property="twitter:title" content={fullTitle} />
+<meta property="twitter:description" content={description} />
+<meta property="twitter:image" content={ogImage} />
+
+<!-- Additional Meta Tags for Local SEO -->
+<meta name="geo.region" content="AR-C" />
+<meta name="geo.placename" content="Buenos Aires" />
+<meta name="geo.position" content="-34.6118;-58.3960" />
+<meta name="ICBM" content="-34.6118, -58.3960" />
+
+<!-- Language -->
+<meta http-equiv="content-language" content="es-AR" />
+<html lang="es-AR" />
+
+<!-- Favicon -->
+<link rel="icon" type="image/png" href="/favicon.png" />
+<link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+
+<!-- JSON-LD Schema -->
+<script type="application/ld+json" set:html={JSON.stringify(finalSchema)} />
+
+<!-- Preconnect to external domains -->
+<link rel="preconnect" href="https://res.cloudinary.com" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+
+<!-- DNS Prefetch for external resources -->
+<link rel="dns-prefetch" href="//wa.me" />
+<link rel="dns-prefetch" href="//www.google.com" />

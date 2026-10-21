@@ -1,0 +1,342 @@
+---
+// VideoPlaylist component for Gallery section
+export interface VideoItem {
+  id: string;
+  title: string;
+  duration: string;
+  views: number;
+  publishedAt: string;
+  thumbnail?: string;
+  videoUrl?: string;
+}
+
+export interface Props {
+  featuredVideo: {
+    id: string;
+    title: string;
+    description: string;
+    duration: string;
+    views: number;
+    publishedAt: string;
+    thumbnail?: string;
+    videoUrl?: string;
+  };
+  relatedVideos: VideoItem[];
+  class?: string;
+}
+
+const {
+  featuredVideo,
+  relatedVideos,
+  class: className = '',
+} = Astro.props;
+
+// Format numbers for display
+function formatViews(views: number): string {
+  if (views >= 1000) {
+    return `${(views / 1000).toFixed(1)}k`;
+  }
+  return views.toString();
+}
+
+// Format relative time
+function formatTimeAgo(dateString: string): string {
+  const date = new Date(dateString);
+  const now = new Date();
+  const diffTime = Math.abs(now.getTime() - date.getTime());
+  const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+  
+  if (diffDays === 1) return 'Hace 1 día';
+  if (diffDays < 7) return `Hace ${diffDays} días`;
+  if (diffDays < 14) return 'Hace 1 semana';
+  if (diffDays < 30) return `Hace ${Math.floor(diffDays / 7)} semanas`;
+  return `Hace ${Math.floor(diffDays / 30)} meses`;
+}
+---
+
+<section class={`py-16 bg-white dark:bg-gray-900 ${className}`}>
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="text-center mb-12">
+      <h2 class="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-6">
+        Playlist Destacada
+      </h2>
+      <div class="w-24 h-1 bg-red-600 mx-auto mb-8"></div>
+      <p class="text-lg text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
+        Una selección especial de nuestros mejores videos para tu aprendizaje
+      </p>
+    </div>
+
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+      <!-- Featured Video -->
+      <div class="space-y-6">
+        <div class="aspect-video bg-gray-200 dark:bg-gray-700 rounded-lg overflow-hidden relative group">
+          {featuredVideo.thumbnail ? (
+            <img 
+              src={featuredVideo.thumbnail} 
+              alt={featuredVideo.title}
+              class="w-full h-full object-cover"
+            />
+          ) : (
+            <div class="w-full h-full flex items-center justify-center bg-gradient-to-br from-red-500 to-red-700">
+              <svg class="w-16 h-16 text-white opacity-50" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"></path>
+              </svg>
+            </div>
+          )}
+          
+          <!-- Play Button Overlay -->
+          <div class="absolute inset-0 bg-black bg-opacity-40 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+            <button 
+              class="play-button w-20 h-20 bg-red-600 rounded-full flex items-center justify-center hover:bg-red-700 transition-all duration-300 hover:scale-110 shadow-2xl"
+              data-video-id={featuredVideo.id}
+              data-video-url={featuredVideo.videoUrl}
+            >
+              <svg class="w-8 h-8 text-white ml-1" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M8 5v14l11-7z"/>
+              </svg>
+            </button>
+          </div>
+          
+          <!-- Duration Badge -->
+          <div class="absolute bottom-4 right-4 bg-black bg-opacity-75 text-white px-2 py-1 rounded text-sm font-medium">
+            📹 {featuredVideo.duration}
+          </div>
+        </div>
+        
+        <div>
+          <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-2">
+            {featuredVideo.title}
+          </h3>
+          <p class="text-gray-600 dark:text-gray-400 mb-4 leading-relaxed">
+            {featuredVideo.description}
+          </p>
+          <div class="flex items-center text-sm text-gray-500 dark:text-gray-400 space-x-4">
+            <span class="flex items-center">
+              <svg class="w-4 h-4 mr-1" fill="currentColor" viewBox="0 0 20 20">
+                <path d="M10 12a2 2 0 100-4 2 2 0 000 4z"></path>
+                <path fill-rule="evenodd" d="M.458 10C1.732 5.943 5.522 3 10 3s8.268 2.943 9.542 7c-1.274 4.057-5.064 7-9.542 7S1.732 14.057.458 10zM14 10a4 4 0 11-8 0 4 4 0 018 0z" clip-rule="evenodd"></path>
+              </svg>
+              {formatViews(featuredVideo.views)} visualizaciones
+            </span>
+            <span class="flex items-center">
+              <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
+              </svg>
+              {formatTimeAgo(featuredVideo.publishedAt)}
+            </span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Playlist -->
+      <div class="space-y-4">
+        <h4 class="text-lg font-semibold text-gray-900 dark:text-white flex items-center">
+          <svg class="w-5 h-5 mr-2 text-red-500" fill="currentColor" viewBox="0 0 20 20">
+            <path d="M3 4a1 1 0 011-1h12a1 1 0 011 1v2a1 1 0 01-1 1H4a1 1 0 01-1-1V4zM3 10a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H4a1 1 0 01-1-1v-6zM14 9a1 1 0 00-1 1v6a1 1 0 001 1h2a1 1 0 001-1v-6a1 1 0 00-1-1h-2z"></path>
+          </svg>
+          Videos Relacionados ({relatedVideos.length})
+        </h4>
+        
+        <div class="space-y-3 max-h-96 overflow-y-auto custom-scrollbar">
+          {relatedVideos.map((video, index) => (
+            <div class="playlist-item flex gap-4 p-3 bg-gray-50 dark:bg-gray-800 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 transition-all duration-300 cursor-pointer group"
+                 data-video-id={video.id}
+                 data-video-url={video.videoUrl}>
+              
+              <!-- Thumbnail -->
+              <div class="relative w-20 h-12 bg-gray-300 dark:bg-gray-600 rounded flex-shrink-0 overflow-hidden">
+                {video.thumbnail ? (
+                  <img 
+                    src={video.thumbnail} 
+                    alt={video.title}
+                    class="w-full h-full object-cover"
+                  />
+                ) : (
+                  <div class="w-full h-full flex items-center justify-center bg-gradient-to-br from-gray-400 to-gray-600">
+                    <svg class="w-4 h-4 text-white" fill="currentColor" viewBox="0 0 24 24">
+                      <path d="M8 5v14l11-7z"/>
+                    </svg>
+                  </div>
+                )}
+                
+                <!-- Play overlay on hover -->
+                <div class="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                  <svg class="w-3 h-3 text-white" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M8 5v14l11-7z"/>
+                  </svg>
+                </div>
+                
+                <!-- Duration -->
+                <div class="absolute bottom-1 right-1 bg-black bg-opacity-75 text-white px-1 text-xs rounded">
+                  {video.duration}
+                </div>
+              </div>
+              
+              <!-- Video Info -->
+              <div class="flex-1 min-w-0">
+                <p class="text-sm font-medium text-gray-900 dark:text-white truncate group-hover:text-red-600 dark:group-hover:text-red-400 transition-colors duration-300">
+                  {video.title}
+                </p>
+                <div class="flex items-center text-xs text-gray-500 dark:text-gray-400 mt-1 space-x-2">
+                  <span>{formatViews(video.views)} visualizaciones</span>
+                  <span>•</span>
+                  <span>{formatTimeAgo(video.publishedAt)}</span>
+                </div>
+              </div>
+              
+              <!-- Play indicator -->
+              <div class="flex items-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                <svg class="w-4 h-4 text-red-500" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M8 5v14l11-7z"/>
+                </svg>
+              </div>
+            </div>
+          ))}
+        </div>
+        
+        <!-- Load More Button -->
+        <button class="w-full mt-4 px-4 py-2 text-sm font-medium text-gray-700 dark:text-gray-300 bg-gray-100 dark:bg-gray-800 rounded-lg hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors duration-300">
+          Cargar más videos
+        </button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Video Modal (Optional) -->
+<div id="video-modal" class="fixed inset-0 bg-black bg-opacity-90 z-50 hidden items-center justify-center p-4">
+  <div class="relative max-w-4xl w-full max-h-full">
+    <!-- Close Button -->
+    <button 
+      id="close-video"
+      class="absolute -top-12 right-0 text-white hover:text-red-400 transition-colors duration-300"
+    >
+      <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+      </svg>
+    </button>
+    
+    <!-- Video Container -->
+    <div id="video-container" class="aspect-video bg-black rounded-lg overflow-hidden">
+      <!-- Video content will be inserted here -->
+    </div>
+  </div>
+</div>
+
+<style>
+  /* Custom scrollbar */
+  .custom-scrollbar::-webkit-scrollbar {
+    width: 4px;
+  }
+
+  .custom-scrollbar::-webkit-scrollbar-track {
+    @apply bg-gray-200 dark:bg-gray-700 rounded;
+  }
+
+  .custom-scrollbar::-webkit-scrollbar-thumb {
+    @apply bg-red-500 rounded hover:bg-red-600;
+  }
+
+  /* Playlist item animations */
+  .playlist-item:hover {
+    transform: translateX(4px);
+  }
+
+  /* Video modal animations */
+  #video-modal.show {
+    animation: fadeIn 0.3s ease-out;
+  }
+
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+</style>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const playButtons = document.querySelectorAll('.play-button');
+    const playlistItems = document.querySelectorAll('.playlist-item');
+    const videoModal = document.getElementById('video-modal');
+    const videoContainer = document.getElementById('video-container');
+    const closeVideoBtn = document.getElementById('close-video');
+    
+    // Handle video play
+    function playVideo(videoId: string, videoUrl?: string) {
+      if (!videoModal || !videoContainer) return;
+      
+      // For demo purposes, we'll show a placeholder
+      // In a real implementation, you'd embed the actual video player
+      videoContainer.innerHTML = `
+        <div class="w-full h-full flex flex-col items-center justify-center text-white">
+          <div class="text-center">
+            <svg class="w-24 h-24 mx-auto mb-4 text-red-500" fill="currentColor" viewBox="0 0 24 24">
+              <path d="M8 5v14l11-7z"/>
+            </svg>
+            <h3 class="text-xl font-bold mb-2">Video Player</h3>
+            <p class="text-gray-300 mb-4">Video ID: ${videoId}</p>
+            <p class="text-sm text-gray-400">
+              En una implementación real, aquí se cargaría el reproductor de video
+            </p>
+            ${videoUrl ? `<p class="text-xs text-gray-500 mt-2">URL: ${videoUrl}</p>` : ''}
+          </div>
+        </div>
+      `;
+      
+      videoModal.classList.remove('hidden');
+      videoModal.classList.add('flex', 'show');
+      document.body.style.overflow = 'hidden';
+    }
+    
+    // Handle close video
+    function closeVideo() {
+      if (!videoModal || !videoContainer) return;
+      
+      videoModal.classList.add('hidden');
+      videoModal.classList.remove('flex', 'show');
+      videoContainer.innerHTML = '';
+      document.body.style.overflow = '';
+    }
+    
+    // Event listeners
+    playButtons.forEach(button => {
+      button.addEventListener('click', () => {
+        const videoId = button.getAttribute('data-video-id') || '';
+        const videoUrl = button.getAttribute('data-video-url') || '';
+        playVideo(videoId, videoUrl);
+      });
+    });
+    
+    playlistItems.forEach(item => {
+      item.addEventListener('click', () => {
+        const videoId = item.getAttribute('data-video-id') || '';
+        const videoUrl = item.getAttribute('data-video-url') || '';
+        playVideo(videoId, videoUrl);
+      });
+    });
+    
+    if (closeVideoBtn) {
+      closeVideoBtn.addEventListener('click', closeVideo);
+    }
+    
+    // Close on overlay click
+    if (videoModal) {
+      videoModal.addEventListener('click', (e) => {
+        if (e.target === videoModal) {
+          closeVideo();
+        }
+      });
+    }
+    
+    // Close on escape key
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && !videoModal?.classList.contains('hidden')) {
+        closeVideo();
+      }
+    });
+  });
+</script>

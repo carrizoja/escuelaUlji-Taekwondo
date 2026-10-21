@@ -1,0 +1,95 @@
+---
+// Grades component - Belt system and ranks
+import { gups, dans, blackBeltRequirements } from "../../data/gups.js";
+import GradientLine from "../ui/GradientLine.astro";
+---
+
+<section id="titulos" class="py-16 bg-gray-50 dark:bg-gray-800">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="text-center mb-12">
+      <h2
+        class="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-6"
+      >
+        Sistema de Grados y Títulos
+      </h2>
+      <GradientLine />
+    </div>
+
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+      <!-- Cinturones de Color (Gup) -->
+      <div class="bg-white dark:bg-gray-900 rounded-xl shadow-lg p-8">
+        <h3
+          class="text-2xl font-bold text-brand-red dark:text-ulji-red-400 mb-6"
+        >
+          Cinturones de Color (Gup)
+        </h3>
+        <div class="space-y-4">
+          {gups.map((gup) => (
+            <div class={`flex items-center justify-between p-4 ${gup.bgClass} rounded-lg`}>
+              <span class="font-semibold text-gray-900 dark:text-white">
+                {gup.grade}
+              </span>
+              <div class="flex items-center">
+                <div class={`w-12 h-4 ${gup.colorClass} rounded mr-3`}></div>
+                <span class="text-gray-600 dark:text-gray-400">
+                  {gup.name}
+                </span>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      <!-- Cinturones Negros (Dan) -->
+      <div class="bg-white dark:bg-gray-900 rounded-xl shadow-lg p-8">
+        <h3
+          class="text-2xl font-bold text-brand-red dark:text-ulji-red-400 mb-6"
+        >
+          Cinturones Negros (Dan)
+        </h3>
+        <div class="space-y-4">
+          {dans.map((dan) => (
+            <div class={`flex items-center justify-between p-4 ${dan.bgClass} rounded-lg`}>
+              <span class="font-semibold text-gray-900 dark:text-white">
+                {dan.grade}
+              </span>
+              <div class="flex items-center">
+                <div class={`w-12 h-4 ${dan.colorClass} rounded mr-3`}></div>
+                <span class="text-gray-600 dark:text-gray-400">
+                  {dan.name}
+                </span>
+              </div>
+            </div>
+          ))}
+        </div>
+
+        <div
+          class="mt-8 p-6 bg-ulji-red-50 dark:bg-ulji-red-900/20 rounded-xl"
+        >
+          <h4
+            class="text-lg font-bold text-brand-red dark:text-ulji-red-400 mb-3"
+          >
+            Requisitos para Cinturón Negro
+          </h4>
+          <ul class="space-y-2 text-gray-700 dark:text-gray-300">
+            {blackBeltRequirements.map((requirement) => (
+              <li class="flex items-center">
+                <svg
+                  class="w-4 h-4 text-brand-red mr-2"
+                  fill="currentColor"
+                  viewBox="0 0 20 20"
+                >
+                  <path
+                    fill-rule="evenodd"
+                    d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
+                    clip-rule="evenodd"></path>
+                </svg>
+                {requirement}
+              </li>
+            ))}
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

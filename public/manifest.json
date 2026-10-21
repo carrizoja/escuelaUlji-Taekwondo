@@ -1,0 +1,26 @@
+{
+  "name": "Escuela Ul-ji Taekwondo",
+  "short_name": "Ul-ji Taekwondo",
+  "description": "Academia de Taekwondo en Buenos Aires - Escuela Ul-ji",
+  "start_url": "/",
+  "display": "standalone",
+  "theme_color": "#1e40af",
+  "background_color": "#ffffff",
+  "icons": [
+    {
+      "src": "/ulji-logo.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    },
+    {
+      "src": "/android-chrome-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/favicon.ico",
+      "sizes": "32x32",
+      "type": "image/x-icon"
+    }
+  ]
+}

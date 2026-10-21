@@ -1,4 +1,5 @@
 ---
+
 // About component for Escuela Ul-ji Taekwondo
 interface Props {
   id?: string;
@@ -15,8 +16,9 @@ const { id = "nosotros", class: className = "" } = Astro.props;
         <h2 class="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-6">
           Sobre Nosotros
         </h2>
+       <div class="w-36 h-1 bg-gradient-to-r from-brand-red to-red-700 mb-8"></div>
         <p class="text-lg text-gray-600 dark:text-gray-400 mb-6 leading-relaxed">
-          La Escuela Ul-ji (울지) de Taekwondo nació en 2020, en plena época pandémica, buscando mejorar el bienestar integral de las niños, niñas, juveniles y adultos mediante la práctica del Taekwondo ITF que el General Choi Hong Hi nos ha dejado como legado. A través de sus principios "Cortesía", "Integridad", "Autocontrol", "Perseverancia" y "Espíritu Indomable" imprime en cada practicante los valores fundamentales para la superación y evolución personal. 
+          La Escuela Ul-ji (울지) de Taekwon-do nació en 2020, en plena época pandémica, buscando mejorar el bienestar integral de las niños, niñas, juveniles y adultos mediante la práctica del Taekwon-do ITF que el General Choi Hong Hi nos ha dejado como legado. A través de sus principios "Cortesía", "Integridad", "Autocontrol", "Perseverancia" y "Espíritu Indomable" imprime en cada practicante los valores fundamentales para la superación y evolución personal. 
         </p>
         <p class="text-lg text-gray-600 dark:text-gray-400 mb-6 leading-relaxed">
           Es una escuela inclusiva en donde toda persona con voluntad y ganas de practicar este arte marcial será bien recibida.
@@ -32,25 +34,31 @@ const { id = "nosotros", class: className = "" } = Astro.props;
               <svg class="w-5 h-5 text-brand-red mr-3 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
                 <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
               </svg>
-              <span><strong>Disciplina:</strong> Base del crecimiento personal y técnico</span>
+              <span><strong>Cortesía: </strong>respeto y la consideración hacia los demás</span>
             </li>
             <li class="flex items-center">
               <svg class="w-5 h-5 text-brand-red mr-3 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
                 <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
               </svg>
-              <span><strong>Respeto:</strong> Hacia maestros, compañeros y oponentes</span>
+              <span><strong>Integridad: </strong> el compromiso con lo que es correcto y bueno</span>
             </li>
             <li class="flex items-center">
               <svg class="w-5 h-5 text-brand-red mr-3 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
                 <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
               </svg>
-              <span><strong>Perseverancia:</strong> La clave para superar cualquier obstáculo</span>
+              <span><strong>Autocontrol: </strong> el dominio de las emociones y acciones</span>
             </li>
             <li class="flex items-center">
               <svg class="w-5 h-5 text-brand-red mr-3 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
                 <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
               </svg>
-              <span><strong>Honor:</strong> Integridad en cada acción dentro y fuera del dojang</span>
+              <span><strong>Perseverancia: </strong> la tenacidad para superar obstáculos</span>
+            </li>
+              <li class="flex items-center">
+              <svg class="w-5 h-5 text-brand-red mr-3 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+              </svg>
+              <span><strong>Espíritu Indomable: </strong> voluntad inquebrantable ante la adversidad</span>
             </li>
           </ul>
         </div>
@@ -60,7 +68,7 @@ const { id = "nosotros", class: className = "" } = Astro.props;
       <div class="space-y-6">
         <div class="relative overflow-hidden rounded-xl shadow-lg group">
           <img 
-            src="/api/placeholder/600/400" 
+            src="https://res.cloudinary.com/dgvje1bpw/image/upload/v1756926793/20250820_214009_ch3irv.jpg" 
             alt="Dojang Escuela Ul-ji"
             class="w-full h-64 object-cover transition-transform duration-300 group-hover:scale-105"
           />
@@ -68,7 +76,7 @@ const { id = "nosotros", class: className = "" } = Astro.props;
         </div>
         <div class="relative overflow-hidden rounded-xl shadow-lg group">
           <img 
-            src="/api/placeholder/600/400" 
+            src="https://res.cloudinary.com/dgvje1bpw/image/upload/v1757541439/20241110_123634_uozrad.jpg" 
             alt="Estudiantes de Ul-ji"
             class="w-full h-64 object-cover transition-transform duration-300 group-hover:scale-105"
           />
@@ -84,11 +92,11 @@ const { id = "nosotros", class: className = "" } = Astro.props;
         <div class="text-sm text-gray-600 dark:text-gray-400">Año de fundación</div>
       </div>
       <div class="bg-gray-50 dark:bg-gray-800 p-6 rounded-xl">
-        <div class="text-3xl font-bold text-brand-red dark:text-ulji-red-400 mb-2">150+</div>
-        <div class="text-sm text-gray-600 dark:text-gray-400">Estudiantes activos</div>
+        <div class="text-3xl font-bold text-brand-red dark:text-ulji-red-400 mb-2">50+</div>
+        <div class="text-sm text-gray-600 dark:text-gray-400">Estudiantes</div>
       </div>
       <div class="bg-gray-50 dark:bg-gray-800 p-6 rounded-xl">
-        <div class="text-3xl font-bold text-brand-red dark:text-ulji-red-400 mb-2">25+</div>
+        <div class="text-3xl font-bold text-brand-red dark:text-ulji-red-400 mb-2">3+</div>
         <div class="text-sm text-gray-600 dark:text-gray-400">Cinturones negro</div>
       </div>
       <div class="bg-gray-50 dark:bg-gray-800 p-6 rounded-xl">

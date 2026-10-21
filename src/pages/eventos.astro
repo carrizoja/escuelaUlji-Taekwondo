@@ -1,11 +1,12 @@
 ---
 // Eventos page - Exams, Tournaments, and Meetings
 import Layout from '../layouts/Layout.astro';
+import GradientLine from '../components/ui/GradientLine.astro';
 import { fetchEventData, formatDate, isUpcoming, isPastDate } from '../utils/googleSheets';
 
 // Get configuration from environment variables
-const SHEET_ID = import.meta.env.GOOGLE_SHEETS_ID || import.meta.env.PUBLIC_GOOGLE_SHEETS_ID;
-const API_KEY = import.meta.env.GOOGLE_API_KEY;
+const SHEET_ID = import.meta.env.PUBLIC_GOOGLE_SHEETS_ID_EVENTOS || import.meta.env.GOOGLE_SHEETS_ID_EVENTOS || '1koYz8Tvd6oEMFB8nBsVQIpNeIYS1dBmrL8jRdSrI_kg';
+const API_KEY = import.meta.env.PUBLIC_GOOGLE_API_KEY || import.meta.env.GOOGLE_API_KEY;
 
 // Fetch data at build time
 let eventData;
@@ -99,32 +100,23 @@ console.log('Events to display:', {
 });
 ---
 
-<Layout title="Eventos - Escuela Ul-ji Taekwondo">
+<Layout 
+	title="Eventos - Exámenes, Torneos y Seminarios | Escuela Ul-ji"
+	description="Mantente actualizado con todos los eventos de la Escuela Ul-ji: exámenes de graduación, torneos de competición, seminarios especiales y actividades familiares."
+	keywords="eventos taekwondo, exámenes graduación, torneos competición, seminarios, actividades familiares, calendario eventos, inscripciones, Escuela Ul-ji"
+>
   <main class="min-h-screen bg-white dark:bg-gray-900">
     
     <!-- Hero Section -->
-    <section class="bg-gradient-primary dark:from-brand-purple dark:to-ulji-red-800 py-20">
+    <section class="bg-gradient-primary dark:bg-gradient-dark py-20">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
         <h1 class="text-4xl md:text-6xl font-heading font-bold text-white mb-6">
           Eventos
         </h1>
         <p class="text-xl font-text text-white/90 max-w-2xl mx-auto">
-          Participa en exámenes, torneos y encuentros especiales de nuestra comunidad
+          Participá en exámenes, torneos y encuentros especiales de nuestra comunidad
         </p>
-        <div class="mt-8 grid grid-cols-1 md:grid-cols-3 gap-4 max-w-2xl mx-auto">
-          <div class="text-center">
-            <div class="text-3xl font-heading font-bold text-white">{displayExamenes.length}</div>
-            <div class="text-white/80 font-text">Próximos Exámenes</div>
-          </div>
-          <div class="text-center">
-            <div class="text-3xl font-heading font-bold text-white">{displayTorneos.length}</div>
-            <div class="text-white/80 font-text">Torneos Activos</div>
-          </div>
-          <div class="text-center">
-            <div class="text-3xl font-heading font-bold text-white">{displaySeminarios.length}</div>
-            <div class="text-white/80 font-text">Seminarios Programados</div>
-          </div>
-        </div>
+       
       </div>
     </section>
 
@@ -152,9 +144,9 @@ console.log('Events to display:', {
           <h2 class="text-3xl md:text-4xl font-heading font-bold text-gray-900 dark:text-white mb-6">
             Próximos Exámenes de Grado
           </h2>
-          <div class="w-24 h-1 bg-brand-red mx-auto mb-8"></div>
+          <GradientLine />
           <p class="text-lg font-text text-gray-600 dark:text-gray-400 max-w-3xl mx-auto">
-            Evalúa tu progreso y avanza al siguiente nivel en tu entrenamiento de Taekwondo
+            Evalúa tu progreso y avanza al siguiente nivel en tu entrenamiento de Taekwon-do
           </p>
         </div>
 

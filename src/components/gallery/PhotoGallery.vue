@@ -7,14 +7,14 @@
         <div 
           v-for="n in 12" 
           :key="n"
-          class="bg-gray-200 dark:bg-gray-800 rounded-lg animate-pulse"
-          :style="{ height: `${Math.random() * 200 + 200}px` }"
+          class="bg-gray-200 dark:bg-gray-800 rounded-lg animate-shimmer"
+          :style="{ height: `${getSkeletonHeight(n)}px` }"
         ></div>
       </div>
 
       <!-- Photo Grid -->
       <div 
-        v-else
+        v-else-if="photos.length > 0"
         :class="[
           'transition-all duration-500',
           viewMode === 'grid' 
@@ -26,7 +26,7 @@
           v-for="(photo, index) in filteredPhotos"
           :key="photo.id"
           :class="[
-            'group cursor-pointer overflow-hidden rounded-lg bg-white dark:bg-gray-800 shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1',
+            'group cursor-pointer overflow-hidden rounded-lg bg-white dark:bg-gray-800 shadow-lg hover:shadow-xl transition-all duration-300 transform',
             viewMode === 'masonry' ? 'break-inside-avoid' : ''
           ]"
           @click="openLightbox(index)"
@@ -41,8 +41,8 @@
             
             <!-- Overlay on Hover -->
             <div class="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-50 transition-all duration-300 flex items-center justify-center">
-              <div class="opacity-0 group-hover:opacity-100 transition-opacity duration-300 text-white text-center">
-                <svg class="w-12 h-12 mx-auto mb-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <div class="opacity-0 group-hover:opacity-100 transition-opacity duration-300 text-white text-center transform translate-y-2 group-hover:translate-y-0">
+                <svg class="w-12 h-12 mx-auto mb-2 animate-bounce" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
                 </svg>
                 <p class="text-sm font-medium">Ver imagen</p>
@@ -74,6 +74,9 @@
             </h3>
             <p class="text-gray-600 dark:text-gray-400 text-xs line-clamp-2">
               {{ photo.description }}
+            </p>
+            <p v-if="photo.tags && photo.tags.length > 0" class="text-gray-600 dark:text-gray-400 text-xs line-clamp-2">
+              {{ Array.isArray(photo.tags) ? photo.tags.join(', ') : '' }}
             </p>
             <div class="flex items-center justify-between mt-3">
               <div class="flex items-center space-x-2">
@@ -127,28 +130,73 @@
     </div>
 
     <!-- Lightbox Modal -->
-    <Teleport to="body">
+    <Teleport to="body" v-if="isMounted">
       <div
         v-if="lightboxOpen"
         class="fixed inset-0 z-[100] bg-black bg-opacity-90 flex items-center justify-center p-4"
         @click="closeLightbox"
       >
-        <div class="relative max-w-full max-h-full" @click.stop>
+        <div class="relative max-w-full max-h-full w-full h-full flex items-center justify-center" @click.stop>
           <!-- Close Button -->
           <button
             @click="closeLightbox"
-            class="absolute -top-12 right-0 text-white hover:text-red-400 transition-colors duration-200"
+            class="absolute top-4 right-4 z-10 text-white hover:text-red-400 transition-colors duration-200 bg-black bg-opacity-50 rounded-full p-2"
           >
-            <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
             </svg>
           </button>
+
+          <!-- Zoom Controls -->
+          <div class="absolute top-4 left-4 z-10 flex flex-col space-y-2">
+            <button
+              @click="zoomIn"
+              class="text-white hover:text-red-400 transition-colors duration-200 bg-black bg-opacity-50 rounded-full p-2"
+              title="Zoom In (+)"
+            >
+              <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
+              </svg>
+            </button>
+            <button
+              @click="zoomOut"
+              class="text-white hover:text-red-400 transition-colors duration-200 bg-black bg-opacity-50 rounded-full p-2"
+              title="Zoom Out (-)"
+            >
+              <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18 12H6"></path>
+              </svg>
+            </button>
+            <button
+              @click="resetZoom"
+              class="text-white hover:text-red-400 transition-colors duration-200 bg-black bg-opacity-50 rounded-full p-2"
+              title="Reset Zoom (0)"
+            >
+              <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 8V4m0 0h4M4 4l5 5m11-1V4m0 0h-4m4 0l-5 5M4 16v4m0 0h4m-4 0l5-5m11 5l-5-5m5 5v-4m0 4h-4"></path>
+              </svg>
+            </button>
+            <button
+              @click="fitToScreen"
+              class="text-white hover:text-red-400 transition-colors duration-200 bg-black bg-opacity-50 rounded-full p-2"
+              title="Fit to Screen (F)"
+            >
+              <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 8h4V4m12 4h-4V4M4 16h4v4m12-4h-4v4"></path>
+              </svg>
+            </button>
+          </div>
+
+          <!-- Zoom Level Indicator -->
+          <div class="absolute top-4 left-1/2 transform -translate-x-1/2 z-10 text-white bg-black bg-opacity-50 px-3 py-1 rounded-full text-sm">
+            {{ Math.round(imageScale * 100) }}%
+          </div>
 
           <!-- Navigation Buttons -->
           <button
             v-if="currentPhotoIndex > 0"
             @click="previousPhoto"
-            class="absolute left-4 top-1/2 transform -translate-y-1/2 text-white hover:text-red-400 transition-colors duration-200"
+            class="absolute left-4 top-1/2 transform -translate-y-1/2 text-white hover:text-red-400 transition-colors duration-200 bg-black bg-opacity-50 rounded-full p-3 z-10"
           >
             <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
@@ -158,20 +206,35 @@
           <button
             v-if="currentPhotoIndex < filteredPhotos.length - 1"
             @click="nextPhoto"
-            class="absolute right-4 top-1/2 transform -translate-y-1/2 text-white hover:text-red-400 transition-colors duration-200"
+            class="absolute right-4 top-1/2 transform -translate-y-1/2 text-white hover:text-red-400 transition-colors duration-200 bg-black bg-opacity-50 rounded-full p-3 z-10"
           >
             <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
             </svg>
           </button>
 
-          <!-- Image -->
-          <img
-            v-if="currentPhoto"
-            :src="currentPhoto.fullSize"
-            :alt="currentPhoto.alt"
-            class="max-w-full max-h-full object-contain"
-          />
+          <!-- Image Container -->
+          <div 
+            class="flex items-center justify-center w-full h-full overflow-hidden"
+            @wheel="handleWheel"
+          >
+            <img
+              v-if="currentPhoto"
+              ref="imageRef"
+              :src="currentPhoto.fullSize"
+              :alt="currentPhoto.alt"
+              class="transition-transform duration-200 select-none"
+              :class="{ 'cursor-move': imageScale > 1, 'cursor-zoom-in': imageScale === 1 }"
+              :style="{
+                transform: `scale(${imageScale}) translate(${imagePosition.x / imageScale}px, ${imagePosition.y / imageScale}px)`,
+                maxWidth: imageScale === 1 ? '90vw' : 'none',
+                maxHeight: imageScale === 1 ? '90vh' : 'none'
+              }"
+              @mousedown="startDrag"
+              @dblclick="imageScale === 1 ? zoomIn() : resetZoom()"
+              draggable="false"
+            />
+          </div>
 
           <!-- Photo Info -->
           <div v-if="currentPhoto" class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black to-transparent p-6 text-white">
@@ -182,6 +245,17 @@
               <span>{{ currentPhotoIndex + 1 }} / {{ filteredPhotos.length }}</span>
             </div>
           </div>
+
+          <!-- Help Text -->
+          <div class="absolute bottom-20 right-4 text-white text-xs bg-black bg-opacity-50 px-3 py-2 rounded hidden md:block">
+            <div>ESC: Cerrar</div>
+            <div>←/→: Navegar</div>
+            <div>+/-: Zoom</div>
+            <div>0: Reset</div>
+            <div>F: Ajustar</div>
+            <div>Doble clic: Zoom</div>
+            <div>Rueda: Zoom</div>
+          </div>
         </div>
       </div>
     </Teleport>
@@ -189,7 +263,8 @@
 </template>
 
 <script setup lang="ts">
-import { ref, computed, onMounted, watch } from 'vue'
+import { ref, computed, onMounted, onUnmounted, watch } from 'vue'
+import { getPhotos } from '../../data/photos.js'
 
 // Props
 interface Props {
@@ -221,39 +296,19 @@ interface Photo {
 }
 
 // Reactive state
-const loading = ref(true)
+const loading = ref(false) // Start as false to avoid hydration issues, will be set to true in onMounted
 const loadingMore = ref(false)
 const photos = ref<Photo[]>([])
 const lightboxOpen = ref(false)
 const currentPhotoIndex = ref(0)
 const page = ref(1)
-const hasMorePhotos = ref(true)
-
-// Mock data
-const generateMockPhotos = (count: number, startId: number = 1): Photo[] => {
-  const categories = ['training', 'competitions', 'belts', 'events', 'students']
-  const mockPhotos: Photo[] = []
-
-  for (let i = 0; i < count; i++) {
-    const id = startId + i
-    const category = categories[Math.floor(Math.random() * categories.length)]
-    
-    mockPhotos.push({
-      id: `photo-${id}`,
-      title: `Foto de ${getCategoryName(category)} ${id}`,
-      description: `Descripción de la foto ${id} mostrando momentos únicos de nuestra escuela de Taekwondo.`,
-      thumbnail: `/api/placeholder/400/${Math.floor(Math.random() * 200) + 300}`,
-      fullSize: `/api/placeholder/1200/${Math.floor(Math.random() * 400) + 800}`,
-      alt: `Foto de Taekwondo ${id}`,
-      category,
-      date: new Date(Date.now() - Math.random() * 365 * 24 * 60 * 60 * 1000).toISOString(),
-      likes: Math.floor(Math.random() * 50) + 5,
-      tags: ['taekwondo', 'artes marciales', category]
-    })
-  }
-
-  return mockPhotos
-}
+const hasMorePhotos = ref(false) // Set to false since we have static data
+const imageScale = ref(1)
+const imagePosition = ref({ x: 0, y: 0 })
+const isDragging = ref(false)
+const dragStart = ref({ x: 0, y: 0 })
+const imageRef = ref<HTMLImageElement | null>(null)
+const isMounted = ref(false)
 
 // Computed
 const filteredPhotos = computed(() => {
@@ -270,7 +325,7 @@ const filteredPhotos = computed(() => {
     filtered = filtered.filter(photo => 
       photo.title.toLowerCase().includes(query) ||
       photo.description.toLowerCase().includes(query) ||
-      photo.tags.some(tag => tag.toLowerCase().includes(query))
+      (Array.isArray(photo.tags) && photo.tags.some(tag => tag.toLowerCase().includes(query)))
     )
   }
 
@@ -297,6 +352,12 @@ const currentPhoto = computed(() => {
 })
 
 // Methods
+const getSkeletonHeight = (index: number): number => {
+  // Use a deterministic height based on index to avoid hydration mismatches
+  const heights = [250, 300, 280, 320, 240, 350, 290, 260, 310, 270, 330, 285]
+  return heights[index % heights.length]
+}
+
 const getCategoryName = (category: string): string => {
   const names: Record<string, string> = {
     training: 'Entrenamiento',
@@ -328,47 +389,117 @@ const formatDate = (dateString: string): string => {
 }
 
 const openLightbox = (index: number) => {
+  if (!isMounted.value) return // Prevent execution during SSR
+  
   currentPhotoIndex.value = index
   lightboxOpen.value = true
   document.body.style.overflow = 'hidden'
+  // Reset zoom and position
+  imageScale.value = 1
+  imagePosition.value = { x: 0, y: 0 }
 }
 
 const closeLightbox = () => {
+  if (!isMounted.value) return // Prevent execution during SSR
+  
   lightboxOpen.value = false
   document.body.style.overflow = ''
+  // Reset zoom and position
+  imageScale.value = 1
+  imagePosition.value = { x: 0, y: 0 }
+}
+
+const zoomIn = () => {
+  if (imageScale.value < 3) {
+    imageScale.value = Math.min(imageScale.value + 0.25, 3)
+  }
+}
+
+const zoomOut = () => {
+  if (imageScale.value > 0.5) {
+    imageScale.value = Math.max(imageScale.value - 0.25, 0.5)
+    // Reset position if zoomed out too much
+    if (imageScale.value === 1) {
+      imagePosition.value = { x: 0, y: 0 }
+    }
+  }
+}
+
+const resetZoom = () => {
+  imageScale.value = 1
+  imagePosition.value = { x: 0, y: 0 }
+}
+
+const fitToScreen = () => {
+  imageScale.value = 0.8
+  imagePosition.value = { x: 0, y: 0 }
+}
+
+// Mouse drag functionality
+const startDrag = (event: MouseEvent) => {
+  if (imageScale.value > 1) {
+    isDragging.value = true
+    dragStart.value = {
+      x: event.clientX - imagePosition.value.x,
+      y: event.clientY - imagePosition.value.y
+    }
+    event.preventDefault()
+  }
+}
+
+const onDrag = (event: MouseEvent) => {
+  if (isDragging.value && imageScale.value > 1) {
+    imagePosition.value = {
+      x: event.clientX - dragStart.value.x,
+      y: event.clientY - dragStart.value.y
+    }
+    event.preventDefault()
+  }
+}
+
+const endDrag = () => {
+  isDragging.value = false
+}
+
+// Wheel zoom functionality
+const handleWheel = (event: WheelEvent) => {
+  event.preventDefault()
+  if (event.deltaY < 0) {
+    zoomIn()
+  } else {
+    zoomOut()
+  }
 }
 
 const previousPhoto = () => {
   if (currentPhotoIndex.value > 0) {
     currentPhotoIndex.value--
+    // Reset zoom and position when changing photos
+    imageScale.value = 1
+    imagePosition.value = { x: 0, y: 0 }
   }
 }
 
 const nextPhoto = () => {
   if (currentPhotoIndex.value < filteredPhotos.value.length - 1) {
     currentPhotoIndex.value++
+    // Reset zoom and position when changing photos
+    imageScale.value = 1
+    imagePosition.value = { x: 0, y: 0 }
   }
 }
 
 const loadMorePhotos = async () => {
+  // Since we have static data, this function is no longer needed
+  // But keeping it for compatibility
   loadingMore.value = true
-  
-  // Simulate API delay
-  await new Promise(resolve => setTimeout(resolve, 1000))
-  
-  page.value++
-  const newPhotos = generateMockPhotos(12, photos.value.length + 1)
-  photos.value.push(...newPhotos)
-  
-  // Simulate no more photos after page 5
-  if (page.value >= 5) {
-    hasMorePhotos.value = false
-  }
-  
+  await new Promise(resolve => setTimeout(resolve, 500))
   loadingMore.value = false
 }
 
 const sharePhoto = (photo: Photo) => {
+  if (!isMounted.value) return // Prevent execution during SSR
+  
   if (navigator.share) {
     navigator.share({
       title: photo.title,
@@ -401,25 +532,65 @@ const handleKeydown = (event: KeyboardEvent) => {
     case 'ArrowRight':
       nextPhoto()
       break
+    case '+':
+    case '=':
+      event.preventDefault()
+      zoomIn()
+      break
+    case '-':
+      event.preventDefault()
+      zoomOut()
+      break
+    case '0':
+      event.preventDefault()
+      resetZoom()
+      break
+    case 'f':
+    case 'F':
+      event.preventDefault()
+      fitToScreen()
+      break
   }
 }
 
 // Lifecycle
 onMounted(async () => {
-  // Load initial photos
-  await new Promise(resolve => setTimeout(resolve, 1000))
-  photos.value = generateMockPhotos(24)
-  loading.value = false
+  // Set mounted state first to avoid hydration issues
+  isMounted.value = true
+  
+  // Now set loading to true for the loading animation
+  loading.value = true
+  
+  try {
+    // Load photos from Google Sheets or fallback data
+    photos.value = await getPhotos()
+  } catch (error) {
+    console.error('Error loading photos:', error)
+    // Photos will remain empty array, which will show "No photos found"
+  } finally {
+    loading.value = false
+  }
 
   // Add keyboard listeners
   document.addEventListener('keydown', handleKeydown)
+  
+  // Add mouse event listeners for dragging
+  document.addEventListener('mousemove', onDrag)
+  document.addEventListener('mouseup', endDrag)
+})
+
+// Cleanup
+onUnmounted(() => {
+  document.removeEventListener('keydown', handleKeydown)
+  document.removeEventListener('mousemove', onDrag)
+  document.removeEventListener('mouseup', endDrag)
 })
 
 // Watchers
 watch(() => [props.category, props.searchQuery, props.sortBy], () => {
   // Reset to first page when filters change
   page.value = 1
-  hasMorePhotos.value = true
+  // No need to reset hasMorePhotos since we have static data
 })
 </script>
 

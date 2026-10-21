@@ -1,0 +1,92 @@
+---
+// FAQs component - Frequently Asked Questions about Taekwondo
+import { taekwondoFaqs } from "../../data/faqs.js";
+---
+
+<section id="faqs" class="py-16 bg-white dark:bg-gray-900">
+  <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="text-center mb-12">
+      <h2
+        class="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-6"
+      >
+        Preguntas Frecuentes
+      </h2>
+      <div class="w-24 h-1 bg-brand-red mx-auto mb-8"></div>
+    </div>
+
+    <div class="space-y-6">
+      {taekwondoFaqs.map((faq) => (
+        <div class="bg-white dark:bg-gray-800 rounded-xl shadow-lg overflow-hidden">
+          <button class="w-full p-6 text-left focus:outline-none focus:ring-2 focus:ring-brand-red faq-button">
+            <div class="flex items-center justify-between">
+              <h3 class="text-lg font-semibold text-gray-900 dark:text-white">
+                {faq.question}
+              </h3>
+              <svg
+                class="w-5 h-5 text-brand-red transform transition-transform duration-300 faq-icon"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M19 9l-7 7-7-7"></path>
+              </svg>
+            </div>
+          </button>
+          <div class="faq-content hidden px-6 pb-6">
+            <p class="text-gray-600 dark:text-gray-400 mt-4">
+              {faq.answer}
+            </p>
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<script>
+  // FAQ accordion functionality
+  document.addEventListener("DOMContentLoaded", function () {
+    const faqButtons = document.querySelectorAll(".faq-button");
+
+    faqButtons.forEach((button) => {
+      button.addEventListener("click", function (e) {
+        if (!(e.currentTarget instanceof HTMLElement)) return;
+
+        const currentButton = e.currentTarget;
+        const content = currentButton.nextElementSibling;
+        const icon = currentButton.querySelector(".faq-icon");
+
+        // Close all other FAQs
+        faqButtons.forEach((otherButton) => {
+          if (otherButton !== currentButton) {
+            const otherContent = otherButton.nextElementSibling;
+            const otherIcon = otherButton.querySelector(".faq-icon");
+            if (otherContent instanceof HTMLElement) {
+              otherContent.classList.add("hidden");
+            }
+            if (otherIcon instanceof HTMLElement) {
+              otherIcon.style.transform = "rotate(0deg)";
+            }
+          }
+        });
+
+        // Toggle current FAQ
+        if (content instanceof HTMLElement) {
+          content.classList.toggle("hidden");
+
+          if (icon instanceof HTMLElement) {
+            if (content.classList.contains("hidden")) {
+              icon.style.transform = "rotate(0deg)";
+            } else {
+              icon.style.transform = "rotate(180deg)";
+            }
+          }
+        }
+      });
+    });
+  });
+</script>

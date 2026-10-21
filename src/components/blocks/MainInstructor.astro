@@ -20,20 +20,29 @@ const {
   photo = "https://res.cloudinary.com/dgvje1bpw/image/upload/v1756758892/santana_php8q6.jpg",
   experience = "30+ años de experiencia",
   certification = "Certificado internacional",
-  achievement = "Formador de campeones",
-  quote = "El Taekwondo no es solo un arte marcial, es una filosofía de vida que forja el carácter y fortalece el espíritu.",
+  achievement = "Formador de personas",
+  quote = "El Taekwon-do no es solo un arte marcial, es una filosofía de vida que forja el carácter y fortalece el espíritu.",
   facebookUrl = "https://www.facebook.com/horacio.santana.10",
   instagramUrl = "https://www.instagram.com/horacio_santana_tkd/"
 } = Astro.props;
+
+// Set gradient colors based on instructor name
+const isJulioBazan = name === "Senior Master Julio Bazán";
+const gradientClass = isJulioBazan 
+  ? "from-blue-900 to-blue-600" 
+  : "from-brand-red-deep to-brand-red";
 ---
 
 <!-- Main Instructor -->
 <div class="mb-20">
-  <div class="bg-white dark:bg-gray-900 rounded-3xl shadow-xl overflow-hidden transition-all duration-300 hover:shadow-2xl">
-    <div class="grid grid-cols-1 lg:grid-cols-2 gap-0">
+  <div class="bg-white dark:bg-gray-900 rounded-3xl shadow-xl overflow-hidden transition-all duration-500 hover:shadow-2xl relative group">
+    <!-- Bright light effect overlay -->
+    <div class="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000 ease-in-out z-10"></div>
+    
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-0 relative">
       
       <!-- Instructor Photo -->
-      <div class="relative h-96 lg:h-auto bg-gradient-to-br from-brand-red-deep to-brand-red">
+      <div class={`relative h-96 lg:h-auto bg-gradient-to-br ${gradientClass}`}>
         <div class="absolute inset-0 bg-black/20"></div>
         <div class="absolute inset-0 flex items-center justify-center">
           <div class="w-64 h-64 md:w-72 md:h-72 bg-white/10 rounded-full flex items-center justify-center backdrop-blur-sm overflow-hidden">
@@ -66,7 +75,7 @@ const {
             </svg>
             <div>
               <p class="font-text text-gray-700 dark:text-gray-300">
-                <strong>{experience}</strong> en Taekwondo ITF
+                <strong>{experience}</strong> en Taekwon-do ITF
               </p>
             </div>
           </div>
@@ -88,7 +97,7 @@ const {
             </svg>
             <div>
               <p class="font-text text-gray-700 dark:text-gray-300">
-                <strong>{achievement}</strong> nacionales e internacionales
+                <strong>{achievement}</strong> 
               </p>
             </div>
           </div>

@@ -1,0 +1,45 @@
+---
+import FilterBar from './gallery/FilterBar.vue'
+import PhotoGallery from './gallery/PhotoGallery.vue'
+---
+
+<div class="gallery-wrapper">
+  <div id="gallery-container">
+    <FilterBar 
+      client:load
+      initialCategory="all"
+      initialViewMode="masonry"
+    />
+    
+    <PhotoGallery
+      client:load
+      category="all"
+      searchQuery=""
+      sortBy="newest"
+      viewMode="masonry"
+    />
+  </div>
+</div>
+
+<script>
+  // Simple client-side initialization
+  document.addEventListener('DOMContentLoaded', () => {
+    console.log('Gallery wrapper loaded');
+    
+    // Add refresh function for development
+    (window as any).refreshGallery = () => {
+      window.location.reload();
+    };
+  });
+</script>
+
+<style>
+  .gallery-wrapper {
+    width: 100%;
+    min-height: 400px;
+  }
+  
+  #gallery-container {
+    width: 100%;
+  }
+</style>

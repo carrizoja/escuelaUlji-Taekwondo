@@ -6,11 +6,13 @@
         
         <!-- Logo and Brand -->
         <div class="flex items-center">
-          <img 
-            src="https://res.cloudinary.com/dgvje1bpw/image/upload/v1756572320/logo_ulji_gkw0wn.png" 
-            alt="Logo Escuela Ul-ji"
-            class="w-16 h-16 bg-red-600 rounded-full flex items-center justify-center mr-3"
-          />
+          <a href="/" class="flex items-center transition-transform duration-300 hover:scale-105">
+            <img 
+              src="https://res.cloudinary.com/dgvje1bpw/image/upload/v1756572320/logo_ulji_gkw0wn.png" 
+              alt="Logo Escuela Ul-ji"
+              class="w-16 h-16 bg-red-600 rounded-full flex items-center justify-center mr-3"
+            />
+          </a>
         </div>
 
         <!-- Desktop Navigation Links -->

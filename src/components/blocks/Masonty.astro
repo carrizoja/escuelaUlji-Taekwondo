@@ -1,0 +1,333 @@
+---
+// Masonry Grid Component for Gallery Section
+export interface Props {
+  images: Array<{
+    src: string;
+    alt: string;
+    title?: string;
+    category?: string;
+  }>;
+  columns?: {
+    mobile: number;
+    tablet: number;
+    desktop: number;
+  };
+  gap?: string;
+  class?: string;
+}
+
+const {
+  images,
+  columns = { mobile: 1, tablet: 2, desktop: 3 },
+  gap = '1rem',
+  class: className = '',
+} = Astro.props;
+
+const masonryId = `masonry-${Math.random().toString(36).substr(2, 9)}`;
+---
+
+<div 
+  id={masonryId}
+  class={`masonry-grid ${className}`}
+  data-columns-mobile={columns.mobile}
+  data-columns-tablet={columns.tablet}
+  data-columns-desktop={columns.desktop}
+  data-gap={gap}
+>
+  {images.map((image, index) => (
+    <div 
+      class="masonry-item group cursor-pointer"
+      data-index={index}
+    >
+      <div class="relative overflow-hidden rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105">
+        <!-- Image -->
+        <img
+          src={image.src}
+          alt={image.alt}
+          class="w-full h-auto object-cover transition-transform duration-500 group-hover:scale-110"
+          loading="lazy"
+        />
+        
+        <!-- Overlay -->
+        <div class="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-40 transition-all duration-300 flex items-center justify-center">
+          <div class="opacity-0 group-hover:opacity-100 transition-opacity duration-300 text-center text-white p-4">
+            {image.title && (
+              <h3 class="text-lg font-bold mb-2">{image.title}</h3>
+            )}
+            {image.category && (
+              <span class="inline-block px-3 py-1 bg-brand-red rounded-full text-sm font-medium">
+                {image.category}
+              </span>
+            )}
+            <!-- Zoom Icon -->
+            <div class="mt-3">
+              <svg class="w-8 h-8 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7"></path>
+              </svg>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  ))}
+</div>
+
+<!-- Lightbox Modal -->
+<div id={`${masonryId}-modal`} class="fixed inset-0 bg-black bg-opacity-90 z-50 hidden items-center justify-center p-4">
+  <div class="relative max-w-6xl max-h-full">
+    <!-- Close Button -->
+    <button 
+      class="absolute top-4 right-4 z-10 text-white hover:text-red-400 transition-colors duration-300"
+      id={`${masonryId}-close`}
+    >
+      <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+      </svg>
+    </button>
+    
+    <!-- Modal Content -->
+    <div id={`${masonryId}-content`} class="flex items-center justify-center">
+      <!-- Content will be dynamically inserted here -->
+    </div>
+    
+    <!-- Navigation Arrows -->
+    <button 
+      class="absolute left-4 top-1/2 transform -translate-y-1/2 text-white hover:text-red-400 transition-colors duration-300"
+      id={`${masonryId}-prev`}
+    >
+      <svg class="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
+      </svg>
+    </button>
+    
+    <button 
+      class="absolute right-4 top-1/2 transform -translate-y-1/2 text-white hover:text-red-400 transition-colors duration-300"
+      id={`${masonryId}-next`}
+    >
+      <svg class="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+      </svg>
+    </button>
+  </div>
+</div>
+
+<style>
+  .masonry-grid {
+    display: grid;
+    gap: var(--masonry-gap, 1rem);
+    grid-template-columns: repeat(var(--masonry-columns, 1), 1fr);
+    grid-auto-rows: 10px;
+  }
+
+  .masonry-item {
+    break-inside: avoid;
+    margin-bottom: var(--masonry-gap, 1rem);
+  }
+
+  /* Responsive columns */
+  @media (min-width: 640px) {
+    .masonry-grid[data-columns-tablet="2"] {
+      --masonry-columns: 2;
+    }
+    .masonry-grid[data-columns-tablet="3"] {
+      --masonry-columns: 3;
+    }
+    .masonry-grid[data-columns-tablet="4"] {
+      --masonry-columns: 4;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .masonry-grid[data-columns-desktop="2"] {
+      --masonry-columns: 2;
+    }
+    .masonry-grid[data-columns-desktop="3"] {
+      --masonry-columns: 3;
+    }
+    .masonry-grid[data-columns-desktop="4"] {
+      --masonry-columns: 4;
+    }
+    .masonry-grid[data-columns-desktop="5"] {
+      --masonry-columns: 5;
+    }
+  }
+
+  /* Alternative CSS-only masonry using columns (fallback) */
+  .masonry-grid.css-masonry {
+    columns: var(--masonry-columns, 1);
+    column-gap: var(--masonry-gap, 1rem);
+  }
+
+  .masonry-grid.css-masonry .masonry-item {
+    display: inline-block;
+    width: 100%;
+    margin-bottom: var(--masonry-gap, 1rem);
+  }
+</style>
+
+<script define:vars={{ masonryId, images }}>
+  document.addEventListener('DOMContentLoaded', function() {
+    const masonryContainer = document.getElementById(masonryId);
+    const modal = document.getElementById(`${masonryId}-modal`);
+    const modalContent = document.getElementById(`${masonryId}-content`);
+    const closeBtn = document.getElementById(`${masonryId}-close`);
+    const prevBtn = document.getElementById(`${masonryId}-prev`);
+    const nextBtn = document.getElementById(`${masonryId}-next`);
+    
+    let currentImageIndex = 0;
+    
+    if (!masonryContainer || !modal || !modalContent) return;
+
+    // Set CSS custom properties for responsive design
+    function updateMasonryLayout() {
+      const gap = masonryContainer.dataset.gap || '1rem';
+      masonryContainer.style.setProperty('--masonry-gap', gap);
+      
+      // Set columns based on screen size
+      const mobile = parseInt(masonryContainer.dataset.columnsMobile) || 1;
+      const tablet = parseInt(masonryContainer.dataset.columnsTablet) || 2;
+      const desktop = parseInt(masonryContainer.dataset.columnsDesktop) || 3;
+      
+      if (window.innerWidth >= 1024) {
+        masonryContainer.style.setProperty('--masonry-columns', desktop);
+      } else if (window.innerWidth >= 640) {
+        masonryContainer.style.setProperty('--masonry-columns', tablet);
+      } else {
+        masonryContainer.style.setProperty('--masonry-columns', mobile);
+      }
+    }
+
+    // JavaScript Masonry Layout (more precise than CSS)
+    function layoutMasonry() {
+      const items = masonryContainer.querySelectorAll('.masonry-item');
+      const gap = parseInt(getComputedStyle(masonryContainer).gap) || 16;
+      const columns = parseInt(getComputedStyle(masonryContainer).getPropertyValue('--masonry-columns')) || 1;
+      
+      if (columns === 1) {
+        // Single column - no special layout needed
+        items.forEach(item => {
+          item.style.gridRowEnd = 'auto';
+        });
+        return;
+      }
+
+      // Multi-column masonry layout
+      items.forEach((item, index) => {
+        const img = item.querySelector('img');
+        if (img && img.complete) {
+          const rowSpan = Math.ceil((img.offsetHeight + gap) / 10);
+          item.style.gridRowEnd = `span ${rowSpan}`;
+        } else if (img) {
+          img.addEventListener('load', () => {
+            const rowSpan = Math.ceil((img.offsetHeight + gap) / 10);
+            item.style.gridRowEnd = `span ${rowSpan}`;
+          });
+        }
+      });
+    }
+
+    // Initialize layout
+    updateMasonryLayout();
+    
+    // Re-layout on window resize
+    let resizeTimeout;
+    window.addEventListener('resize', () => {
+      clearTimeout(resizeTimeout);
+      resizeTimeout = setTimeout(() => {
+        updateMasonryLayout();
+        layoutMasonry();
+      }, 100);
+    });
+
+    // Layout after images load
+    const allImages = masonryContainer.querySelectorAll('img');
+    let loadedImages = 0;
+    
+    function checkAllImagesLoaded() {
+      loadedImages++;
+      if (loadedImages === allImages.length) {
+        layoutMasonry();
+      }
+    }
+
+    allImages.forEach(img => {
+      if (img.complete) {
+        checkAllImagesLoaded();
+      } else {
+        img.addEventListener('load', checkAllImagesLoaded);
+        img.addEventListener('error', checkAllImagesLoaded);
+      }
+    });
+
+    // Lightbox functionality
+    function openModal(index) {
+      currentImageIndex = index;
+      const image = images[index];
+      
+      modalContent.innerHTML = `
+        <div class="text-center">
+          <img src="${image.src}" alt="${image.alt}" class="max-w-full max-h-[80vh] object-contain rounded-lg shadow-2xl">
+          ${image.title ? `<h3 class="text-white text-xl font-bold mt-4">${image.title}</h3>` : ''}
+          ${image.category ? `<span class="inline-block px-3 py-1 bg-brand-red rounded-full text-sm font-medium text-white mt-2">${image.category}</span>` : ''}
+        </div>
+      `;
+      
+      modal.classList.remove('hidden');
+      modal.classList.add('flex');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeModal() {
+      modal.classList.add('hidden');
+      modal.classList.remove('flex');
+      document.body.style.overflow = '';
+    }
+
+    function showPrevImage() {
+      currentImageIndex = (currentImageIndex - 1 + images.length) % images.length;
+      openModal(currentImageIndex);
+    }
+
+    function showNextImage() {
+      currentImageIndex = (currentImageIndex + 1) % images.length;
+      openModal(currentImageIndex);
+    }
+
+    // Event listeners
+    masonryContainer.addEventListener('click', (e) => {
+      const item = e.target.closest('.masonry-item');
+      if (item) {
+        const index = parseInt(item.dataset.index);
+        openModal(index);
+      }
+    });
+
+    closeBtn.addEventListener('click', closeModal);
+    prevBtn.addEventListener('click', showPrevImage);
+    nextBtn.addEventListener('click', showNextImage);
+
+    // Close on overlay click
+    modal.addEventListener('click', (e) => {
+      if (e.target === modal) {
+        closeModal();
+      }
+    });
+
+    // Keyboard navigation
+    document.addEventListener('keydown', (e) => {
+      if (!modal.classList.contains('hidden')) {
+        switch(e.key) {
+          case 'Escape':
+            closeModal();
+            break;
+          case 'ArrowLeft':
+            showPrevImage();
+            break;
+          case 'ArrowRight':
+            showNextImage();
+            break;
+        }
+      }
+    });
+  });
+</script>

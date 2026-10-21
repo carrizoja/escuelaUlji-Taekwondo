@@ -10,12 +10,12 @@ interface Props {
 
 const { stats = [
   { value: 30, label: "Años de Experiencia", suffix: "+" },
-  { value: 100, label: "Estudiantes Formados", suffix: "+" },
-  { value: 50, label: "Exámenes Realizados", suffix: "+" }
+  { value: 50, label: "Estudiantes Formados", suffix: "+" },
+  { value: 20, label: "Exámenes Realizados", suffix: "+" }
 ] } = Astro.props;
 ---
 
-<div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-4xl mx-auto animate-slide-up">
+<div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-4xl mx-auto animate-slide-up mb-4">
   {stats.map((stat, index) => (
     <div class="text-center group">
       <div 

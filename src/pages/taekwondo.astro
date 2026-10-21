@@ -1,19 +1,27 @@
 ---
 // Taekwondo page - History, Titles, and FAQs
-import Layout from '../layouts/Layout.astro';
+import Layout from "../layouts/Layout.astro";
+import History from "../components/blocks/History.astro";
+import Grades from "../components/blocks/Grades.astro";
+import Faqs from "../components/blocks/Faqs.astro";
+import ThirdButton from "../components/ui/ThirdButton.astro";
+import SchoolTime from "../components/blocks/SchoolTime.astro";
 ---
 
-<Layout title="Taekwondo - Escuela Ul-ji">
+<Layout 
+	title="Taekwondo - Historia y Filosofía | Escuela Ul-ji"
+	description="Descubre la historia del Taekwondo, sistema de cinturones, graduaciones y la filosofía marcial. Información completa sobre este arte marcial coreano en la Escuela Ul-ji."
+	keywords="historia taekwondo, cinturones taekwondo, graduaciones, filosofía marcial, arte marcial coreano, sistema de grados, Escuela Ul-ji, Dan, Gup"
+>
   <main class="min-h-screen bg-white dark:bg-gray-900">
-    
     <!-- Hero Section -->
-    <section class="bg-gradient-primary dark:from-orange-800 dark:to-ulji-red-800 py-20">
+    <section class="bg-gradient-primary dark:bg-gradient-dark py-20">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
         <h1 class="text-4xl md:text-6xl font-bold text-white mb-6">
-          Taekwondo
+          Taekwon-do
         </h1>
-        <p class="text-xl text-brand-orange-light max-w-2xl mx-auto">
-          Descubre la historia, técnicas y filosofía del arte marcial coreano
+        <p class="text-xl text-ulji-red-100 max-w-2xl mx-auto">
+          Descubrí la historia, técnicas y filosofía del arte marcial surcoreano
         </p>
       </div>
     </section>
@@ -22,13 +30,22 @@ import Layout from '../layouts/Layout.astro';
     <section class="bg-white dark:bg-gray-800 shadow-lg sticky top-0 z-40">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <nav class="flex space-x-8 overflow-x-auto py-4">
-          <a href="#historia" class="whitespace-nowrap text-brand-red dark:text-ulji-red-400 border-b-2 border-brand-red dark:border-ulji-red-400 px-4 py-2 font-semibold">
+          <a
+            href="#historia"
+            class="whitespace-nowrap text-brand-red dark:text-ulji-red-400 border-b-2 border-brand-red dark:border-ulji-red-400 px-4 py-2 font-semibold"
+          >
             Historia
           </a>
-          <a href="#titulos" class="whitespace-nowrap text-gray-600 dark:text-gray-400 hover:text-brand-red dark:hover:text-ulji-red-400 px-4 py-2 font-semibold transition-colors duration-300">
+          <a
+            href="#titulos"
+            class="whitespace-nowrap text-gray-600 dark:text-gray-400 hover:text-brand-red dark:hover:text-ulji-red-400 px-4 py-2 font-semibold transition-colors duration-300"
+          >
             Títulos
           </a>
-          <a href="#faqs" class="whitespace-nowrap text-gray-600 dark:text-gray-400 hover:text-brand-red dark:hover:text-ulji-red-400 px-4 py-2 font-semibold transition-colors duration-300">
+          <a
+            href="#faqs"
+            class="whitespace-nowrap text-gray-600 dark:text-gray-400 hover:text-brand-red dark:hover:text-ulji-red-400 px-4 py-2 font-semibold transition-colors duration-300"
+          >
             FAQs
           </a>
         </nav>
@@ -36,446 +53,93 @@ import Layout from '../layouts/Layout.astro';
     </section>
 
     <!-- Historia Section -->
-    <section id="historia" class="py-16 bg-white dark:bg-gray-900">
-      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="text-center mb-12">
-          <h2 class="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-6">
-            Historia del Taekwondo
-          </h2>
-          <div class="w-24 h-1 bg-brand-red mx-auto mb-8"></div>
-          <p class="text-lg text-gray-600 dark:text-gray-400 max-w-3xl mx-auto">
-            El Taekwondo es mucho más que un arte marcial, es una filosofía de vida que combina técnicas de combate con desarrollo espiritual y mental.
-          </p>
-        </div>
-
-        <!-- Timeline -->
-        <div class="relative">
-          <div class="absolute left-1/2 transform -translate-x-px h-full w-1 bg-ulji-red-200 dark:bg-ulji-red-800"></div>
-          
-          <div class="space-y-16">
-            <!-- Era Antigua -->
-            <div class="relative flex items-center">
-              <div class="flex-1 pr-8 text-right">
-                <div class="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-lg">
-                  <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-2">Era Antigua (50 A.C. - 935 D.C.)</h3>
-                  <p class="text-gray-600 dark:text-gray-400">
-                    Los orígenes del Taekwondo se remontan a los antiguos reinos coreanos, donde se practicaba el "Subak" y "Taekkyon", artes marciales que enfatizaban las técnicas de patadas.
-                  </p>
-                </div>
-              </div>
-              <div class="absolute left-1/2 transform -translate-x-1/2 w-12 h-12 bg-brand-red rounded-full border-4 border-white dark:border-gray-900 flex items-center justify-center">
-                <svg class="w-6 h-6 text-white" fill="currentColor" viewBox="0 0 20 20">
-                  <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-8.293l-3-3a1 1 0 00-1.414 1.414L10.586 9H7a1 1 0 100 2h3.586l-1.293 1.293a1 1 0 101.414 1.414l3-3a1 1 0 000-1.414z" clip-rule="evenodd"></path>
-                </svg>
-              </div>
-              <div class="flex-1 pl-8"></div>
-            </div>
-
-            <!-- Era Moderna -->
-            <div class="relative flex items-center">
-              <div class="flex-1 pr-8"></div>
-              <div class="absolute left-1/2 transform -translate-x-1/2 w-12 h-12 bg-orange-600 rounded-full border-4 border-white dark:border-gray-900 flex items-center justify-center">
-                <svg class="w-6 h-6 text-white" fill="currentColor" viewBox="0 0 20 20">
-                  <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-                </svg>
-              </div>
-              <div class="flex-1 pl-8">
-                <div class="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-lg">
-                  <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-2">Era Moderna (1945-1955)</h3>
-                  <p class="text-gray-600 dark:text-gray-400">
-                    Después de la independencia de Corea, varios maestros comenzaron a sistematizar las artes marciales tradicionales, dando origen a diferentes escuelas o "Kwans".
-                  </p>
-                </div>
-              </div>
-            </div>
-
-            <!-- Unificación -->
-            <div class="relative flex items-center">
-              <div class="flex-1 pr-8 text-right">
-                <div class="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-lg">
-                  <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-2">Unificación (1955)</h3>
-                  <p class="text-gray-600 dark:text-gray-400">
-                    El General Choi Hong Hi propone el nombre "Taekwondo" que significa "el camino del pie y el puño", unificando las diferentes escuelas bajo una sola denominación.
-                  </p>
-                </div>
-              </div>
-              <div class="absolute left-1/2 transform -translate-x-1/2 w-12 h-12 bg-yellow-600 rounded-full border-4 border-white dark:border-gray-900 flex items-center justify-center">
-                <svg class="w-6 h-6 text-white" fill="currentColor" viewBox="0 0 20 20">
-                  <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path>
-                </svg>
-              </div>
-              <div class="flex-1 pl-8"></div>
-            </div>
-
-            <!-- Olímpico -->
-            <div class="relative flex items-center">
-              <div class="flex-1 pr-8"></div>
-              <div class="absolute left-1/2 transform -translate-x-1/2 w-12 h-12 bg-blue-600 rounded-full border-4 border-white dark:border-gray-900 flex items-center justify-center">
-                <svg class="w-6 h-6 text-white" fill="currentColor" viewBox="0 0 20 20">
-                  <path fill-rule="evenodd" d="M12.395 2.553a1 1 0 00-1.45-.385c-.345.23-.614.558-.822.88-.214.33-.403.713-.57 1.116-.334.804-.614 1.768-.84 2.734a31.365 31.365 0 00-.613 3.58 2.64 2.64 0 01-.945-1.067c-.328-.68-.398-1.534-.398-2.654A1 1 0 005.05 6.05 6.981 6.981 0 003 11a7 7 0 1011.95-4.95c-.592-.591-.98-.985-1.348-1.467-.363-.476-.724-1.063-1.207-2.03zM12.12 15.12A3 3 0 017 13s.879.5 2.5.5c0-1 .5-4 1.25-4.5.5 1 .786 1.293 1.371 1.879A2.99 2.99 0 0113 13a2.99 2.99 0 01-.879 2.121z" clip-rule="evenodd"></path>
-                </svg>
-              </div>
-              <div class="flex-1 pl-8">
-                <div class="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-lg">
-                  <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-2">Deporte Olímpico (2000)</h3>
-                  <p class="text-gray-600 dark:text-gray-400">
-                    El Taekwondo se convierte en deporte olímpico oficial en los Juegos de Sydney 2000, expandiendo su alcance mundial y estandarizando sus reglas de competición.
-                  </p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
+    <History />
+    <SchoolTime />
 
     <!-- Títulos Section -->
-    <section id="titulos" class="py-16 bg-gray-50 dark:bg-gray-800">
-      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="text-center mb-12">
-          <h2 class="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-6">
-            Sistema de Grados y Títulos
-          </h2>
-          <div class="w-24 h-1 bg-brand-red mx-auto mb-8"></div>
-        </div>
-
-        <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
-          <!-- Cinturones de Color (Kup) -->
-          <div class="bg-white dark:bg-gray-900 rounded-xl shadow-lg p-8">
-            <h3 class="text-2xl font-bold text-brand-red dark:text-ulji-red-400 mb-6">
-              Cinturones de Color (Kup)
-            </h3>
-            <div class="space-y-4">
-              <div class="flex items-center justify-between p-4 bg-yellow-50 dark:bg-yellow-900/20 rounded-lg">
-                <span class="font-semibold text-gray-900 dark:text-white">10° Kup</span>
-                <div class="flex items-center">
-                  <div class="w-12 h-4 bg-white border-2 border-gray-300 rounded mr-3"></div>
-                  <span class="text-gray-600 dark:text-gray-400">Cinturón Blanco</span>
-                </div>
-              </div>
-              <div class="flex items-center justify-between p-4 bg-yellow-50 dark:bg-yellow-900/20 rounded-lg">
-                <span class="font-semibold text-gray-900 dark:text-white">9° Kup</span>
-                <div class="flex items-center">
-                  <div class="w-12 h-4 bg-yellow-400 rounded mr-3"></div>
-                  <span class="text-gray-600 dark:text-gray-400">Cinturón Amarillo</span>
-                </div>
-              </div>
-              <div class="flex items-center justify-between p-4 bg-orange-50 dark:bg-orange-900/20 rounded-lg">
-                <span class="font-semibold text-gray-900 dark:text-white">8° Kup</span>
-                <div class="flex items-center">
-                  <div class="w-12 h-4 bg-orange-500 rounded mr-3"></div>
-                  <span class="text-gray-600 dark:text-gray-400">Cinturón Naranja</span>
-                </div>
-              </div>
-              <div class="flex items-center justify-between p-4 bg-green-50 dark:bg-green-900/20 rounded-lg">
-                <span class="font-semibold text-gray-900 dark:text-white">7° Kup</span>
-                <div class="flex items-center">
-                  <div class="w-12 h-4 bg-green-500 rounded mr-3"></div>
-                  <span class="text-gray-600 dark:text-gray-400">Cinturón Verde</span>
-                </div>
-              </div>
-              <div class="flex items-center justify-between p-4 bg-blue-50 dark:bg-blue-900/20 rounded-lg">
-                <span class="font-semibold text-gray-900 dark:text-white">6° - 4° Kup</span>
-                <div class="flex items-center">
-                  <div class="w-12 h-4 bg-blue-600 rounded mr-3"></div>
-                  <span class="text-gray-600 dark:text-gray-400">Cinturón Azul</span>
-                </div>
-              </div>
-              <div class="flex items-center justify-between p-4 bg-ulji-red-50 dark:bg-ulji-red-900/20 rounded-lg">
-                <span class="font-semibold text-gray-900 dark:text-white">3° - 1° Kup</span>
-                <div class="flex items-center">
-                  <div class="w-12 h-4 bg-brand-red rounded mr-3"></div>
-                  <span class="text-gray-600 dark:text-gray-400">Cinturón Rojo</span>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <!-- Cinturones Negros (Dan) -->
-          <div class="bg-white dark:bg-gray-900 rounded-xl shadow-lg p-8">
-            <h3 class="text-2xl font-bold text-brand-red dark:text-ulji-red-400 mb-6">
-              Cinturones Negros (Dan)
-            </h3>
-            <div class="space-y-4">
-              <div class="flex items-center justify-between p-4 bg-gray-50 dark:bg-gray-800 rounded-lg">
-                <span class="font-semibold text-gray-900 dark:text-white">1° - 3° Dan</span>
-                <div class="flex items-center">
-                  <div class="w-12 h-4 bg-black rounded mr-3"></div>
-                  <span class="text-gray-600 dark:text-gray-400">Instructor</span>
-                </div>
-              </div>
-              <div class="flex items-center justify-between p-4 bg-gray-50 dark:bg-gray-800 rounded-lg">
-                <span class="font-semibold text-gray-900 dark:text-white">4° - 6° Dan</span>
-                <div class="flex items-center">
-                  <div class="w-12 h-4 bg-black rounded mr-3"></div>
-                  <span class="text-gray-600 dark:text-gray-400">Maestro</span>
-                </div>
-              </div>
-              <div class="flex items-center justify-between p-4 bg-gray-50 dark:bg-gray-800 rounded-lg">
-                <span class="font-semibold text-gray-900 dark:text-white">7° - 8° Dan</span>
-                <div class="flex items-center">
-                  <div class="w-12 h-4 bg-black rounded mr-3"></div>
-                  <span class="text-gray-600 dark:text-gray-400">Gran Maestro</span>
-                </div>
-              </div>
-              <div class="flex items-center justify-between p-4 bg-yellow-50 dark:bg-yellow-900/20 rounded-lg">
-                <span class="font-semibold text-gray-900 dark:text-white">9° Dan</span>
-                <div class="flex items-center">
-                  <div class="w-12 h-4 bg-gradient-to-r from-brand-red to-black rounded mr-3"></div>
-                  <span class="text-gray-600 dark:text-gray-400">Gran Maestro Superior</span>
-                </div>
-              </div>
-            </div>
-
-            <div class="mt-8 p-6 bg-ulji-red-50 dark:bg-ulji-red-900/20 rounded-xl">
-              <h4 class="text-lg font-bold text-brand-red dark:text-ulji-red-400 mb-3">
-                Requisitos para Cinturón Negro
-              </h4>
-              <ul class="space-y-2 text-gray-700 dark:text-gray-300">
-                <li class="flex items-center">
-                  <svg class="w-4 h-4 text-brand-red mr-2" fill="currentColor" viewBox="0 0 20 20">
-                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
-                  </svg>
-                  Mínimo 3-4 años de entrenamiento
-                </li>
-                <li class="flex items-center">
-                  <svg class="w-4 h-4 text-brand-red mr-2" fill="currentColor" viewBox="0 0 20 20">
-                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
-                  </svg>
-                  Dominio de todas las formas (Poomsae)
-                </li>
-                <li class="flex items-center">
-                  <svg class="w-4 h-4 text-brand-red mr-2" fill="currentColor" viewBox="0 0 20 20">
-                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
-                  </svg>
-                  Excelencia técnica y física
-                </li>
-                <li class="flex items-center">
-                  <svg class="w-4 h-4 text-brand-red mr-2" fill="currentColor" viewBox="0 0 20 20">
-                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
-                  </svg>
-                  Madurez mental y espiritual
-                </li>
-              </ul>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- FAQs Section -->
-    <section id="faqs" class="py-16 bg-white dark:bg-gray-900">
-      <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="text-center mb-12">
-          <h2 class="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-6">
-            Preguntas Frecuentes
-          </h2>
-          <div class="w-24 h-1 bg-brand-red mx-auto mb-8"></div>
-        </div>
-
-        <div class="space-y-6">
-          <!-- FAQ 1 -->
-          <div class="bg-white dark:bg-gray-800 rounded-xl shadow-lg overflow-hidden">
-            <button class="w-full p-6 text-left focus:outline-none focus:ring-2 focus:ring-brand-red faq-button">
-              <div class="flex items-center justify-between">
-                <h3 class="text-lg font-semibold text-gray-900 dark:text-white">
-                  ¿A qué edad se puede empezar a practicar Taekwondo?
-                </h3>
-                <svg class="w-5 h-5 text-brand-red transform transition-transform duration-300 faq-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
-                </svg>
-              </div>
-            </button>
-            <div class="faq-content hidden px-6 pb-6">
-              <p class="text-gray-600 dark:text-gray-400">
-                El Taekwondo se puede comenzar desde los 4 años de edad. Tenemos programas especializados para diferentes grupos etarios: Pequeños Tigres (4-6 años), Niños (7-12 años), Adolescentes (13-17 años) y Adultos (18+ años). Cada programa está diseñado según las capacidades físicas y mentales de cada edad.
-              </p>
-            </div>
-          </div>
-
-          <!-- FAQ 2 -->
-          <div class="bg-white dark:bg-gray-800 rounded-xl shadow-lg overflow-hidden">
-            <button class="w-full p-6 text-left focus:outline-none focus:ring-2 focus:ring-brand-red faq-button">
-              <div class="flex items-center justify-between">
-                <h3 class="text-lg font-semibold text-gray-900 dark:text-white">
-                  ¿Qué beneficios aporta la práctica del Taekwondo?
-                </h3>
-                <svg class="w-5 h-5 text-brand-red transform transition-transform duration-300 faq-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
-                </svg>
-              </div>
-            </button>
-            <div class="faq-content hidden px-6 pb-6">
-              <p class="text-gray-600 dark:text-gray-400">
-                El Taekwondo aporta beneficios físicos como flexibilidad, fuerza, coordinación y equilibrio. A nivel mental desarrolla disciplina, autocontrol, confianza y respeto. También mejora la concentración, reduce el estrés y fomenta valores como la perseverancia y el trabajo en equipo.
-              </p>
-            </div>
-          </div>
-
-          <!-- FAQ 3 -->
-          <div class="bg-white dark:bg-gray-800 rounded-xl shadow-lg overflow-hidden">
-            <button class="w-full p-6 text-left focus:outline-none focus:ring-2 focus:ring-brand-red faq-button">
-              <div class="flex items-center justify-between">
-                <h3 class="text-lg font-semibold text-gray-900 dark:text-white">
-                  ¿Cuánto tiempo toma llegar al cinturón negro?
-                </h3>
-                <svg class="w-5 h-5 text-brand-red transform transition-transform duration-300 faq-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
-                </svg>
-              </div>
-            </button>
-            <div class="faq-content hidden px-6 pb-6">
-              <p class="text-gray-600 dark:text-gray-400">
-                En promedio, un estudiante dedicado que entrena regularmente (2-3 veces por semana) puede alcanzar el cinturón negro en 3-4 años. Sin embargo, esto depende de factores como la edad, dedicación, capacidad física y mental del estudiante. Lo importante no es la velocidad, sino el desarrollo integral del practicante.
-              </p>
-            </div>
-          </div>
-
-          <!-- FAQ 4 -->
-          <div class="bg-white dark:bg-gray-800 rounded-xl shadow-lg overflow-hidden">
-            <button class="w-full p-6 text-left focus:outline-none focus:ring-2 focus:ring-brand-red faq-button">
-              <div class="flex items-center justify-between">
-                <h3 class="text-lg font-semibold text-gray-900 dark:text-white">
-                  ¿Es necesario tener experiencia previa en artes marciales?
-                </h3>
-                <svg class="w-5 h-5 text-brand-red transform transition-transform duration-300 faq-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
-                </svg>
-              </div>
-            </button>
-            <div class="faq-content hidden px-6 pb-6">
-              <p class="text-gray-600 dark:text-gray-400">
-                No es necesario tener experiencia previa. Nuestro programa está diseñado para recibir estudiantes de todos los niveles, desde principiantes absolutos hasta aquellos con experiencia en otras artes marciales. Comenzamos desde lo más básico y progresamos gradualmente según el ritmo de cada estudiante.
-              </p>
-            </div>
-          </div>
-
-          <!-- FAQ 5 -->
-          <div class="bg-white dark:bg-gray-800 rounded-xl shadow-lg overflow-hidden">
-            <button class="w-full p-6 text-left focus:outline-none focus:ring-2 focus:ring-brand-red faq-button">
-              <div class="flex items-center justify-between">
-                <h3 class="text-lg font-semibold text-gray-900 dark:text-white">
-                  ¿Qué equipamiento necesito para empezar?
-                </h3>
-                <svg class="w-5 h-5 text-brand-red transform transition-transform duration-300 faq-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
-                </svg>
-              </div>
-            </button>
-            <div class="faq-content hidden px-6 pb-6">
-              <p class="text-gray-600 dark:text-gray-400">
-                Para comenzar solo necesitas ropa cómoda para hacer ejercicio. Después de unas semanas, cuando decidas continuar, necesitarás adquirir un dobok (uniforme de Taekwondo). Para competición se requiere equipo de protección específico, pero esto es mucho más adelante en tu entrenamiento.
-              </p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Call to Action -->
-    <section class="py-16 bg-gradient-primary dark:bg-ulji-red-700">
-      <div class="max-w-4xl mx-auto text-center px-4 sm:px-6 lg:px-8">
-        <h3 class="text-3xl font-bold text-white mb-6">
-          Comienza Tu Viaje en el Taekwondo
-        </h3>
-        <p class="text-xl text-brand-red-light mb-8">
-          Descubre todo lo que puedes lograr con disciplina y dedicación
-        </p>
-        <div class="flex flex-col sm:flex-row gap-4 justify-center">
-          <a 
-            href="/contacto" 
-            class="bg-white text-brand-red hover:bg-gray-100 px-8 py-3 rounded-lg font-semibold transition-colors duration-300"
-          >
-            Clase de Prueba Gratis
-          </a>
-          <a 
-            href="/eventos" 
-            class="border-2 border-white text-white hover:bg-white hover:text-brand-red px-8 py-3 rounded-lg font-semibold transition-all duration-300"
-          >
-            Ver Próximos Eventos
-          </a>
-        </div>
-      </div>
-    </section>
-
+    <Grades />
   </main>
+
+  <!-- FAQs Section -->
+  <Faqs />
+
+  <!-- Call to Action -->
+  <section class="py-16 bg-gradient-primary dark:bg-ulji-red-700">
+    <div class="max-w-4xl mx-auto text-center px-4 sm:px-6 lg:px-8">
+      <h3 class="text-3xl font-bold text-white mb-6">
+        Estudiá con nuestro material teórico
+      </h3>
+      <p class="text-xl text-white mb-8">
+        Descargá el manual con todo lo necesario para tu formación en Taekwon-do
+      </p>
+      <div class="flex flex-col sm:flex-row gap-4 justify-center">
+        <ThirdButton
+          href="/docs/teorico.pdf"
+          download="Manual_Taekwondo_Escuela_Ul-ji.pdf"
+          variant="primary"
+          icon={true}
+        >
+          Descargar PDF
+        </ThirdButton>
+        <ThirdButton
+          href="/eventos"
+          variant="outline"
+        >
+          Ver Próximos Eventos
+        </ThirdButton>
+      </div>
+    </div>
+  </section>
 </Layout>
 
 <script>
-  // FAQ accordion functionality
-  document.addEventListener('DOMContentLoaded', function() {
-    const faqButtons = document.querySelectorAll('.faq-button');
-    
-    faqButtons.forEach(button => {
-      button.addEventListener('click', function(e) {
-        if (!(e.currentTarget instanceof HTMLElement)) return;
-        
-        const currentButton = e.currentTarget;
-        const content = currentButton.nextElementSibling;
-        const icon = currentButton.querySelector('.faq-icon');
-        
-        // Close all other FAQs
-        faqButtons.forEach(otherButton => {
-          if (otherButton !== currentButton) {
-            const otherContent = otherButton.nextElementSibling;
-            const otherIcon = otherButton.querySelector('.faq-icon');
-            if (otherContent instanceof HTMLElement) {
-              otherContent.classList.add('hidden');
-            }
-            if (otherIcon instanceof HTMLElement) {
-              otherIcon.style.transform = 'rotate(0deg)';
-            }
-          }
-        });
-        
-        // Toggle current FAQ
-        if (content instanceof HTMLElement) {
-          content.classList.toggle('hidden');
-          
-          if (icon instanceof HTMLElement) {
-            if (content.classList.contains('hidden')) {
-              icon.style.transform = 'rotate(0deg)';
-            } else {
-              icon.style.transform = 'rotate(180deg)';
-            }
-          }
-        }
-      });
-    });
-
-    // Smooth scrolling for navigation links
+  // Smooth scrolling for navigation links
+  document.addEventListener("DOMContentLoaded", function () {
     const navLinks = document.querySelectorAll('nav a[href^="#"]');
-    
-    navLinks.forEach(link => {
-      link.addEventListener('click', function(e) {
+
+    navLinks.forEach((link) => {
+      link.addEventListener("click", function (e) {
         e.preventDefault();
         if (!(e.currentTarget instanceof HTMLElement)) return;
-        
+
         const currentLink = e.currentTarget;
-        const targetId = currentLink.getAttribute('href')?.substring(1);
-        const targetElement = targetId ? document.getElementById(targetId) : null;
-        
+        const targetId = currentLink.getAttribute("href")?.substring(1);
+        const targetElement = targetId
+          ? document.getElementById(targetId)
+          : null;
+
         if (targetElement instanceof HTMLElement) {
           const offsetTop = targetElement.offsetTop - 100;
-          
+
           window.scrollTo({
             top: offsetTop,
-            behavior: 'smooth'
+            behavior: "smooth",
           });
-          
+
           // Update active nav item
-          navLinks.forEach(navLink => {
+          navLinks.forEach((navLink) => {
             if (navLink instanceof HTMLElement) {
-              navLink.classList.remove('text-brand-red', 'dark:text-ulji-red-400', 'border-b-2', 'border-brand-red', 'dark:border-ulji-red-400');
-              navLink.classList.add('text-gray-600', 'dark:text-gray-400');
+              navLink.classList.remove(
+                "text-brand-red",
+                "dark:text-ulji-red-400",
+                "border-b-2",
+                "border-brand-red",
+                "dark:border-ulji-red-400"
+              );
+              navLink.classList.add("text-gray-600", "dark:text-gray-400");
             }
           });
-          
-          currentLink.classList.add('text-brand-red', 'dark:text-ulji-red-400', 'border-b-2', 'border-brand-red', 'dark:border-ulji-red-400');
-          currentLink.classList.remove('text-gray-600', 'dark:text-gray-400');
+
+          currentLink.classList.add(
+            "text-brand-red",
+            "dark:text-ulji-red-400",
+            "border-b-2",
+            "border-brand-red",
+            "dark:border-ulji-red-400"
+          );
+          currentLink.classList.remove("text-gray-600", "dark:text-gray-400");
         }
       });
     });
   });
 </script>
-</Layout>

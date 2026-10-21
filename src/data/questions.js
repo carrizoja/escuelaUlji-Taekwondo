@@ -17,8 +17,8 @@ export const quickQuestions = [
   },
   {
     id: 'beneficios',
-    text: '¿Qué beneficios tiene el Taekwondo?',
-    question: '¿Qué beneficios tiene el Taekwondo?'
+    text: '¿Qué beneficios tiene el Taekwon-do?',
+    question: '¿Qué beneficios tiene el Taekwon-do?'
   },
   {
     id: 'primera-clase',

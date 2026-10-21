@@ -5,7 +5,7 @@ import AssistantInstructor from './blocks/AssistantInstructor.astro';
 import { assistantInstructors } from '../data/assistant_instructors.js';
 ---
 
-<section id="instructores" class="py-20 bg-gray-50 dark:bg-gray-800 transition-colors duration-300">
+<section id="instructores" class="py-12 bg-gray-50 dark:bg-gray-800 transition-colors duration-300">
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
     
     <!-- Section Header -->
@@ -40,8 +40,32 @@ import { assistantInstructors } from '../data/assistant_instructors.js';
           gradientFrom={instructor.gradientFrom}
           gradientTo={instructor.gradientTo}
           photo={instructor.photo || ''}
+          instagram={instructor.instagram || ''}
+          resume={instructor.resume || ''}
         />
       ))}
+    </div>
+    <div>
+      <h2 class="text-4xl md:text-5xl font-heading font-bold text-gray-900 text-center dark:text-white mb-4 transition-colors duration-300">
+        Mención Honorífica
+      </h2>
+      <p class="text-xl font-text text-center text-gray-600 dark:text-gray-400 p-4">
+        Reconocimiento a la dedicación y esfuerzo en la enseñanza del Taekwon-do.
+      </p>
+      <!-- Main Instructor Component -->
+    <MainInstructor
+      name="Senior Master Julio Bazán"
+      title="Presidente ACIT"
+      rank="8º Dan"
+      photo="https://res.cloudinary.com/dgvje1bpw/image/upload/v1756773883/bazan_mupmv7.jpg"
+      experience="45+ años de experiencia"
+      certification="Certificado internacional"
+      achievement="Formador de campeones"
+      quote="El Taekwon-do no es solo un arte marcial, es una filosofía de vida que forma personas de bien con carácter y fortalece el espíritu."
+      facebookUrl="https://www.facebook.com/julio.bazan.37"
+      instagramUrl="https://www.instagram.com/masterjuliobazan/"
+    />
+
     </div>
 
     <!-- Certifications & Credentials -->
@@ -57,8 +81,8 @@ import { assistantInstructors } from '../data/assistant_instructors.js';
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z"></path>
             </svg>
           </div>
-          <h4 class="font-heading font-semibold text-gray-900 dark:text-white mb-2">WTF Certificado</h4>
-          <p class="font-text text-sm text-gray-600 dark:text-gray-400">World Taekwondo Federation</p>
+          <h4 class="font-heading font-semibold text-gray-900 dark:text-white mb-2">ITF Certificado</h4>
+          <p class="font-text text-sm text-gray-600 dark:text-gray-400">International Taekwondo Federation</p>
         </div>
 
         <div class="text-center group">
@@ -68,7 +92,7 @@ import { assistantInstructors } from '../data/assistant_instructors.js';
             </svg>
           </div>
           <h4 class="font-heading font-semibold text-gray-900 dark:text-white mb-2">ACIT Afiliado</h4>
-          <p class="font-text text-sm text-gray-600 dark:text-gray-400">Asociación Centro Internacional</p>
+          <p class="font-text text-sm text-gray-600 dark:text-gray-400">Asociación Centro Internacional de Taekwondo</p>
         </div>
 
         <div class="text-center group">
@@ -87,11 +111,10 @@ import { assistantInstructors } from '../data/assistant_instructors.js';
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
             </svg>
           </div>
-          <h4 class="font-heading font-semibold text-gray-900 dark:text-white mb-2">Formación Continua</h4>
+          <h4 class="font-heading font-semibold text-gray-900 dark:text-white mb-2">Didáctica Inclusiva</h4>
           <p class="font-text text-sm text-gray-600 dark:text-gray-400">Actualización Permanente</p>
         </div>
       </div>
     </div>
-
   </div>
 </section>

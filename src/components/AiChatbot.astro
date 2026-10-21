@@ -17,7 +17,7 @@ const positionClasses = {
 };
 ---
 
-<!-- AI Chatbot Button and Window -->
+<!-- AI Chatb        return "🥋 **Sistema de Grados - Taekwondo ITF**:\n\n**Cinturones Gup (Colores)**:\n⚪ 10° Gup - Cinturón Blanco (Principiante)\n🟡 9° Gup - Cinturón Blanco punta Amarilla\n🟡 8° Gup - Cinturón Amarillo\n🟢 7° Gup - Cinturón Amarillo punta Verde\n🟢 6° Gup - Cinturón Verde\n🔵 5° Gup - Cinturón Verde punta Azul\n🔵 4° Gup - Cinturón Azul\n🟤 3° Gup - Cinturón Azul punta Marrón\n🟤 2° Gup - Cinturón Marrón\n⚫ 1° Gup - Cinturón Marrón punta Negra\n\n**Cinturones Dan (Negro)**:\n⚫ 1° Dan - Bu Sabum (Instructor Asistente)\n⚫ 2° Dan - Bu Sabum (Instructor Asistente)\n⚫ 3° Dan - Bu Sabum (Instructor Asistente)\n⚫ 4° Dan - Sabum Nim (Instructor)\n⚫ 5° Dan - Sabum Nim (Instructor)\n⚫ 6° Dan - Sabum Nim (Instructor)\n⚫ 7° Dan - Master (Maestro)\n⚫ 8° Dan - Senior Master (Maestro Senior)\n⚫ 9° Dan - Grand Master (Gran Maestro)\n\n**📋 Requisitos para exámenes**:\n• Tiempo mínimo de práctica entre grados\n• Dominio de formas (Tul) correspondientes\n• Técnicas de defensa personal\n• Conocimiento teórico del Taekwondo\n• Examen práctico con instructor\n\n📅 **Próximos exámenes**: Contactanos para fechas\n📞 WhatsApp: +54 9 11 6595-1634\n\n¿Te interesa saber sobre algún grado específico?";t Button and Window -->
 <div id="ai-chatbot" class={`fixed ${positionClasses[position]} z-50`}>
   <!-- Floating Chat Button -->
   <button
@@ -68,7 +68,7 @@ const positionClasses = {
     <!-- Notification Dot -->
     <div
       id="notification-dot"
-      class="absolute -top-1 -right-1 w-3 h-3 md:w-4 md:h-4 bg-green-500 rounded-full"
+      class="absolute -top-0 -right-0 w-2 h-2 md:w-3 md:h-3 bg-green-500 rounded-full"
     >
       <div class="w-full h-full bg-green-400 rounded-full animate-ping"></div>
     </div>
@@ -98,7 +98,7 @@ const positionClasses = {
         <div>
           <h3 class="font-heading font-semibold">Ul-ji Assistant</h3>
           <p class="text-sm opacity-90 font-text">
-            Asistente Virtual de Taekwondo
+            Asistente Virtual de Taekwon-do
           </p>
         </div>
       </div>
@@ -112,9 +112,9 @@ const positionClasses = {
           class="max-w-[80%] p-3 rounded-lg bg-gray-100 dark:bg-gray-800 text-gray-900 dark:text-white rounded-bl-none"
         >
           <p class="text-sm font-text">
-            ¡Hola! Soy el asistente virtual de la Escuela Ul-ji de Taekwondo.
+            ¡Hola! Soy el asistente virtual de la Escuela Ul-ji de Taekwon-do.
             Estoy aquí para ayudarte con información sobre nuestras clases,
-            horarios, exámenes y todo lo relacionado con el Taekwondo. ¿En qué
+            horarios, exámenes y todo lo relacionado con el Taekwon-do. ¿En qué
             puedo ayudarte hoy?
           </p>
           <p class="text-xs opacity-70 mt-1" id="initial-time"></p>
@@ -414,7 +414,7 @@ const positionClasses = {
         message.includes("consulta rápida") ||
         message.includes("ayuda rápida")
       ) {
-        return "🚀 **Preguntas Frecuentes - Respuestas Rápidas**:\n\n• **Horarios**: Escribe 'horarios' para ver todos los horarios\n• **Precios**: Escribe 'precios' para ver las cuotas\n• **Contacto**: Escribe 'contacto' para info de WhatsApp\n• **Primera clase**: Escribe 'primera clase' para empezar\n• **Cinturones**: Escribe 'grados' para el sistema de cinturones\n• **Beneficios**: Escribe 'beneficios' para ventajas del Taekwondo\n• **Ubicación**: Escribe 'dónde' para la dirección\n\n💬 También podés usar las preguntas rápidas de abajo para respuestas instantáneas.";
+        return "🚀 **Preguntas Frecuentes - Respuestas Rápidas**:\n\n• **Horarios**: Escribí 'horarios' para ver todos los horarios\n• **Precios**: Escribí 'precios' para ver las cuotas\n• **Contacto**: Escribí 'contacto' para info de WhatsApp\n• **Primera clase**: Escribí 'primera clase' para empezar\n• **Cinturones**: Escribí 'grados' para el sistema de cinturones\n• **Beneficios**: Escribe 'beneficios' para ventajas del Taekwon-do\n• **Ubicación**: Escribe 'dónde' para la dirección\n\n💬 También podés usar las preguntas rápidas de abajo para respuestas instantáneas.";
       }
 
       // Clases y horarios
@@ -424,7 +424,7 @@ const positionClasses = {
         message.includes("cuando") ||
         message.includes("día")
       ) {
-        return "⏰ **Horarios de Clases**:\n\n🥋 ** Infantiles (5-12 años)**:\n• lunes y miércoles: 18:30 - 19:40 h\n🥋 **Juveniles y adultos (13 años en adelante)**:\n• lunes y miércoles: 19:40 - 21 h";
+        return "⏰ **Horarios de Clases**:\n\n🥋 ** Infantiles (5-12 años) **:\n• lunes y miércoles: 18:30 - 19:40 h\n🥋 **Juveniles y adultos (13 años en adelante) **:\n• lunes y miércoles: 19:40 - 21 h";
       }
 
       // Precios y costos
@@ -447,19 +447,18 @@ const positionClasses = {
         message.includes("ubicación") ||
         message.includes("dirección")
       ) {
-        return "📞 **Contacto Escuela Ul-ji**:\n\n📱 WhatsApp: +54 9 11 6595-1634\n📍 **Dojang Principal**: Aserejé - Don Bosco 3834, Capital Federal\n📧 Email: info@escuelaul-ji.com.ar\n\n🚇 **Cómo llegar**:\n• Subte Línea E - Estación Boedo\n• Colectivos: 4, 23, 50, 168\n\n¿Necesitas indicaciones específicas?";
+        return "📞 **Contacto Escuela Ul-ji**:\n\n📱 WhatsApp: +54 9 11 6595-1634\n📍 **Dojang Principal**: Centro Cultural La Grieta - Alsina 2143, Capital Federal\n📧 Email: info@escuelaulji.com.ar\n\n🚇 **Cómo llegar**:\n• Subte Línea A - Estación Congreso\n• Colectivos: 8, 151, 105, 90, 103, 2\n\n¿Necesitas indicaciones específicas?";
       }
 
       // Cinturones y grados
       if (
-        message.includes("cinturón") ||
         message.includes("cinturon") ||
         message.includes("grado") ||
         message.includes("dan") ||
-        message.includes("kup") ||
+        message.includes("gup") ||
         message.includes("examen")
       ) {
-        return "🥋 **Sistema de Grados - Taekwondo WTF**:\n\n**Cinturones Kup (Color)**:\n🟡 10° Kup - Cinturón Amarillo\n🟠 9° Kup - Amarillo/Naranja\n🟠 8° Kup - Cinturón Naranja\n🟢 7° Kup - Naranja/Verde\n🟢 6° Kup - Cinturón Verde\n🔵 5° Kup - Verde/Azul\n🔵 4° Kup - Cinturón Azul\n🟤 3° Kup - Azul/Marrón\n🟤 2° Kup - Cinturón Marrón\n⚫ 1° Kup - Marrón/Negro\n\n**Cinturones Dan (Negro)**:\n⚫ 1° a 9° Dan\n\n¿Te interesa saber sobre los próximos exámenes?";
+        return "🥋 **Sistema de Grados - Taekwondo ITF**:\n\n**Cinturones Gup (Colores)**:\n⚪ 10° Gup - Cinturón Blanco (Principiante)\n� 9° Gup - Cinturón Blanco punta Amarilla\n� 8° Gup - Cinturón Amarillo\n🟢 7° Gup - Cinturón Amarillo punta Verde\n🟢 6° Gup - Cinturón Verde\n🔵 5° Gup - Cinturón Verde punta Azul\n🔵 4° Gup - Cinturón Azul\n🟤 3° Gup - Cinturón Azul punta Marrón\n🟤 2° Gup - Cinturón Marrón\n⚫ 1° Gup - Cinturón Marrón punta Negra\n\n**Cinturones Dan (Negro)**:\n⚫ 1° Dan a 9° Dan - Cinturón Negro\n\n**📋 Requisitos para exámenes**:\n• Tiempo mínimo de práctica entre grados\n• Dominio de formas (Tul) correspondientes\n• Técnicas de defensa personal\n• Conocimiento teórico del Taekwondo\n• Examen práctico con instructor\n\n📅 **Próximos exámenes**: Contactanos para fechas\n📞 WhatsApp: +54 9 11 6595-1634\n\n¿Te interesa saber sobre algún grado específico?";
       }
 
       // Beneficios del Taekwondo
@@ -469,7 +468,7 @@ const positionClasses = {
         message.includes("por qué") ||
         message.includes("ventaja")
       ) {
-        return "🌟 **Beneficios del Taekwondo**:\n\n**Para Niños:**\n• Disciplina y respeto\n• Mejora la concentración\n• Desarrollo motor y coordinación\n• Autoconfianza y autoestima\n• Defensa personal\n\n**Para Adolescentes:**\n• Control del estrés escolar\n• Trabajo en equipo\n• Liderazgo y responsabilidad\n• Actividad física saludable\n\n**Para Adultos:**\n• Excelente ejercicio cardiovascular\n• Flexibilidad y fuerza\n• Liberación de tensiones\n• Arte marcial tradicional\n• Comunidad y amistad\n\n¡El Taekwondo es para toda la vida!";
+        return "🌟 **Beneficios del Taekwon-do**:\n\n**Para niños y niñas:**\n• Disciplina y respeto\n• Mejora la concentración\n• Desarrollo motor y coordinación\n• Autoconfianza y autoestima\n• Defensa personal\n\n**Para Adolescentes:**\n• Control del estrés escolar\n• Trabajo en equipo\n• Liderazgo y responsabilidad\n• Actividad física saludable\n\n**Para Adultos:**\n• Excelente ejercicio cardiovascular\n• Flexibilidad y fuerza\n• Liberación de tensiones\n• Arte marcial tradicional\n• Comunidad y amistad\n\n¡El Taekwon-do es para toda la vida!";
       }
       if (
         message.includes("precio") ||
@@ -489,7 +488,7 @@ const positionClasses = {
         message.includes("nuevo") ||
         message.includes("principiante")
       ) {
-        return "🎯 **Tu Primera Clase en Ul-Ji**:\n\n**¿Qué necesitas traer?**\n• Ropa cómoda y deportiva. En lo posible, evita ropa muy ajustada o jeans.\n• Botella de agua\n• Toalla pequeña\n• ¡Muchas ganas de aprender!\n\n**¿Qué haremos?**\n• Calentamiento y estiramiento\n• Técnicas básicas de patadas y puños\n• Posiciones fundamentales\n• Filosofía del Taekwondo\n• Saludo y protocolo\n\n**¡La primera clase es GRATUITA!**\n📞 Reserva tu lugar: +54 9 11 6595-1634\n\n¿Qué edad tenés? Te asigno el mejor horario.";
+        return "🎯 **Tu Primera Clase en Ul-Ji**:\n\n**¿Qué necesitás traer?**\n• Ropa cómoda y deportiva. En lo posible, evita ropa muy ajustada o jeans.\n• Botella de agua\n• Toalla pequeña\n• ¡Muchas ganas de aprender!\n\n**¿Qué haremos?**\n• Calentamiento y estiramiento\n• Técnicas básicas de patadas y puños\n• Posiciones fundamentales\n• Filosofía del Taekwon-do\n• Saludo y protocolo\n\n**¡La primera clase es GRATUITA!**\n📞 Reservá tu lugar: +54 9 11 6595-1634\n\n¿Qué edad tenés? Te asigno el mejor horario.";
       }
 
       // Saludos
@@ -499,7 +498,7 @@ const positionClasses = {
         message.includes("buenas tardes") ||
         message.includes("buenas noches")
       ) {
-        return "¡Hola! 👋🥋 ¡Bienvenido/a a la Escuela Ul-ji de Taekwondo!\n\nSomos una escuela de Taekwondo con más de 30 años de experiencia formando taekwondistas de todas las edades.\n\n**Especialidades:**\n• Taekwondo ITF tradicional\n• Formación integral en valores\n• Preparación para competencias\n• Defensa personal\n• Mejoramos la confianza en uno mismo\n\n¿En qué podemos ayudarte hoy?";
+        return "¡Hola! 👋🥋 ¡Bienvenido/a a la Escuela Ul-ji de Taekwon-do!\n\nSomos una escuela de Taekwon-do con más de 5 años de experiencia formando taekwondistas de todas las edades.\n\n**Especialidades:**\n• Taekwon-do ITF tradicional\n• Formación integral en valores\n• Preparación para competencias\n• Defensa personal\n• Mejoramos la confianza en uno mismo\n\n¿En qué podemos ayudarte hoy?";
       }
 
       // Quick single-word responses
@@ -516,19 +515,19 @@ const positionClasses = {
       }
 
       if (message.trim() === "grados" || message.trim() === "cinturones") {
-        return "🥋 **Sistema de Grados**:\n\n**Cinturones Kup (Color)**:\n🟡 10° Kup - Amarillo\n🟠 9°-8° Kup - Naranja\n🟢 7°-6° Kup - Verde\n🔵 5°-4° Kup - Azul\n🟤 3°-2° Kup - Marrón\n⚫ 1° Kup - Marrón/Negro\n\n**Cinturones Dan (Negro)**:\n⚫ 1° a 9° Dan";
+        return "🥋 **Sistema de Grados - Taekwondo ITF**:\n\n**Cinturones Gup (Colores)**:\n⚪ 10° Gup - Cinturón Blanco\n🟡 9° Gup - Cinturón Blanco punta Amarilla\n🟡 8° Gup - Cinturón Amarillo\n🟢 7° Gup - Cinturón Amarillo punta Verde\n🟢 6° Gup - Cinturón Verde\n🔵 5° Gup - Cinturón Verde punta Azul\n🔵 4° Gup - Cinturón Azul\n🟤 3° Gup - Cinturón Azul punta Roja\n🟤 2° Gup - Cinturón Rojo\n⚫ 1° Gup - Cinturón Rojo punta Negra\n\n**Cinturones Dan (Negro)**:\n⚫ 1° Dan - Bu Sabum (Instructor Asistente)\n⚫ 2° Dan - Bu Sabum (Instructor Asistente)\n⚫ 3° Dan - Bu Sabum (Instructor Asistente)\n⚫ 4° Dan - Sabum Nim (Instructor)\n⚫ 5° Dan - Sabum Nim (Instructor)\n⚫ 6° Dan - Sabum Nim (Instructor)\n⚫ 7° Dan - Master (Maestro)\n⚫ 8° Dan - Senior Master (Maestro Senior)\n⚫ 9° Dan - Grand Master (Gran Maestro)\n\n📋 **Requisitos**:\n• Tiempo mínimo entre grados\n• Conocimiento de formas (Tules)\n• Técnicas de defensa personal\n• Examen teórico y práctico\n\n¿Querés saber sobre próximos exámenes?";
       }
 
       if (message.trim() === "ubicación" || message.trim() === "dónde" || message.trim() === "donde") {
-        return "📍 **Ubicación Escuela Ul-ji**:\n\n🏢 **Centro Cultural La Grieta**\nAlsina 2143, Capital Federal\n\n🚇 **Transporte**:\n• Subte Línea E - Estación Boedo\n• Colectivos: 4, 23, 50, 168\n\n📱 Para indicaciones específicas: +54 9 11 6595-1634";
+        return "📍 **Ubicación Escuela Ul-ji**:\n\n🏢 **Centro Cultural La Grieta**\nAlsina 2143, Capital Federal\n\n🚇 **Transporte**:\n• Subte Línea A - Estación Congreso\n• Colectivos: 2, 103, 90, 168, 151, 105, 8\n\n📱 Para indicaciones específicas: +54 9 11 6595-1634";
       }
 
       if (message.trim() === "beneficios") {
-        return "🌟 **Beneficios del Taekwondo**:\n\n**Físicos**: Flexibilidad, fuerza, coordinación\n**Mentales**: Disciplina, concentración, autocontrol\n**Sociales**: Respeto, trabajo en equipo\n**Personales**: Autoconfianza, autoestima\n**Prácticos**: Defensa personal, actividad saludable\n\n¡Es mucho más que un deporte!";
+        return "🌟 **Beneficios del Taekwon-do**:\n\n**Físicos**: Flexibilidad, fuerza, coordinación\n**Mentales**: Disciplina, concentración, autocontrol\n**Sociales**: Respeto, trabajo en equipo\n**Personales**: Autoconfianza, autoestima\n**Prácticos**: Defensa personal, actividad saludable\n\n¡Es mucho más que un deporte!";
       }
 
       // Default response
-      return "¡Excelente pregunta! 🤔🥋\n\nPara darte la información más precisa sobre Taekwondo, te recomiendo:\n\n📱 **WhatsApp**: +54 9 11 6595-1634 (respuesta inmediata)\n📧 **Email**: info@escuelaulji.com.ar\n🏢 **Visitanos**: Centro Cultural La Grieta - Alsina 2143, Capital Federal\n\nTambién podés preguntarme sobre:\n• Horarios de clases\n• Precios y promociones\n• Beneficios del Taekwondo\n• Próximos exámenes\n• Competencias\n\n¿Hay algo específico sobre el Taekwondo que te gustaría saber?";
+      return "¡Excelente pregunta! 🤔🥋\n\nPara darte la información más precisa sobre Taekwon-do, te recomiendo:\n\n📱 **WhatsApp**: +54 9 11 6595-1634 (respuesta inmediata)\n📧 **Email**: info@escuelaulji.com.ar\n🏢 **Visitanos**: Centro Cultural La Grieta - Alsina 2143, Capital Federal\n\nTambién podés preguntarme sobre:\n• Horarios de clases\n• Precios y promociones\n• Beneficios del Taekwon-do\n• Próximos exámenes\n• Competencias\n\n¿Hay algo específico sobre el Taekwon-do que te gustaría saber?";
     }
   }
 

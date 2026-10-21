@@ -1,292 +1,167 @@
 ---
 // Modern Contact component for Escuela Ul-ji Taekwondo
+import QuickBenefits from './blocks/QuickBenefits.astro';
+import { getActiveDojangs } from '../data/dojangs.js';
+import GradientLine from './ui/GradientLine.astro';
+import ContactButtons from './blocks/ContactButtons.astro';
+import PrimaryButton from './ui/PrimaryButton.astro';
+import FourthButton from './ui/FourthButton.astro';
+
+const activeDojangs = getActiveDojangs();
 ---
 
 <section
-  id="contact"
-  class="py-20 bg-white dark:bg-gray-900 transition-colors duration-300"
+  class="py-10 bg-white dark:bg-gray-900 transition-colors duration-300"
 >
+
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <!-- Quick Benefits -->
+        <QuickBenefits />
     <!-- Section Header -->
-    <div class="text-center mb-16">
-      <div
-        class="inline-flex items-center justify-center w-16 h-16 bg-red-600 dark:bg-red-500 rounded-full mb-6 transition-colors duration-300"
-      >
-        <span class="text-white font-bold text-2xl">울지</span>
-      </div>
-      <h2
+     <div id="sedes" class="mb-10 mt-10 text-center">
+        <h2
         class="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white mb-4 transition-colors duration-300"
       >
-        Contáctanos
+        Nuestras sedes
       </h2>
+      <GradientLine />
       <p
         class="text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto transition-colors duration-300"
       >
-        ¿Listo para comenzar tu viaje en el Taekwondo? Contáctanos para agendar
-        tu clase de prueba gratuita.
+        Descubrí nuestras ubicaciones y encontrá la más cercana a vos.
       </p>
-    </div>
-
-    <div class="grid grid-cols-1 gap-12">
-      <!-- Contact Information & Details -->
-      <div class="flex flex-col space-y-8">
-        <section class="flex flex-col w-full">
-          <!-- Contact Info -->
-          <div
-            class="bg-gradient-to-br from-red-600 to-red-800 dark:from-red-500 dark:to-red-700 rounded-2xl p-8 text-white shadow-xl transition-colors duration-300"
-          >
-            <h3 class="text-2xl font-bold mb-6">Información de Contacto</h3>
-
-            <div class="space-y-4">
-              <div class="flex items-start">
-                <svg
-                  class="w-6 h-6 mr-4 mt-1 flex-shrink-0"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-width="2"
-                    d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"
-                  ></path>
-                  <path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-width="2"
-                    d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path>
+      
+      <!-- Dynamic Dojangs Blocks -->
+      <div class="mt-8 space-y-6">
+        {activeDojangs.map((dojang) => (
+          <div class="bg-gradient-to-br from-gray-50 to-gray-100 dark:from-gray-800 dark:to-gray-900 rounded-2xl p-8 shadow-xl transition-colors duration-300">
+            <div class="flex items-center mb-6">
+              <div class="bg-red-500 rounded-full p-3 mr-4">
+                <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"></path>
                 </svg>
-                <div>
-                  <h4 class="font-semibold mb-1">Dirección</h4>
-                  <p class="text-red-100">
-                    Av. Principal 123<br />Ciudad, Estado 12345
-                  </p>
-                </div>
               </div>
-
-              <div class="flex items-start">
-                <svg
-                  class="w-6 h-6 mr-4 mt-1 flex-shrink-0"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-width="2"
-                    d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"
-                  ></path>
-                </svg>
-                <div>
-                  <h4 class="font-semibold mb-1">Teléfono</h4>
-                  <p class="text-red-100">+1 (555) 123-4567</p>
-                </div>
-              </div>
-
-              <div class="flex items-start">
-                <svg
-                  class="w-6 h-6 mr-4 mt-1 flex-shrink-0"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-width="2"
-                    d="M3 8l7.89 4.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
-                  ></path>
-                </svg>
-                <div>
-                  <h4 class="font-semibold mb-1">Email</h4>
-                  <p class="text-red-100">info@escuelaulji.com</p>
-                </div>
-              </div>
-
-              <div class="flex items-start">
-                <svg
-                  class="w-6 h-6 mr-4 mt-1 flex-shrink-0"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-width="2"
-                    d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-                </svg>
-                <div>
-                  <h4 class="font-semibold mb-1">Horarios de Atención</h4>
-                  <p class="text-red-100">
-                    Lunes - Viernes: 9:00 AM - 9:00 PM<br />
-                    Sábados: 8:00 AM - 6:00 PM<br />
-                    Domingos: 10:00 AM - 4:00 PM
-                  </p>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <!-- Class Schedule -->
-          <div
-            class="bg-gray-50 dark:bg-gray-800 rounded-2xl p-8 shadow-xl transition-colors duration-300"
-          >
-            <h3
-              class="text-2xl font-bold text-gray-900 dark:text-white mb-6 transition-colors duration-300"
-            >
-              Horarios de Clases
-            </h3>
-
-            <div class="space-y-4">
-              <div class="border-l-4 border-red-500 pl-4">
-                <h4
-                  class="font-semibold text-gray-900 dark:text-white transition-colors duration-300"
-                >
-                  Infantiles (6-12 años)
-                </h4>
-                <p
-                  class="text-gray-600 dark:text-gray-300 transition-colors duration-300"
-                >
-                  lunes y miércoles: 18:30 PM - 19:40 PM
-                </p>
-              </div>
-              <div class="border-l-4 border-red-500 pl-4">
-                <h4
-                  class="font-semibold text-gray-900 dark:text-white transition-colors duration-300"
-                >
-                  Juveniles y adultos (mayores de 13 años)
-                </h4>
-                <p
-                  class="text-gray-600 dark:text-gray-300 transition-colors duration-300"
-                >
-                  lunes y miércoles: 19:40 PM - 21:00 PM
+              <div>
+                <h3 class="text-2xl font-bold text-gray-900 dark:text-white transition-colors duration-300">
+                  {dojang.name}
+                </h3>
+                <p class="text-gray-600 dark:text-gray-300 transition-colors duration-300">
+                  {dojang.address.neighborhood}
                 </p>
               </div>
             </div>
-          </div>
-        </section>
 
-        <!-- Quick Benefits -->
-        <div
-          class="bg-gradient-to-br from-gray-900 to-gray-700 dark:from-black dark:to-gray-800 rounded-2xl p-8 text-white shadow-xl transition-colors duration-300"
-        >
-          <h3 class="text-2xl font-bold mb-6">
-            ¿Por qué elegir Escuela Ul-ji?
-          </h3>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <!-- Address & Contact -->
+              <div class="space-y-4">
+                <div class="flex items-start">
+                  <div>
+                    <div class="flex items-center">
+                      <svg class="w-5 h-5 text-red-500 mr-3 mt-1 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path>
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                      </svg>
+                      <h4 class="font-semibold text-gray-900 dark:text-white transition-colors duration-300">Dirección</h4>
+                    </div>
+                    <p class="text-gray-600 dark:text-gray-300 transition-colors duration-300 text-left">
+                      {dojang.address.street}<br/>
+                      {dojang.address.neighborhood}, {dojang.address.city}
+                    </p>
+                  </div>
+                </div>
 
-          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-            <div class="flex items-center">
-              <svg
-                class="w-5 h-5 text-red-400 mr-3 flex-shrink-0"
-                fill="currentColor"
-                viewBox="0 0 20 20"
-              >
-                <path
-                  fill-rule="evenodd"
-                  d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
-                  clip-rule="evenodd"></path>
-              </svg>
-              <span class="text-sm">Instructores certificados</span>
+                <div class="flex items-start">
+                  <div>
+                    <div class="flex items-center">
+                      <svg class="w-5 h-5 text-red-500 mr-3 mt-1 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"></path>
+                      </svg>
+                      <h4 class="font-semibold text-gray-900 dark:text-white transition-colors duration-300">Contacto</h4>
+                    </div>
+                    <p class="text-gray-600 text-left dark:text-gray-300 transition-colors duration-300">
+                      {dojang.contact.phone}<br/>
+                      {dojang.contact.email}
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Class Schedules -->
+              <div class="space-y-4">
+                <div class="flex items-start">
+                  <div class="w-full">
+                    <div class="flex items-center mb-3">
+                      <svg class="w-5 h-5 text-red-500 mr-3 mt-1 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                      </svg>
+                      <h4 class="font-semibold text-gray-900 dark:text-white transition-colors duration-300">Horarios de Clases</h4>
+                    </div>
+                    <div class="space-y-3">
+                      {dojang.schedules.classes.map((schedule) => (
+                        <div class="bg-white dark:bg-gray-700 rounded-lg p-3 border-l-4 border-red-500 transition-colors duration-300">
+                          <div class="flex justify-between items-center">
+                            <div>
+                              <p class="font-medium text-gray-900 dark:text-white transition-colors duration-300">
+                                {schedule.category}
+                              </p>
+                              <p class="text-sm text-gray-600 dark:text-gray-300 transition-colors duration-300">
+                                {schedule.ageRange}
+                              </p>
+                            </div>
+                            <div class="text-right">
+                              <p class="text-sm font-medium text-gray-900 dark:text-white transition-colors duration-300">
+                                {schedule.days.join(" y ")}
+                              </p>
+                              <p class="text-sm text-gray-600 dark:text-gray-300 transition-colors duration-300">
+                                {schedule.time}
+                              </p>
+                            </div>
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
 
-            <div class="flex items-center">
-              <svg
-                class="w-5 h-5 text-red-400 mr-3 flex-shrink-0"
-                fill="currentColor"
-                viewBox="0 0 20 20"
+            <!-- Action Buttons -->
+            <div class="flex flex-col sm:flex-row gap-4 mt-6 pt-6 border-t border-gray-200 dark:border-gray-700">
+              <PrimaryButton 
+                href={dojang.location.googleMapsUrl}
+                text="Ver en Maps"
+                icon="external"
+                target="_blank"
+                size="md"
+              />
+              <FourthButton
+                href={`https://wa.me/${dojang.contact.whatsapp}?text=${encodeURIComponent('¡Hola! Me interesa información sobre las clases en la sede de ' + dojang.address.neighborhood)}`}
+                variant="whatsapp"
+                icon="whatsapp"
+                size="md"
               >
-                <path
-                  fill-rule="evenodd"
-                  d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
-                  clip-rule="evenodd"></path>
-              </svg>
-              <span class="text-sm">Clases a partir de los 6 años</span>
-            </div>
-
-            <div class="flex items-center">
-              <svg
-                class="w-5 h-5 text-red-400 mr-3 flex-shrink-0"
-                fill="currentColor"
-                viewBox="0 0 20 20"
-              >
-                <path
-                  fill-rule="evenodd"
-                  d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
-                  clip-rule="evenodd"></path>
-              </svg>
-              <span class="text-sm">Equipamiento incluido</span>
-            </div>
-
-            <div class="flex items-center">
-              <svg
-                class="w-5 h-5 text-red-400 mr-3 flex-shrink-0"
-                fill="currentColor"
-                viewBox="0 0 20 20"
-              >
-                <path
-                  fill-rule="evenodd"
-                  d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
-                  clip-rule="evenodd"></path>
-              </svg>
-              <span class="text-sm">Ambiente familiar</span>
-            </div>
-
-            <div class="flex items-center">
-              <svg
-                class="w-5 h-5 text-red-400 mr-3 flex-shrink-0"
-                fill="currentColor"
-                viewBox="0 0 20 20"
-              >
-                <path
-                  fill-rule="evenodd"
-                  d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
-                  clip-rule="evenodd"></path>
-              </svg>
-              <span class="text-sm">Preparación para competencias</span>
-            </div>
-
-            <div class="flex items-center">
-              <svg
-                class="w-5 h-5 text-red-400 mr-3 flex-shrink-0"
-                fill="currentColor"
-                viewBox="0 0 20 20"
-              >
-                <path
-                  fill-rule="evenodd"
-                  d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
-                  clip-rule="evenodd"></path>
-              </svg>
-              <span class="text-sm">Primeras dos clases gratis</span>
+                Consultar WhatsApp
+              </FourthButton>
             </div>
           </div>
-        </div>
+        ))}
       </div>
+     </div>
+    <div class="text-center mb-10 mt-10">
+      <h2
+        class="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white mb-4 transition-colors duration-300"
+      >
+        Contactanos
+      </h2>
+      <GradientLine />
+      <p
+        class="text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto transition-colors duration-300"
+      >
+        ¿Listo para comenzar tu viaje en Taekwon-do? <br> Eligí tu canal preferido para comunicarte con nosotros
+      </p>
+         <!-- Quick Contact Buttons -->
+    <ContactButtons />
     </div>
 
-    <!-- Map Section -->
-    <div class="mt-16">
-      <h3
-        class="text-3xl font-bold text-gray-900 dark:text-white text-center mb-8 transition-colors duration-300"
-      >
-        Nuestra Ubicación
-      </h3>
-      <div
-        class="bg-gray-200 dark:bg-gray-700 rounded-2xl overflow-hidden shadow-xl transition-colors duration-300"
-      >
-        <iframe 
-          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3283.7022182647434!2d-58.39929108839642!3d-34.611690757806876!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x95bccae7d7e40f69%3A0xd16eafadc83019c!2sLa%20Grieta!5e0!3m2!1sen!2sar!4v1756689664146!5m2!1sen!2sar" 
-          width="100%" 
-          height="400" 
-          style="border:0;" 
-          allowfullscreen="" 
-          loading="lazy" 
-          referrerpolicy="no-referrer-when-downgrade"
-          title="Ubicación de Escuela Ul-ji Taekwondo"
-        ></iframe>
-      </div>
-    </div>
   </div>
 </section>
