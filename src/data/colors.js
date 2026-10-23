@@ -11,7 +11,7 @@ export const colors = {
       200: '#FBD5D5',  // Lighter red
       300: '#F79292',  // Pink (desaturated)
       400: '#FF6666',  // Light Red (plenos)
-      500: '#F73434',  // Red (plenos) - Main red
+      500: '#DC2626',  // Accent red, AA with white text
       600: '#CC3131',  // Red (desaturated)
       700: '#A00000',  // Deep Red (plenos)
       800: '#810000',  // Dark Red (desaturated)
@@ -43,13 +43,13 @@ export const colors = {
   semantic: {
     success: '#5FB77E',    // Muted status green (--status)
     warning: '#F59E0B',    
-    error: '#F73434',      // Red (plenos)
+    error: '#DC2626',      // Accent red
     info: '#3B82F6'
   },
 
   // Special gradients using palette colors
   gradients: {
-    primary: 'linear-gradient(135deg, #A00000 0%, #F73434 50%, #FF6666 100%)',
+    primary: 'linear-gradient(135deg, #A00000 0%, #DC2626 50%, #FF6666 100%)',
     secondary: 'linear-gradient(135deg, #34BC5B 0%, #49F57A 50%, #95F9AF 100%)',
     dark: 'linear-gradient(135deg, #000000 0%, #810000 50%, #A00000 100%)',
     hero: 'linear-gradient(135deg, #111827 0%, #810000 25%, #A00000 75%, #000000 100%)'
@@ -59,7 +59,7 @@ export const colors = {
 // CSS Custom Properties for easy usage
 export const cssVariables = {
   // Primary colors
-  '--color-red-primary': '#F73434',
+  '--color-red-primary': '#DC2626',
   '--color-red-deep': '#A00000', 
   '--color-red-light': '#FF6666',
   '--color-red-dark': '#810000',
@@ -69,7 +69,7 @@ export const cssVariables = {
   '--color-black': '#000000',
 
   // Gradients
-  '--gradient-primary': 'linear-gradient(135deg, #A00000 0%, #F73434 50%, #FF6666 100%)',
+  '--gradient-primary': 'linear-gradient(135deg, #A00000 0%, #DC2626 50%, #FF6666 100%)',
   '--gradient-hero': 'linear-gradient(135deg, #111827 0%, #810000 25%, #A00000 75%, #000000 100%)'
 }
 
@@ -81,7 +81,7 @@ export const tailwindColors = {
     200: '#FBD5D5',
     300: '#F79292',
     400: '#FF6666', 
-    500: '#F73434',
+    500: '#DC2626',
     600: '#CC3131',
     700: '#A00000',
     800: '#810000',
@@ -101,5 +101,6 @@ export const toneColors = {
   fg: 'var(--text)',
   muted: 'var(--muted)',
   eyebrow: 'var(--eyebrow)',
+  accent: 'var(--accent-text)',
   status: 'var(--status)'
 }

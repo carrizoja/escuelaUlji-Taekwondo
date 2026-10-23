@@ -32,7 +32,7 @@ function contrast(a, b) {
 }
 
 const BACKGROUNDS = ['bg', 'surface', 'card']
-const TEXTS = ['text', 'muted', 'eyebrow', 'status']
+const TEXTS = ['text', 'muted', 'eyebrow', 'status', 'accent-text']
 const MODES = [
   ['.tone-dark', 'dark tone'],
   ['.tone-light', 'light tone, light mode'],
@@ -63,3 +63,25 @@ for (const [selector, label] of MODES.slice(1)) {
     }
   })
 }
+
+// Brand accent: white text on red backgrounds and red text on every tone.
+const rootTokens = readTokens(':root')
+
+test('brand red accent reaches 4.5:1 with white text (buttons, badges)', () => {
+  assert.match(rootTokens['color-red-primary'] ?? '', /^#[0-9a-fA-F]{6}$/)
+  const ratio = contrast('#FFFFFF', rootTokens['color-red-primary'])
+  assert.ok(ratio >= 4.5, `white on --color-red-primary is ${ratio.toFixed(2)}:1`)
+})
+
+test('tailwind brand.red and ulji-red-500 resolve to the CSS accent (single source)', async () => {
+  const { default: config } = await import('../tailwind.config.js')
+  const colors = config.theme.extend.colors
+  assert.equal(colors.brand.red.toLowerCase(), rootTokens['color-red-primary'].toLowerCase())
+  assert.equal(colors.primary[500].toLowerCase(), rootTokens['color-red-primary'].toLowerCase())
+})
+
+test('root --accent-text reaches 4.5:1 on white', () => {
+  assert.match(rootTokens['accent-text'] ?? '', /^#[0-9a-fA-F]{6}$/)
+  const ratio = contrast(rootTokens['accent-text'], '#FFFFFF')
+  assert.ok(ratio >= 4.5, `--accent-text on white is ${ratio.toFixed(2)}:1`)
+})
