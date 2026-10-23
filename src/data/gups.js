@@ -5,7 +5,7 @@ export const gups = [
     name: "Cinturón Blanco",
     color: "white",
     colorClass: "bg-white border-2 border-gray-300",
-    bgClass: "bg-gray-50 dark:bg-gray-800"
+    bgClass: "bg-bg"
   },
   {
     grade: "9° Gup", 
@@ -68,7 +68,7 @@ export const gups = [
     name: "Cinturón Negro punta Roja",
     color: "gradient",
     colorClass: "bg-gradient-to-r from-brand-red to-black",
-    bgClass: "bg-gray-50 dark:bg-gray-800"
+    bgClass: "bg-bg"
   }
 ];
 
@@ -78,35 +78,35 @@ export const dans = [
     name: "Ayudante de Instructor",
     color: "black",
     colorClass: "bg-black",
-    bgClass: "bg-gray-50 dark:bg-gray-800"
+    bgClass: "bg-bg"
   },
   {
     grade: "4° - 6° Dan", 
     name: "Instructor",
     color: "black",
     colorClass: "bg-black",
-    bgClass: "bg-gray-50 dark:bg-gray-800"
+    bgClass: "bg-bg"
   },
   {
     grade: "7° Dan",
     name: "Master",
     color: "black",
     colorClass: "bg-black",
-    bgClass: "bg-gray-50 dark:bg-gray-800"
+    bgClass: "bg-bg"
   },
     {
     grade: "8° Dan",
     name: "Senior Master", 
     color: "black",
     colorClass: "bg-black",
-    bgClass: "bg-gray-50 dark:bg-gray-800"
+    bgClass: "bg-bg"
   },
   {
     grade: "9° Dan",
     name: "Grand Maester",
         color: "black",
     colorClass: "bg-black",
-    bgClass: "bg-gray-50 dark:bg-gray-800"
+    bgClass: "bg-bg"
   }
 ];
 

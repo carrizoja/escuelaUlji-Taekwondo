@@ -7,29 +7,30 @@ interface Props {
 }
 
 const { id = "nosotros", class: className = "" } = Astro.props;
+import Section from "../Section.astro";
 ---
 
-<section id={id} class={`py-16 bg-white dark:bg-gray-900 ${className}`}>
+<Section tone="light" id={id} class={`py-16 ${className}`}>
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
     <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
       <div>
-        <h2 class="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-6">
+        <h2 class="heading text-3xl md:text-4xl mb-6">
           Sobre Nosotros
         </h2>
        <div class="w-36 h-1 bg-gradient-to-r from-brand-red to-red-700 mb-8"></div>
-        <p class="text-lg text-gray-600 dark:text-gray-400 mb-6 leading-relaxed">
+        <p class="text-lg text-muted mb-6 leading-relaxed">
           La Escuela Ul-ji (울지) de Taekwon-do nació en 2020, en plena época pandémica, buscando mejorar el bienestar integral de las niños, niñas, juveniles y adultos mediante la práctica del Taekwon-do ITF que el General Choi Hong Hi nos ha dejado como legado. A través de sus principios "Cortesía", "Integridad", "Autocontrol", "Perseverancia" y "Espíritu Indomable" imprime en cada practicante los valores fundamentales para la superación y evolución personal. 
         </p>
-        <p class="text-lg text-gray-600 dark:text-gray-400 mb-6 leading-relaxed">
+        <p class="text-lg text-muted mb-6 leading-relaxed">
           Es una escuela inclusiva en donde toda persona con voluntad y ganas de practicar este arte marcial será bien recibida.
         </p>
         
         <!-- Core Values Section -->
-        <div class="bg-ulji-red-50 dark:bg-ulji-red-900/20 p-6 rounded-xl">
-          <h3 class="text-xl font-bold text-brand-red dark:text-ulji-red-400 mb-3">
+        <div class="bg-surface border border-line p-6 rounded-xl">
+          <h3 class="text-xl font-bold text-eyebrow mb-3">
             Nuestros Valores Fundamentales
           </h3>
-          <ul class="space-y-2 text-gray-700 dark:text-gray-300">
+          <ul class="space-y-2 text-fg">
             <li class="flex items-center">
               <svg class="w-5 h-5 text-brand-red mr-3 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
                 <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
@@ -87,25 +88,25 @@ const { id = "nosotros", class: className = "" } = Astro.props;
     
     <!-- Statistics Section -->
     <div class="mt-16 grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
-      <div class="bg-gray-50 dark:bg-gray-800 p-6 rounded-xl">
-        <div class="text-3xl font-bold text-brand-red dark:text-ulji-red-400 mb-2">2020</div>
-        <div class="text-sm text-gray-600 dark:text-gray-400">Año de fundación</div>
+      <div class="stat-card bg-card border border-line p-6 rounded-xl">
+        <div class="text-3xl font-bold text-eyebrow mb-2">2020</div>
+        <div class="text-sm text-muted">Año de fundación</div>
       </div>
-      <div class="bg-gray-50 dark:bg-gray-800 p-6 rounded-xl">
-        <div class="text-3xl font-bold text-brand-red dark:text-ulji-red-400 mb-2">50+</div>
-        <div class="text-sm text-gray-600 dark:text-gray-400">Estudiantes</div>
+      <div class="stat-card bg-card border border-line p-6 rounded-xl">
+        <div class="text-3xl font-bold text-eyebrow mb-2">50+</div>
+        <div class="text-sm text-muted">Estudiantes</div>
       </div>
-      <div class="bg-gray-50 dark:bg-gray-800 p-6 rounded-xl">
-        <div class="text-3xl font-bold text-brand-red dark:text-ulji-red-400 mb-2">3+</div>
-        <div class="text-sm text-gray-600 dark:text-gray-400">Cinturones negro</div>
+      <div class="stat-card bg-card border border-line p-6 rounded-xl">
+        <div class="text-3xl font-bold text-eyebrow mb-2">3+</div>
+        <div class="text-sm text-muted">Cinturones negro</div>
       </div>
-      <div class="bg-gray-50 dark:bg-gray-800 p-6 rounded-xl">
-        <div class="text-3xl font-bold text-brand-red dark:text-ulji-red-400 mb-2">ITF</div>
-        <div class="text-sm text-gray-600 dark:text-gray-400">Federación oficial</div>
+      <div class="stat-card bg-card border border-line p-6 rounded-xl">
+        <div class="text-3xl font-bold text-eyebrow mb-2">ITF</div>
+        <div class="text-sm text-muted">Federación oficial</div>
       </div>
     </div>
   </div>
-</section>
+</Section>
 
 <style>
   /* Smooth animations for images */
@@ -114,8 +115,7 @@ const { id = "nosotros", class: className = "" } = Astro.props;
   }
   
   /* Hover effects for statistics cards */
-  .bg-gray-50:hover,
-  .dark .bg-gray-800:hover {
+  .stat-card:hover {
     transform: translateY(-2px);
     box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
     transition: all 0.3s ease;

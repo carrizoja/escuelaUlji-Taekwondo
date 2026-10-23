@@ -3,6 +3,7 @@
 // used by /eventos. The page fetches the data and passes the already
 // selected items (see utils/homePreview.js).
 import Section from '../Section.astro';
+import { WATERMARKS } from '../../utils/watermark.js';
 
 interface PreviewEvent {
   id: string;
@@ -24,7 +25,7 @@ const day = (d: Date) => d.getDate();
 const month = (d: Date) => d.toLocaleDateString('es-AR', { month: 'short' }).replace('.', '');
 ---
 
-<Section tone="dark" id="eventos">
+<Section tone="dark" id="eventos" watermark={WATERMARKS.events} watermarkPosition="top-left">
   <div class="mx-auto flex max-w-7xl flex-col gap-10 px-4 py-16 sm:px-6 md:py-24 lg:px-8">
     <div class="flex flex-wrap items-end justify-between gap-4">
       <div class="flex flex-col gap-3">

@@ -1,13 +1,14 @@
 ---
 // FAQs component - Frequently Asked Questions about Taekwondo
 import { taekwondoFaqs } from "../../data/faqs.js";
+import Section from "../Section.astro";
 ---
 
-<section id="faqs" class="py-16 bg-white dark:bg-gray-900">
+<Section tone="light" id="faqs" class="py-16 !bg-surface">
   <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
     <div class="text-center mb-12">
       <h2
-        class="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-6"
+        class="heading text-3xl md:text-4xl mb-6"
       >
         Preguntas Frecuentes
       </h2>
@@ -16,10 +17,10 @@ import { taekwondoFaqs } from "../../data/faqs.js";
 
     <div class="space-y-6">
       {taekwondoFaqs.map((faq) => (
-        <div class="bg-white dark:bg-gray-800 rounded-xl shadow-lg overflow-hidden">
+        <div class="bg-card border border-line rounded-xl shadow-lg overflow-hidden">
           <button class="w-full p-6 text-left focus:outline-none focus:ring-2 focus:ring-brand-red faq-button">
             <div class="flex items-center justify-between">
-              <h3 class="text-lg font-semibold text-gray-900 dark:text-white">
+              <h3 class="text-lg font-semibold text-fg">
                 {faq.question}
               </h3>
               <svg
@@ -37,7 +38,7 @@ import { taekwondoFaqs } from "../../data/faqs.js";
             </div>
           </button>
           <div class="faq-content hidden px-6 pb-6">
-            <p class="text-gray-600 dark:text-gray-400 mt-4">
+            <p class="text-muted mt-4">
               {faq.answer}
             </p>
           </div>
@@ -45,7 +46,7 @@ import { taekwondoFaqs } from "../../data/faqs.js";
       ))}
     </div>
   </div>
-</section>
+</Section>
 
 <script>
   // FAQ accordion functionality

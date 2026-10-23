@@ -21,12 +21,12 @@
 - [x] 3.3 "Por qué Ul-ji" light section: three cards and four credentials (card text from dojangs/QuickBenefits; no card photos to avoid mismatched images)
 - [x] 3.4 Horarios white section: table from existing data and WhatsApp CTA (rows from dojangs.js via buildScheduleRows; "Competidores" row omitted, no source)
 - [x] 3.5 Eventos dark section: cards with date badge, type and status (muted green for open) (next 3 events from fetchEventData; no event photos since the sheet has none; falls back to most recent when none upcoming)
-- [x] 3.6 Comunidad charcoal gallery preview (3 latest photos from getPhotos(); watermark omitted, Korean glyphs rendered as blocks)
+- [x] 3.6 Comunidad charcoal gallery preview (3 latest photos from getPhotos(); watermark added in slice 3 with a Noto Sans KR subset)
 - [x] 3.7 Contact CTA light section and section order check (old Carousel, StudentSpotlight and Contact removed from index.astro only; sedes list and anchors kept in contact CTA)
 
 ## 4. Other pages
 
-- [ ] 4.1 Apply light tone to taekwondo, institucional, schedule and contacto
+- [x] 4.1 Apply light tone to taekwondo, institucional, schedule and contacto (covers taekwondo + institucional only; empty schedule/contacto pages deleted by owner decision; their links now point to /#horarios and the footer contact block)
 - [ ] 4.2 Apply dark tone to eventos and gallery
 - [ ] 4.3 Remove obsolete `dark:` classes from dark-tone sections
 

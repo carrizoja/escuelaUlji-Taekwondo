@@ -5,6 +5,7 @@
 import Section from '../Section.astro';
 import PrimaryButton from '../ui/PrimaryButton.astro';
 import SecondaryButton from '../ui/SecondaryButton.astro';
+import { WATERMARKS } from '../../utils/watermark.js';
 import { getMainDojang, getWhatsAppLink } from '../../data/dojangs.js';
 
 // Same action photo as the "Competencias y Torneos" carousel slide.
@@ -15,7 +16,7 @@ const trialLink = getWhatsAppLink(
 );
 ---
 
-<Section tone="dark" id="inicio">
+<Section tone="dark" id="inicio" watermark={WATERMARKS.hero}>
   <img
     src={heroImage}
     alt=""

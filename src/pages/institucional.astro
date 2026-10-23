@@ -4,6 +4,8 @@ import Layout from '../layouts/Layout.astro';
 import Instructors from '../components/Instructors.astro';
 import About from '../components/blocks/About.astro';
 import GradientLine from '../components/ui/GradientLine.astro';
+import Section from '../components/Section.astro';
+import BeltStripe from '../components/BeltStripe.astro';
 import ThirdButton from '../components/ui/ThirdButton.astro';
 ---
 
@@ -12,50 +14,52 @@ import ThirdButton from '../components/ui/ThirdButton.astro';
 	description="Conoce la historia, misión y valores de la Escuela Ul-ji. Nuestros instructores, metodología de enseñanza y compromiso con la formación integral en Taekwondo."
 	keywords="escuela taekwondo Buenos Aires, instructores certificados, misión escuela Ul-ji, valores marciales, metodología enseñanza, formación integral, historia escuela"
 >
-  <main class="min-h-screen bg-white dark:bg-gray-900">
-    
-    <!-- Hero Section -->
-    <section class="bg-gradient-primary dark:bg-gradient-dark py-20">
-      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-        <h1 class="text-4xl md:text-6xl font-bold text-white mb-6">
+  <main class="min-h-screen">
+
+    <!-- Hero (dark tone) -->
+    <Section tone="dark" class="py-20">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <span aria-hidden="true" class="mb-4 block h-1 w-10 bg-brand-red"></span>
+        <h1 class="heading text-4xl md:text-6xl mb-6">
           Institucional
         </h1>
-        <p class="text-xl text-ulji-red-100 max-w-2xl mx-auto">
+        <p class="text-xl text-muted max-w-2xl">
           Conocé más sobre nuestra escuela, nuestra misión y nuestra visión
         </p>
       </div>
-    </section>
+    </Section>
+    <BeltStripe />
 
     <!-- Navigation Tabs -->
-    <section class="bg-white dark:bg-gray-800 shadow-lg sticky top-0 z-40">
+    <div class="tone-light sticky top-20 z-40 border-b border-line shadow-lg">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <nav class="flex space-x-8 overflow-x-auto py-4">
-          <a href="#nosotros" class="whitespace-nowrap text-brand-red dark:text-ulji-red-400 border-b-2 border-brand-red dark:border-ulji-red-400 px-4 py-2 font-semibold">
+          <a href="#nosotros" class="whitespace-nowrap text-eyebrow border-b-2 border-eyebrow px-4 py-2 font-semibold">
             Nosotros
           </a>
-          <a href="#instructores" class="whitespace-nowrap text-gray-600 dark:text-gray-400 hover:text-brand-red dark:hover:text-ulji-red-400 px-4 py-2 font-semibold transition-colors duration-300">
+          <a href="#instructores" class="whitespace-nowrap text-muted hover:text-eyebrow px-4 py-2 font-semibold transition-colors duration-300">
             Instructores
           </a>
-          <a href="#mision" class="whitespace-nowrap text-gray-600 dark:text-gray-400 hover:text-brand-red dark:hover:text-ulji-red-400 px-4 py-2 font-semibold transition-colors duration-300">
+          <a href="#mision" class="whitespace-nowrap text-muted hover:text-eyebrow px-4 py-2 font-semibold transition-colors duration-300">
             Misión
           </a>
-          <a href="#vision" class="whitespace-nowrap text-gray-600 dark:text-gray-400 hover:text-brand-red dark:hover:text-ulji-red-400 px-4 py-2 font-semibold transition-colors duration-300">
+          <a href="#vision" class="whitespace-nowrap text-muted hover:text-eyebrow px-4 py-2 font-semibold transition-colors duration-300">
             Visión
           </a>
         </nav>
       </div>
-    </section>
+    </div>
     <!-- About Section -->
     <About />
 
-    <!-- Instructores Component -->    <!-- Instructores Component -->
+    <!-- Instructores Component -->
     <Instructors />
 
     <!-- Misión Section -->
-    <section id="mision" class="py-4 bg-gray-50 dark:bg-gray-800">
+    <Section tone="light" id="mision" class="py-16 !bg-surface">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="text-center mb-12">
-          <h2 class="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-6">
+          <h2 class="heading text-3xl md:text-4xl mb-6">
             Nuestra Misión
           </h2>
           <GradientLine />
@@ -70,21 +74,21 @@ import ThirdButton from '../components/ui/ThirdButton.astro';
             />
           </div>
           <div class="order-1 lg:order-2">
-            <div class="bg-white dark:bg-gray-900 p-8 rounded-xl shadow-lg">
-              <h3 class="text-2xl font-bold text-brand-red dark:text-ulji-red-400 mb-6">
+            <div class="bg-card border border-line p-8 rounded-xl shadow-lg">
+              <h3 class="heading text-2xl text-eyebrow mb-6">
                 Formar personas con valores
               </h3>
-              <p class="text-lg text-gray-700 dark:text-gray-300 mb-6 leading-relaxed">
+              <p class="text-lg text-fg mb-6 leading-relaxed">
                 A través de la práctica del Taekwon-do, transmitiendo sus valores (cortesía, autocontrol, espíritu indomable, integridad y perseverancia).
               </p>
-               <p class="text-lg text-gray-700 dark:text-gray-300 mb-6 leading-relaxed">
+               <p class="text-lg text-fg mb-6 leading-relaxed">
                 Brindar un espacio inclusivo y seguro donde niños, niñas, jóvenes y adultos desarrollen sus habilidades físicas, mentales y emocionales, fortaleciendo el cuerpo y el carácter.
               </p>
-              <p class="text-lg text-gray-700 dark:text-gray-300 mb-6 leading-relaxed">
+              <p class="text-lg text-fg mb-6 leading-relaxed">
                 Creemos que el verdadero arte marcial trasciende las técnicas de combate y se convierte en una filosofía de vida que promueve la paz, el respeto y el crecimiento personal continuo.
               </p>
-              <div class="bg-ulji-red-50 dark:bg-ulji-red-900/20 p-4 rounded-lg border-l-4 border-brand-red">
-                <p class="text-gray-800 dark:text-gray-200 font-medium italic">
+              <div class="bg-surface border border-line p-4 rounded-lg border-l-4 !border-l-brand-red">
+                <p class="text-fg font-medium italic">
                   "No formamos solo luchadores, formamos personas íntegras que utilizan el Taekwondo como herramienta de transformación personal y social."
                 </p>
               </div>
@@ -92,13 +96,13 @@ import ThirdButton from '../components/ui/ThirdButton.astro';
           </div>
         </div>
       </div>
-    </section>
+    </Section>
 
     <!-- Visión Section -->
-    <section id="vision" class="py-16 bg-white dark:bg-gray-900">
+    <Section tone="light" id="vision" class="py-16">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="text-center mb-12">
-          <h2 class="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-6">
+          <h2 class="heading text-3xl md:text-4xl mb-6">
             Nuestra Visión
           </h2>
           <GradientLine />
@@ -106,25 +110,25 @@ import ThirdButton from '../components/ui/ThirdButton.astro';
         
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
           <div>
-            <div class="bg-gradient-to-br from-ulji-red-50 to-orange-50 dark:from-ulji-red-900/20 dark:to-orange-900/20 p-8 rounded-xl">
-              <h3 class="text-2xl font-bold text-brand-red dark:text-ulji-red-400 mb-6">
+            <div class="bg-surface border border-line p-8 rounded-xl">
+              <h3 class="heading text-2xl text-eyebrow mb-6">
                 Líderes en Excelencia Marcial
               </h3>
-              <p class="text-lg text-gray-700 dark:text-gray-300 mb-6 leading-relaxed">
+              <p class="text-lg text-fg mb-6 leading-relaxed">
                 Ser una escuela referente de Taekwondo en la comunidad argentina; sobre todo, en Buenos Aires, reconocida por su excelencia técnica, calidad humana, inclusión social y su compromiso con la educación en valores y su capacidad de inspirar a las personas a alcanzar sus sueños y máximo potencial dentro y fuera del dojang.
               </p>
-              <p class="text-lg text-gray-700 dark:text-gray-300 mb-6 leading-relaxed">
+              <p class="text-lg text-fg mb-6 leading-relaxed">
                 Visualizamos un futuro donde cada graduado de Ul-ji sea un embajador de los valores del Taekwondo, contribuyendo a crear una sociedad más disciplinada, respetuosa y pacífica.
               </p>
               
               <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-8">
-                <div class="text-center p-4 bg-white dark:bg-gray-800 rounded-lg shadow">
-                  <div class="text-3xl font-bold text-brand-red dark:text-ulji-red-400 mb-2">2030</div>
-                  <div class="text-sm text-gray-600 dark:text-gray-400">Meta: 500+ estudiantes formados</div>
+                <div class="text-center p-4 bg-card border border-line rounded-lg shadow">
+                  <div class="text-3xl font-bold text-eyebrow mb-2">2030</div>
+                  <div class="text-sm text-muted">Meta: 500+ estudiantes formados</div>
                 </div>
-                <div class="text-center p-4 bg-white dark:bg-gray-800 rounded-lg shadow">
-                  <div class="text-3xl font-bold text-brand-red dark:text-ulji-red-400 mb-2">5+</div>
-                  <div class="text-sm text-gray-600 dark:text-gray-400">Cinturones negro certificados</div>
+                <div class="text-center p-4 bg-card border border-line rounded-lg shadow">
+                  <div class="text-3xl font-bold text-eyebrow mb-2">5+</div>
+                  <div class="text-sm text-muted">Cinturones negro certificados</div>
                 </div>
               </div>
             </div>
@@ -143,30 +147,29 @@ import ThirdButton from '../components/ui/ThirdButton.astro';
           </div>
         </div>
       </div>
-    </section>
+    </Section>
 
-    <!-- Call to Action -->
-          <!-- Call to Action Section -->
-      <section class="mt-4 text-center">
-        <div class="bg-gradient-primary text-white py-16 px-8">
-          <h2 class="text-3xl font-bold mb-4">¿Listo para comenzar tu viaje en Taekwon-do?</h2>
-          <p class="text-lg mb-8">Unite a la familia Ul-Ji y descubrí todo tu potencial</p>
-          <div class="flex flex-col sm:flex-row gap-4 justify-center">
-            <ThirdButton 
-              href="/#sedes"
-              variant="primary"
-            >
-              Información de Clases
-            </ThirdButton>
-            <ThirdButton 
-              href="/gallery"
-              variant="outline"
-            >
-              Ver Galería
-            </ThirdButton>
-          </div>
+    <!-- Call to Action (dark tone) -->
+    <Section tone="dark" class="py-16">
+      <div class="max-w-4xl mx-auto text-center px-4 sm:px-6 lg:px-8">
+        <h2 class="heading text-3xl mb-4">¿Listo para comenzar tu viaje en Taekwon-do?</h2>
+        <p class="text-lg text-muted mb-8">Unite a la familia Ul-Ji y descubrí todo tu potencial</p>
+        <div class="flex flex-col sm:flex-row gap-4 justify-center">
+          <ThirdButton
+            href="/#sedes"
+            variant="primary"
+          >
+            Información de Clases
+          </ThirdButton>
+          <ThirdButton
+            href="/gallery"
+            variant="outline"
+          >
+            Ver Galería
+          </ThirdButton>
         </div>
-      </section>
+      </div>
+    </Section>
 
   </main>
 </Layout>
@@ -196,13 +199,13 @@ import ThirdButton from '../components/ui/ThirdButton.astro';
             // Update active nav item
             navLinks.forEach(navLink => {
               if (navLink instanceof HTMLElement) {
-                navLink.classList.remove('text-brand-red', 'dark:text-ulji-red-400', 'border-b-2', 'border-brand-red', 'dark:border-ulji-red-400');
-                navLink.classList.add('text-gray-600', 'dark:text-gray-400');
+                navLink.classList.remove('text-eyebrow', 'border-b-2', 'border-eyebrow');
+                navLink.classList.add('text-muted');
               }
             });
             
-            clickedLink.classList.add('text-brand-red', 'dark:text-ulji-red-400', 'border-b-2', 'border-brand-red', 'dark:border-ulji-red-400');
-            clickedLink.classList.remove('text-gray-600', 'dark:text-gray-400');
+            clickedLink.classList.add('text-eyebrow', 'border-b-2', 'border-eyebrow');
+            clickedLink.classList.remove('text-muted');
           }
         }
       });
@@ -223,12 +226,12 @@ import ThirdButton from '../components/ui/ThirdButton.astro';
           if (scrollY >= sectionTop && scrollY < sectionBottom && sectionId) {
             navLinks.forEach(navLink => {
               if (navLink instanceof HTMLElement) {
-                navLink.classList.remove('text-brand-red', 'dark:text-ulji-red-400', 'border-b-2', 'border-brand-red', 'dark:border-ulji-red-400');
-                navLink.classList.add('text-gray-600', 'dark:text-gray-400');
+                navLink.classList.remove('text-eyebrow', 'border-b-2', 'border-eyebrow');
+                navLink.classList.add('text-muted');
                 
                 if (navLink.getAttribute('href') === `#${sectionId}`) {
-                  navLink.classList.add('text-brand-red', 'dark:text-ulji-red-400', 'border-b-2', 'border-brand-red', 'dark:border-ulji-red-400');
-                  navLink.classList.remove('text-gray-600', 'dark:text-gray-400');
+                  navLink.classList.add('text-eyebrow', 'border-b-2', 'border-eyebrow');
+                  navLink.classList.remove('text-muted');
                 }
               }
             });
@@ -241,4 +244,3 @@ import ThirdButton from '../components/ui/ThirdButton.astro';
     updateActiveNav(); // Initial call
   });
 </script>
-</Layout>

@@ -4,6 +4,7 @@ import NavbarVue from '../components/NavbarVue.vue';
 import Footer from '../components/Footer.astro';
 import AiChatbot from '../components/AiChatbot.astro';
 import SEO from '../components/SEO.astro';
+import { koreanFontHref } from '../utils/watermark.js';
 
 export interface Props {
 	title?: string;
@@ -56,6 +57,8 @@ const { title, description, keywords } = Astro.props;
 		<link rel="preconnect" href="https://fonts.googleapis.com">
 		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 		<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&family=Barlow:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+		<!-- Noto Sans KR subset: only the decorative watermark glyphs (see utils/watermark.js) -->
+		<link href={koreanFontHref()} rel="stylesheet">
 		
 		<!-- Google Analytics (gtag.js) -->
 		<script async src="https://www.googletagmanager.com/gtag/js?id=G-SFRSR3MB1F"></script>

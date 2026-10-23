@@ -4,6 +4,8 @@ import Layout from "../layouts/Layout.astro";
 import History from "../components/blocks/History.astro";
 import Grades from "../components/blocks/Grades.astro";
 import Faqs from "../components/blocks/Faqs.astro";
+import Section from "../components/Section.astro";
+import BeltStripe from "../components/BeltStripe.astro";
 import ThirdButton from "../components/ui/ThirdButton.astro";
 import SchoolTime from "../components/blocks/SchoolTime.astro";
 ---
@@ -13,44 +15,46 @@ import SchoolTime from "../components/blocks/SchoolTime.astro";
 	description="Descubre la historia del Taekwondo, sistema de cinturones, graduaciones y la filosofía marcial. Información completa sobre este arte marcial coreano en la Escuela Ul-ji."
 	keywords="historia taekwondo, cinturones taekwondo, graduaciones, filosofía marcial, arte marcial coreano, sistema de grados, Escuela Ul-ji, Dan, Gup"
 >
-  <main class="min-h-screen bg-white dark:bg-gray-900">
-    <!-- Hero Section -->
-    <section class="bg-gradient-primary dark:bg-gradient-dark py-20">
-      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-        <h1 class="text-4xl md:text-6xl font-bold text-white mb-6">
+  <main class="min-h-screen">
+    <!-- Hero (dark tone) -->
+    <Section tone="dark" class="py-20">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <span aria-hidden="true" class="mb-4 block h-1 w-10 bg-brand-red"></span>
+        <h1 class="heading text-4xl md:text-6xl mb-6">
           Taekwon-do
         </h1>
-        <p class="text-xl text-ulji-red-100 max-w-2xl mx-auto">
+        <p class="text-xl text-muted max-w-2xl">
           Descubrí la historia, técnicas y filosofía del arte marcial surcoreano
         </p>
       </div>
-    </section>
+    </Section>
+    <BeltStripe />
 
     <!-- Navigation Tabs -->
-    <section class="bg-white dark:bg-gray-800 shadow-lg sticky top-0 z-40">
+    <div class="tone-light sticky top-20 z-40 border-b border-line shadow-lg">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <nav class="flex space-x-8 overflow-x-auto py-4">
           <a
             href="#historia"
-            class="whitespace-nowrap text-brand-red dark:text-ulji-red-400 border-b-2 border-brand-red dark:border-ulji-red-400 px-4 py-2 font-semibold"
+            class="whitespace-nowrap text-eyebrow border-b-2 border-eyebrow px-4 py-2 font-semibold"
           >
             Historia
           </a>
           <a
             href="#titulos"
-            class="whitespace-nowrap text-gray-600 dark:text-gray-400 hover:text-brand-red dark:hover:text-ulji-red-400 px-4 py-2 font-semibold transition-colors duration-300"
+            class="whitespace-nowrap text-muted hover:text-eyebrow px-4 py-2 font-semibold transition-colors duration-300"
           >
             Títulos
           </a>
           <a
             href="#faqs"
-            class="whitespace-nowrap text-gray-600 dark:text-gray-400 hover:text-brand-red dark:hover:text-ulji-red-400 px-4 py-2 font-semibold transition-colors duration-300"
+            class="whitespace-nowrap text-muted hover:text-eyebrow px-4 py-2 font-semibold transition-colors duration-300"
           >
             FAQs
           </a>
         </nav>
       </div>
-    </section>
+    </div>
 
     <!-- Historia Section -->
     <History />
@@ -58,38 +62,38 @@ import SchoolTime from "../components/blocks/SchoolTime.astro";
 
     <!-- Títulos Section -->
     <Grades />
-  </main>
 
-  <!-- FAQs Section -->
-  <Faqs />
+    <!-- FAQs Section -->
+    <Faqs />
 
-  <!-- Call to Action -->
-  <section class="py-16 bg-gradient-primary dark:bg-ulji-red-700">
-    <div class="max-w-4xl mx-auto text-center px-4 sm:px-6 lg:px-8">
-      <h3 class="text-3xl font-bold text-white mb-6">
-        Estudiá con nuestro material teórico
-      </h3>
-      <p class="text-xl text-white mb-8">
-        Descargá el manual con todo lo necesario para tu formación en Taekwon-do
-      </p>
-      <div class="flex flex-col sm:flex-row gap-4 justify-center">
-        <ThirdButton
-          href="/docs/teorico.pdf"
-          download="Manual_Taekwondo_Escuela_Ul-ji.pdf"
-          variant="primary"
-          icon={true}
-        >
-          Descargar PDF
-        </ThirdButton>
-        <ThirdButton
-          href="/eventos"
-          variant="outline"
-        >
-          Ver Próximos Eventos
-        </ThirdButton>
+    <!-- Call to Action (dark tone) -->
+    <Section tone="dark" class="py-16">
+      <div class="max-w-4xl mx-auto text-center px-4 sm:px-6 lg:px-8">
+        <h3 class="heading text-3xl mb-6">
+          Estudiá con nuestro material teórico
+        </h3>
+        <p class="text-xl text-muted mb-8">
+          Descargá el manual con todo lo necesario para tu formación en Taekwon-do
+        </p>
+        <div class="flex flex-col sm:flex-row gap-4 justify-center">
+          <ThirdButton
+            href="/docs/teorico.pdf"
+            download="Manual_Taekwondo_Escuela_Ul-ji.pdf"
+            variant="primary"
+            icon={true}
+          >
+            Descargar PDF
+          </ThirdButton>
+          <ThirdButton
+            href="/eventos"
+            variant="outline"
+          >
+            Ver Próximos Eventos
+          </ThirdButton>
+        </div>
       </div>
-    </div>
-  </section>
+    </Section>
+  </main>
 </Layout>
 
 <script>
@@ -120,24 +124,20 @@ import SchoolTime from "../components/blocks/SchoolTime.astro";
           navLinks.forEach((navLink) => {
             if (navLink instanceof HTMLElement) {
               navLink.classList.remove(
-                "text-brand-red",
-                "dark:text-ulji-red-400",
+                "text-eyebrow",
                 "border-b-2",
-                "border-brand-red",
-                "dark:border-ulji-red-400"
+                "border-eyebrow"
               );
-              navLink.classList.add("text-gray-600", "dark:text-gray-400");
+              navLink.classList.add("text-muted");
             }
           });
 
           currentLink.classList.add(
-            "text-brand-red",
-            "dark:text-ulji-red-400",
+            "text-eyebrow",
             "border-b-2",
-            "border-brand-red",
-            "dark:border-ulji-red-400"
+            "border-eyebrow"
           );
-          currentLink.classList.remove("text-gray-600", "dark:text-gray-400");
+          currentLink.classList.remove("text-muted");
         }
       });
     });
