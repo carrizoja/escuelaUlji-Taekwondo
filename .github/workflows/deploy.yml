@@ -66,6 +66,10 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
+      - name: Test
+        run: npm test
+
+      # Fails if an events sheet tab cannot be fetched or is missing a required header
       - name: Build
         run: npm run build
 

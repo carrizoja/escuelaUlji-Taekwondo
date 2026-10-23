@@ -4,19 +4,19 @@
 - [x] 1.2 Add concurrency group, `npm ci`, `npm run build` with sheet env vars from secrets
 - [x] 1.3 Add FTP deploy step with pinned SamKirkland/FTP-Deploy-Action using FTP secrets
 - [x] 1.4 Confirm failure notification behavior and document it
-- [ ] 1.5 Owner: create GitHub secrets FTP_SERVER, FTP_USERNAME, FTP_PASSWORD, FTP_SERVER_DIR, PUBLIC_GOOGLE_API_KEY, sheet ids
-- [ ] 1.6 Run the workflow manually and verify the live site updates
-- [ ] 1.7 Verify no credentials appear in the repo or logs
+- [x] 1.5 Owner: create GitHub secrets FTP_SERVER, FTP_USERNAME, FTP_PASSWORD, FTP_SERVER_DIR, PUBLIC_GOOGLE_API_KEY, sheet ids
+- [x] 1.6 Run the workflow manually and verify the live site updates
+- [x] 1.7 Verify no credentials appear in the repo or logs
 
 ## 2. Phase 2: Data hardening
 
-- [ ] 2.1 Back up the events spreadsheet
-- [ ] 2.2 Define the final header list per tab in `GOOGLE_SHEETS_SETUP.md` (single source of truth)
-- [ ] 2.3 Add `id` column to Examenes, Torneos, Seminarios and backfill UUIDs
-- [ ] 2.4 Refactor `src/utils/googleSheets.js` to read columns by header name with clear missing-header errors
-- [ ] 2.5 Use sheet `id` in `src/pages/eventos.astro` instead of the date
-- [ ] 2.6 Remove `src/utils/googleSheets.ts`
-- [ ] 2.7 Verify build output is unchanged and reordered columns still work
+- [x] 2.1 Back up the events spreadsheet
+- [x] 2.2 Define the final header list per tab in `GOOGLE_SHEETS_SETUP.md` (single source of truth)
+- [x] 2.3 Add `id` column to Examenes, Torneos, Seminarios and backfill UUIDs
+- [x] 2.4 Refactor `src/utils/googleSheets.js` to read columns by header name with clear missing-header errors (also fixes Torneos and Seminarios fields read from the wrong columns; build fails on fetch or header errors)
+- [x] 2.5 Use sheet `id` in `src/pages/eventos.astro` instead of the date
+- [x] 2.6 Remove `src/utils/googleSheets.ts`
+- [x] 2.7 Verify build output is unchanged and reordered columns still work (reordering covered by `npm test`; build verified against the real sheet: all rows have ids, fields render from the right columns)
 
 ## 3. Phase 3: Dashboard setup (owner)
 

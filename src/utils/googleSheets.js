@@ -9,6 +9,8 @@
  * Make sure to configure these in your .env file
  */
 
+import { EVENT_SCHEMAS, parseSheetRows } from './sheetRows.js';
+
 // Your Google Sheets configuration
 const SHEET_CONFIG = {
   // Using environment variables for sensitive data
@@ -126,110 +128,29 @@ export function validateSheetsConfig() {
 }
 
 /**
- * Fetches event data from Google Sheets (exams, tournaments, seminars)
+ * Fetches event data from Google Sheets (exams, tournaments, seminars).
+ * Columns are read by header name; see GOOGLE_SHEETS_SETUP.md for the schema.
  * @param {string} sheetId - Google Sheets ID for events
  * @param {string} apiKey - Google Sheets API key
  * @returns {Promise<Object>} Object containing arrays for examenes, torneos, and seminarios
+ * @throws {Error} When a tab cannot be fetched or its headers do not match the schema
  */
 export async function fetchEventData(sheetId, apiKey) {
-  try {
-    // Define the ranges for each type of event
-    const ranges = {
-      examenes: 'Examenes!A:J',
-      torneos: 'Torneos!A:L', 
-      seminarios: 'Seminarios!A:K'
-    };
+  const eventData = {};
 
-    const eventData = {
-      examenes: [],
-      torneos: [],
-      seminarios: []
-    };
+  for (const schema of Object.values(EVENT_SCHEMAS)) {
+    const url = `https://sheets.googleapis.com/v4/spreadsheets/${sheetId}/values/${encodeURIComponent(schema.tab)}?key=${apiKey}`;
+    const response = await fetch(url);
 
-    // Fetch data for each event type
-    for (const [eventType, range] of Object.entries(ranges)) {
-      try {
-        const url = `https://sheets.googleapis.com/v4/spreadsheets/${sheetId}/values/${range}?key=${apiKey}`;
-        const response = await fetch(url);
-        
-        if (!response.ok) {
-          console.warn(`Failed to fetch ${eventType}: ${response.status} - ${response.statusText}`);
-          continue;
-        }
-        
-        const data = await response.json();
-        const rows = data.values;
-        
-        if (!rows || rows.length === 0) {
-          console.warn(`No data found for ${eventType}`);
-          continue;
-        }
-        
-        // Skip header row and convert to event objects
-        const [headers, ...eventRows] = rows;
-        
-        eventData[eventType] = eventRows.map((row, index) => {
-          if (!row || row.length === 0) return null;
-          
-          // Parse based on event type
-          if (eventType === 'examenes') {
-            return {
-              id: row[0] || `exam-${index + 1}`,
-              fecha: row[0] || '', // Date is in column A
-              tipo: row[1] || '',  // Type is in column B
-              grado: row[2] || '', // Grade is in column C
-              lugar: row[3] || '', // Location is in column D
-              hora: row[4] || '',  // Time is in column E
-              requisitos: row[5] || '', // Requirements is in column F
-              estado: row[7] || 'Programado', // Status might be in column H
-              costo: row[8] || '',
-              observaciones: row[9] || ''
-            };
-          } else if (eventType === 'torneos') {
-            return {
-              id: row[0] || `torneo-${index + 1}`,
-              fecha: row[0] || '', // Date is in column A
-              nombre: row[1] || '', // Name is in column B
-              categoria: row[2] || '', // Category is in column C
-              lugar: row[3] || '', // Location is in column D
-              inscripcion: row[4] || '', // Registration is in column E
-              costo: row[5] || '', // Cost is in column F
-              nivel: row[6] || '', // Level is in column G
-              modalidad: row[7] || '', // Modality is in column H
-              estado: row[8] || 'Inscripciones Abiertas', // Status is in column I
-              premio: row[9] || '', // Prize is in column J
-              observaciones: row[10] || ''
-            };
-          } else if (eventType === 'seminarios') {
-            return {
-              id: row[0] || `seminario-${index + 1}`,
-              fecha: row[0] || '', // Date is in column A
-              titulo: row[1] || '', // Title is in column B
-              maestro: row[2] || '', // Master is in column C
-              tema: row[3] || '', // Theme is in column D
-              lugar: row[4] || '', // Location is in column E
-              duracion: row[5] || '', // Duration is in column F
-              costo: row[6] || '', // Cost is in column G
-              cupos: row[7] || '', // Slots is in column H
-              nivel: row[8] || '', // Level is in column I
-              descripcion: row[9] || '' // Description is in column J
-            };
-          }
-          
-          return null;
-        }).filter(event => event !== null && event.id);
-        
-      } catch (error) {
-        console.error(`Error fetching ${eventType}:`, error);
-      }
+    if (!response.ok) {
+      throw new Error(`Failed to fetch sheet tab "${schema.tab}": ${response.status} - ${response.statusText}`);
     }
-    
-    return eventData;
-    
-  } catch (error) {
-    console.error('Error fetching event data from Google Sheets:', error);
-    throw error;
+
+    const data = await response.json();
+    eventData[schema.key] = parseSheetRows(schema.tab, data.values, schema);
   }
+
+  return eventData;
 }
 
 /**
