@@ -43,7 +43,7 @@
 - [x] 5.1 Test CRUD for each event type and photos, including invalid input (live: seminar create/delete and photo upload/create/delete; exams and tournaments share the same code path; invalid input covered by unit tests)
 - [x] 5.2 Test concurrent saves and lock timeout message (unit tests with a stubbed LockService; not reproduced live)
 - [x] 5.3 Test a renamed header produces a clear error and no write (unit tests: missing header throws naming tab and header, nothing written)
-- [ ] 5.4 Test that another Google account is denied access
+- [x] 5.4 Test that another Google account is denied access (verified 2026-10-23: another account and an anonymous visitor are both refused)
 - [x] 5.5 Test end to end: save event, dispatch, deploy, site shows event (verified 2026-10-23: test seminar appeared on /eventos and home after the dispatched deploy, and disappeared after delete)
 - [x] 5.6 Confirm Cloudinary secret and token are absent from page source and repo (secret only used server-side for signing; browser receives api key + signature; repo holds property names only)
 - [x] 5.7 Write admin setup guide including secret rotation steps
