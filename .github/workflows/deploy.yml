@@ -1,0 +1,81 @@
+# Builds the static Astro site and deploys dist/ to Hostinger over FTP.
+#
+# Triggers:
+#   - push to main
+#   - repository_dispatch "content-updated" (sent by the admin dashboard after an events save)
+#   - manual run from the Actions tab
+#
+# Required repository secrets:
+#   FTP_SERVER, FTP_USERNAME, FTP_PASSWORD, FTP_SERVER_DIR (e.g. "public_html/", must end with "/")
+#   PUBLIC_GOOGLE_API_KEY
+# Optional repository secrets (the code has fallbacks):
+#   PUBLIC_GOOGLE_SHEETS_ID, PUBLIC_GOOGLE_SHEETS_ID_EVENTOS
+#
+# Failure notification: GitHub emails the account that triggered a failed run
+# (enabled by default under Settings > Notifications > Actions).
+
+name: Deploy to Hostinger
+
+on:
+  push:
+    branches: [main]
+  repository_dispatch:
+    types: [content-updated]
+  workflow_dispatch:
+
+concurrency:
+  group: deploy-production
+  cancel-in-progress: false
+
+permissions:
+  contents: read
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    env:
+      PUBLIC_GOOGLE_API_KEY: ${{ secrets.PUBLIC_GOOGLE_API_KEY }}
+      PUBLIC_GOOGLE_SHEETS_ID: ${{ secrets.PUBLIC_GOOGLE_SHEETS_ID }}
+      PUBLIC_GOOGLE_SHEETS_ID_EVENTOS: ${{ secrets.PUBLIC_GOOGLE_SHEETS_ID_EVENTOS }}
+    steps:
+      # Fail fast instead of deploying a site built without data (e.g. empty events page)
+      - name: Check required secrets
+        env:
+          FTP_SERVER: ${{ secrets.FTP_SERVER }}
+          FTP_USERNAME: ${{ secrets.FTP_USERNAME }}
+          FTP_PASSWORD: ${{ secrets.FTP_PASSWORD }}
+          FTP_SERVER_DIR: ${{ secrets.FTP_SERVER_DIR }}
+        run: |
+          missing=0
+          for name in FTP_SERVER FTP_USERNAME FTP_PASSWORD FTP_SERVER_DIR PUBLIC_GOOGLE_API_KEY; do
+            if [ -z "${!name}" ]; then
+              echo "::error::Missing required secret: $name"
+              missing=1
+            fi
+          done
+          exit $missing
+
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build
+        run: npm run build
+
+      # Incremental sync: only changed files are uploaded. If a run fails midway,
+      # re-running the workflow completes the deploy.
+      - name: Deploy via FTP
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.6
+        with:
+          server: ${{ secrets.FTP_SERVER }}
+          username: ${{ secrets.FTP_USERNAME }}
+          password: ${{ secrets.FTP_PASSWORD }}
+          server-dir: ${{ secrets.FTP_SERVER_DIR }}
+          local-dir: ./dist/
