@@ -3,6 +3,7 @@
 // photo data path as /gallery (data/photos.js: Google Sheets with static fallback).
 import Section from '../Section.astro';
 import PrimaryButton from '../ui/PrimaryButton.astro';
+import { cloudinaryResize } from '../../utils/cloudinary.js';
 
 interface Photo {
   id: string;
@@ -31,7 +32,7 @@ const { photos } = Astro.props;
           <li>
             <a href="/gallery" class="group block aspect-[4/3] overflow-hidden rounded-xl" aria-label={photo.title}>
               <img
-                src={photo.thumbnail}
+                src={cloudinaryResize(photo.thumbnail, { width: 800, height: 600 })}
                 alt={photo.alt || photo.title}
                 loading="lazy"
                 class="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
