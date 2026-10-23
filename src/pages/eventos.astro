@@ -2,7 +2,7 @@
 // Eventos page - Exams, Tournaments, and Meetings
 import Layout from '../layouts/Layout.astro';
 import GradientLine from '../components/ui/GradientLine.astro';
-import { fetchEventData, formatDate, isUpcoming, isPastDate } from '../utils/googleSheets';
+import { fetchEventData, formatDate, isUpcoming, isPastDate } from '../utils/googleSheets.js';
 
 // Get configuration from environment variables
 const SHEET_ID = import.meta.env.PUBLIC_GOOGLE_SHEETS_ID_EVENTOS || import.meta.env.GOOGLE_SHEETS_ID_EVENTOS || '1koYz8Tvd6oEMFB8nBsVQIpNeIYS1dBmrL8jRdSrI_kg';
@@ -31,6 +31,8 @@ try {
     console.log('First seminario:', eventData.seminarios[0]);
   }
 } catch (error) {
+  // Fail the production build rather than deploy an empty events page
+  if (import.meta.env.PROD) throw error;
   console.error('Failed to fetch event data:', error);
   eventData = { examenes: [], torneos: [], seminarios: [] };
 }
