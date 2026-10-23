@@ -2,13 +2,12 @@
  * Sheet access layer. Columns are found by header name (case and surrounding
  * spaces ignored), never by position, so reordering columns is safe.
  *
- * Writes only touch known columns (unknown columns are preserved). Values are
- * written as text so the spreadsheet locale cannot reinterpret them, except
- * event dates: those cells are real dates (shown as M/D/YYYY) like the
- * existing rows. Photo dates are ISO text (the gallery parses them).
+ * Writes only touch known columns (unknown columns are preserved). Event dates
+ * are written as real dates; everything else as strings. Cell formats are
+ * never changed: every tab is a Sheets Table whose typed columns (Date / Text)
+ * already keep values correct, and typed columns reject format changes.
+ * Photo dates are ISO strings in a Text column (the gallery parses them).
  */
-
-const EVENT_DATE_FORMAT = 'M/d/yyyy';
 
 function normalizeHeader(value) {
   return String(value === null || value === undefined ? '' : value).trim().toLowerCase();
@@ -78,19 +77,6 @@ function sheetDateToDate(text) {
   return new Date(+p[2], +p[0] - 1, +p[1]);
 }
 
-/**
- * Applies a number format, skipping cells in typed columns of a Sheets Table:
- * those reject format changes and already enforce their own type.
- */
-function trySetNumberFormat(cell, format) {
-  try {
-    cell.setNumberFormat(format);
-  } catch (err) {
-    if (!/typed column/i.test(String(err && err.message))) throw err;
-  }
-  return cell;
-}
-
 /** Writes values into the known columns of a row. */
 function writeCells(sheet, schema, rowNumber, columns, values) {
   Object.keys(values).forEach(function (field) {
@@ -98,9 +84,9 @@ function writeCells(sheet, schema, rowNumber, columns, values) {
     if (index === undefined || index === -1) return;
     const cell = sheet.getRange(rowNumber, index + 1);
     if (schema !== PHOTO_SCHEMA && field === 'fecha' && toSheetDate(values[field])) {
-      trySetNumberFormat(cell, EVENT_DATE_FORMAT).setValue(sheetDateToDate(toSheetDate(values[field])));
+      cell.setValue(sheetDateToDate(toSheetDate(values[field])));
     } else {
-      trySetNumberFormat(cell, '@').setValue(values[field]);
+      cell.setValue(values[field]);
     }
   });
 }

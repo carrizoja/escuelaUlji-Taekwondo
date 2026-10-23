@@ -21,12 +21,9 @@ function fakeSheet(values, typedColumns = []) {
     getLastRow: () => values.length,
     getRange(row, col) {
       return {
-        setNumberFormat(f) {
-          // Google Sheets Tables reject format changes on typed columns
-          if (typedColumns.includes(col)) throw new Error("You can't set the number format of cells in a typed column.");
-          formats.push({ row, col, f });
-          return this;
-        },
+        // Sheets Tables reject format changes on typed columns, and the error can
+        // surface after the call, so the store must never change formats.
+        setNumberFormat(f) { formats.push({ row, col, f, typed: typedColumns.includes(col) }); return this; },
         setValue(v) {
           writes.push({ row, col, v });
           while (values.length < row) values.push([]);
@@ -70,14 +67,13 @@ test('readRecords maps rows by header and skips blank rows', () => {
   assert.equal(records[0].rowNumber, 2);
 });
 
-test('appendRecord writes a new uuid, text-formatted cells, and only known columns', () => {
+test('appendRecord writes a new uuid and only known columns, without changing formats', () => {
   const { get, schemas } = setup();
   const sheet = fakeSheet([[...torneoHeaders, 'notas'], torneoRow]);
   const rec = plain(get('appendRecord')(sheet, schemas.torneos, { fecha: '1/2/2026', nombre: 'Nuevo' }));
   assert.equal(rec.id, 'new-uuid');
   assert.ok(sheet.writes.every(w => w.row === 3 && w.col <= torneoHeaders.length));
-  const fechaCol = torneoHeaders.indexOf('fecha') + 1;
-  assert.ok(sheet.formats.filter(f => f.col !== fechaCol).every(f => f.f === '@'));
+  assert.equal(sheet.formats.length, 0);
   assert.equal(sheet.values[2][torneoHeaders.indexOf('id')], 'new-uuid');
 });
 
@@ -114,7 +110,7 @@ test('a broken header writes nothing', () => {
   assert.equal(sheet.writes.length, 0);
 });
 
-test('event dates are written as real date cells with the M/d/yyyy format', () => {
+test('event dates are written as real date cells', () => {
   const { get, schemas } = setup();
   const sheet = fakeSheet([torneoHeaders, torneoRow]);
   get('appendRecord')(sheet, schemas.torneos, { fecha: '3/7/2026', nombre: 'Nuevo' });
@@ -122,7 +118,7 @@ test('event dates are written as real date cells with the M/d/yyyy format', () =
   const value = sheet.values[2][col - 1];
   assert.equal(Object.prototype.toString.call(value), '[object Date]');
   assert.deepEqual([value.getFullYear(), value.getMonth(), value.getDate()], [2026, 2, 7]);
-  assert.equal(sheet.formats.find(f => f.col === col).f, 'M/d/yyyy');
+  assert.equal(sheet.formats.length, 0);
 });
 
 test('photo dates stay text', () => {
@@ -130,7 +126,7 @@ test('photo dates stay text', () => {
   const sheet = fakeSheet([['id', 'title', 'thumbnail', 'alt', 'category', 'date', 'description', 'fullSize', 'nivel', 'tags'], []]);
   get('appendRecord')(sheet, get('PHOTO_SCHEMA'), { title: 't', date: '2025-05-01T12:00:00Z' });
   assert.equal(sheet.values[2][5], '2025-05-01T12:00:00Z');
-  assert.equal(sheet.formats.find(f => f.col === 6).f, '@');
+  assert.equal(sheet.formats.length, 0);
 });
 
 test('appendRecord still writes every value when columns are typed (Sheets Tables)', () => {
@@ -147,4 +143,5 @@ test('appendRecord still writes every value when columns are typed (Sheets Table
   assert.equal(Object.prototype.toString.call(row3.find(w => w.col === 1).v), '[object Date]');
   assert.equal(row3.find(w => w.col === 2).v, 'Copa');
   assert.equal(row3.find(w => w.col === 11).v, 'new-uuid');
+  assert.equal(sheet.formats.length, 0);
 });
