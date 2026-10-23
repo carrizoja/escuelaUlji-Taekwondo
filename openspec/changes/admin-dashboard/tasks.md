@@ -10,13 +10,13 @@
 
 ## 2. Phase 2: Data hardening
 
-- [ ] 2.1 Back up the events spreadsheet
+- [x] 2.1 Back up the events spreadsheet
 - [x] 2.2 Define the final header list per tab in `GOOGLE_SHEETS_SETUP.md` (single source of truth)
-- [ ] 2.3 Add `id` column to Examenes, Torneos, Seminarios and backfill UUIDs
+- [x] 2.3 Add `id` column to Examenes, Torneos, Seminarios and backfill UUIDs
 - [x] 2.4 Refactor `src/utils/googleSheets.js` to read columns by header name with clear missing-header errors (also fixes Torneos and Seminarios fields read from the wrong columns; build fails on fetch or header errors)
 - [x] 2.5 Use sheet `id` in `src/pages/eventos.astro` instead of the date
 - [x] 2.6 Remove `src/utils/googleSheets.ts`
-- [ ] 2.7 Verify build output is unchanged and reordered columns still work (reordering covered by `npm test`; build to verify after ids are added)
+- [x] 2.7 Verify build output is unchanged and reordered columns still work (reordering covered by `npm test`; build verified against the real sheet: all rows have ids, fields render from the right columns)
 
 ## 3. Phase 3: Dashboard setup (owner)
 
