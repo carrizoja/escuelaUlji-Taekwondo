@@ -4,39 +4,45 @@
 interface Props {
   tone?: 'dark' | 'light';
   watermark?: string;
+  watermarkPosition?: 'bottom-right' | 'top-left';
   id?: string;
   class?: string;
 }
 
-const { tone = 'light', watermark, id, class: className = '' } = Astro.props;
+const { tone = 'light', watermark, watermarkPosition = 'bottom-right', id, class: className = '' } = Astro.props;
 ---
 
 <section id={id} class:list={[`tone-${tone}`, 'relative overflow-hidden', className]}>
+  <div class="relative">
+    <slot />
+  </div>
   {watermark && (
     <span
       aria-hidden="true"
-      class="section-watermark pointer-events-none select-none absolute -right-2 -bottom-6 font-heading font-extrabold leading-none"
+      class:list={[
+        'section-watermark pointer-events-none select-none absolute leading-none',
+        watermarkPosition === 'top-left' ? '-left-4 -top-4' : '-right-2 -bottom-6',
+      ]}
     >
       {watermark}
     </span>
   )}
-  <div class="relative">
-    <slot />
-  </div>
 </section>
 
 <style>
   .section-watermark {
+    /* Noto Sans KR subset is loaded in Layout.astro (glyphs from utils/watermark.js) */
+    font-family: 'Noto Sans KR', 'Poppins', sans-serif;
+    font-weight: 800;
     font-size: 340px;
     opacity: 0.05;
     color: var(--text);
   }
 
-  /* Smaller and fainter on phones so it never competes with the text */
+  /* Hidden on phones so it never competes with the text */
   @media (max-width: 639px) {
     .section-watermark {
-      font-size: 160px;
-      opacity: 0.035;
+      display: none;
     }
   }
 </style>
