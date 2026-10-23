@@ -45,3 +45,24 @@ All commands are run from the root of the project, from a terminal:
 
 Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
 # escuelaUlji-Taekwondo
+
+## Deployment
+
+Pushing to `main` builds the site and deploys `dist/` to Hostinger over FTP via
+`.github/workflows/deploy.yml`. It can also be run manually from the Actions tab,
+and the admin dashboard triggers it after content updates (`repository_dispatch: content-updated`).
+
+Required repository secrets (Settings › Secrets and variables › Actions):
+
+| Secret | Example |
+|---|---|
+| `FTP_SERVER` | `ftp.yourdomain.com` |
+| `FTP_USERNAME` | Hostinger FTP user |
+| `FTP_PASSWORD` | Hostinger FTP password |
+| `FTP_SERVER_DIR` | `public_html/` (must end with `/`) |
+| `PUBLIC_GOOGLE_API_KEY` | Google Sheets API key |
+
+Optional: `PUBLIC_GOOGLE_SHEETS_ID`, `PUBLIC_GOOGLE_SHEETS_ID_EVENTOS` (the code has defaults).
+
+The workflow stops before building if a required secret is missing. GitHub emails you when a run fails.
+If a deploy fails midway, re-run the workflow to complete it.
