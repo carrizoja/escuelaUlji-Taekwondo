@@ -1,0 +1,68 @@
+---
+// "Por qué Ul-ji" (light tone): three audience cards and four credentials.
+// Copy is taken from existing content: blocks/QuickBenefits.astro,
+// data/dojangs.js (age ranges, services) and Instructors.astro (credentials).
+import Section from '../Section.astro';
+import { getMainDojang } from '../../data/dojangs.js';
+
+const main = getMainDojang();
+const [kids, adults] = main.schedules.classes;
+
+const cards = [
+  {
+    title: 'Niños',
+    badge: kids.ageRange,
+    text: 'Clases a partir de los 6 años en un ambiente familiar y con instructores certificados.',
+  },
+  {
+    title: 'Adolescentes y adultos',
+    badge: adults.ageRange,
+    text: 'Taekwon-do ITF para juveniles y adultos: técnica, defensa personal y formación del carácter.',
+  },
+  {
+    title: 'Competencia',
+    badge: 'Torneos y exámenes',
+    text: 'Preparación para competencias, exámenes de graduación y seminarios especiales.',
+  },
+];
+
+const credentials = [
+  { title: 'ITF Certificado', text: 'International Taekwondo Federation' },
+  { title: 'ACIT Afiliado', text: 'Asociación Centro Internacional de Taekwondo' },
+  { title: 'Primeros Auxilios', text: 'Certificación de Seguridad' },
+  { title: 'Didáctica Inclusiva', text: 'Actualización Permanente' },
+];
+---
+
+<Section tone="light" id="taekwondo">
+  <div class="mx-auto flex max-w-7xl flex-col gap-12 px-4 py-16 sm:px-6 md:py-24 lg:px-8">
+    <div class="max-w-3xl">
+      <p class="eyebrow mb-3 text-xs sm:text-sm">Por qué Ul-ji</p>
+      <h2 class="heading text-3xl leading-tight md:text-5xl">¿Por qué elegir Escuela Ul-ji?</h2>
+      <p class="mt-4 text-lg text-muted md:text-xl">
+        Taekwon-do ITF para niños, niñas, juveniles y adultos, con foco en el carácter, la confianza y la resiliencia.
+      </p>
+    </div>
+
+    <div class="grid grid-cols-1 gap-6 md:grid-cols-3">
+      {cards.map((card) => (
+        <article class="group flex flex-col gap-3 rounded-xl border border-line bg-card p-6 shadow-lg transition-all duration-300 hover:-translate-y-1 hover:shadow-xl">
+          <span class="self-start rounded-full border border-line px-3 py-1 text-sm font-semibold text-eyebrow">
+            {card.badge}
+          </span>
+          <h3 class="heading text-xl transition-colors duration-300 group-hover:text-red-500 md:text-2xl">{card.title}</h3>
+          <p class="text-base leading-relaxed text-muted">{card.text}</p>
+        </article>
+      ))}
+    </div>
+
+    <ul class="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
+      {credentials.map((c) => (
+        <li class="flex flex-col gap-1 border-t-[3px] border-fg p-5">
+          <strong class="font-heading text-base font-semibold">{c.title}</strong>
+          <span class="text-sm text-muted">{c.text}</span>
+        </li>
+      ))}
+    </ul>
+  </div>
+</Section>

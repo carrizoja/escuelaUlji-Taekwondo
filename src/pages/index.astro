@@ -1,9 +1,36 @@
 ---
-import Hero from '../components/blocks/Hero.astro';
 import Layout from '../layouts/Layout.astro';
-import Contact from '../components/Contact.astro';
-import Carousel from '../components/ui/Carousel.astro';
-import StudentSpotlight from '../components/blocks/StudentSpotlight.astro';
+import BeltStripe from '../components/BeltStripe.astro';
+import HomeHero from '../components/home/HomeHero.astro';
+import WhyUlji from '../components/home/WhyUlji.astro';
+import HomeSchedule from '../components/home/HomeSchedule.astro';
+import HomeEvents from '../components/home/HomeEvents.astro';
+import HomeCommunity from '../components/home/HomeCommunity.astro';
+import HomeContactCta from '../components/home/HomeContactCta.astro';
+import { fetchEventData } from '../utils/googleSheets.js';
+import { selectPreviewEvents } from '../utils/homePreview.js';
+import { getPhotos } from '../data/photos.js';
+
+// Events: same sheet, env vars and failure policy as src/pages/eventos.astro.
+const SHEET_ID = import.meta.env.PUBLIC_GOOGLE_SHEETS_ID_EVENTOS || import.meta.env.GOOGLE_SHEETS_ID_EVENTOS || '1koYz8Tvd6oEMFB8nBsVQIpNeIYS1dBmrL8jRdSrI_kg';
+const API_KEY = import.meta.env.PUBLIC_GOOGLE_API_KEY || import.meta.env.GOOGLE_API_KEY;
+
+let eventData;
+try {
+	eventData = await fetchEventData(SHEET_ID, API_KEY);
+} catch (error) {
+	// Fail the production build rather than deploy a home without events
+	if (import.meta.env.PROD) throw error;
+	console.error('Failed to fetch event data:', error);
+	eventData = { examenes: [], torneos: [], seminarios: [] };
+}
+const previewEvents = selectPreviewEvents(eventData, { limit: 3 });
+
+// Gallery preview: same photo source as /gallery (Sheets, static fallback). Most recent first.
+const allPhotos = await getPhotos();
+const previewPhotos = [...allPhotos]
+	.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
+	.slice(0, 3);
 ---
 
 <Layout 
@@ -11,8 +38,11 @@ import StudentSpotlight from '../components/blocks/StudentSpotlight.astro';
 	description="Aprende Taekwondo en la Escuela Ul-ji con instructores certificados. Clases para todas las edades en Buenos Aires. Filosofía, disciplina y técnica en un ambiente familiar."
 	keywords="taekwondo, artes marciales, Buenos Aires, escuela Ul-ji, clases taekwondo, autodefensa, disciplina, filosofía marcial, instructores certificados, cinturones"
 >
-	<Hero />
-	<Carousel />
-	<StudentSpotlight />
-	<Contact />
+	<HomeHero />
+	<BeltStripe />
+	<WhyUlji />
+	<HomeSchedule />
+	<HomeEvents events={previewEvents} />
+	<HomeCommunity photos={previewPhotos} />
+	<HomeContactCta />
 </Layout>

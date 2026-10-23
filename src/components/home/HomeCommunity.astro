@@ -1,0 +1,45 @@
+---
+// "Comunidad" (dark tone, charcoal surface): gallery preview using the same
+// photo data path as /gallery (data/photos.js: Google Sheets with static fallback).
+import Section from '../Section.astro';
+import PrimaryButton from '../ui/PrimaryButton.astro';
+
+interface Photo {
+  id: string;
+  title: string;
+  alt: string;
+  thumbnail: string;
+}
+
+interface Props {
+  photos: Photo[];
+}
+
+const { photos } = Astro.props;
+---
+
+<Section tone="dark" id="galeria" class="!bg-surface border-t border-line">
+  <div class="mx-auto flex max-w-7xl flex-col gap-10 px-4 py-16 sm:px-6 md:py-24 lg:px-8">
+    <div class="flex flex-wrap items-end justify-between gap-4">
+      <h2 class="heading text-3xl leading-tight md:text-5xl">Nuestra comunidad</h2>
+      <PrimaryButton href="/gallery" text="Ver galería completa" icon="gallery" size="md" variant="primary" class="min-h-[48px]" />
+    </div>
+
+    {photos.length > 0 && (
+      <ul class="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
+        {photos.map((photo) => (
+          <li>
+            <a href="/gallery" class="group block aspect-[4/3] overflow-hidden rounded-xl" aria-label={photo.title}>
+              <img
+                src={photo.thumbnail}
+                alt={photo.alt || photo.title}
+                loading="lazy"
+                class="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
+              />
+            </a>
+          </li>
+        ))}
+      </ul>
+    )}
+  </div>
+</Section>
