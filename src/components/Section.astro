@@ -1,0 +1,42 @@
+---
+// Section wrapper that applies a tone (dark or light) and an optional
+// decorative watermark. Tone tokens live in src/styles/global.css.
+interface Props {
+  tone?: 'dark' | 'light';
+  watermark?: string;
+  id?: string;
+  class?: string;
+}
+
+const { tone = 'light', watermark, id, class: className = '' } = Astro.props;
+---
+
+<section id={id} class:list={[`tone-${tone}`, 'relative overflow-hidden', className]}>
+  {watermark && (
+    <span
+      aria-hidden="true"
+      class="section-watermark pointer-events-none select-none absolute -right-2 -bottom-6 font-heading font-extrabold leading-none"
+    >
+      {watermark}
+    </span>
+  )}
+  <div class="relative">
+    <slot />
+  </div>
+</section>
+
+<style>
+  .section-watermark {
+    font-size: 340px;
+    opacity: 0.05;
+    color: var(--text);
+  }
+
+  /* Smaller and fainter on phones so it never competes with the text */
+  @media (max-width: 639px) {
+    .section-watermark {
+      font-size: 160px;
+      opacity: 0.035;
+    }
+  }
+</style>
