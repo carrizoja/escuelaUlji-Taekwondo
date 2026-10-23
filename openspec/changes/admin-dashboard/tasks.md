@@ -20,10 +20,10 @@
 
 ## 3. Phase 3: Dashboard setup (owner)
 
-- [ ] 3.1 Create a fine-grained GitHub token for the repo (actions and contents only)
-- [ ] 3.2 Create the Apps Script project and set Script Properties (Cloudinary key/secret/cloud name, GitHub token, sheet ids)
+- [x] 3.1 Create a fine-grained GitHub token for the repo (actions and contents only)
+- [x] 3.2 Create the Apps Script project and set Script Properties (Cloudinary key/secret/cloud name, GitHub token, sheet ids)
 - [x] 3.3 Share both spreadsheets with the owner account used by the script
-- [ ] 3.4 Deploy as web app: Execute as me, access only myself
+- [x] 3.4 Deploy as web app: Execute as me, access only myself
 
 ## 4. Phase 3: Dashboard implementation
 

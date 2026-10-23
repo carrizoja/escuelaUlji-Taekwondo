@@ -123,7 +123,7 @@
         const d = this.deploy;
         if (!d) return this.deployLoading ? 'Consultando publicación…' : 'Publicación: sin datos';
         if (d.status === 'none') return 'Todavía no hubo publicaciones';
-        const when = d.createdAt ? new Date(d.createdAt).toLocaleString('es-AR') : '';
+        const when = d.createdAt ? new Date(d.createdAt).toLocaleString('es-AR', { timeZone: 'America/Argentina/Buenos_Aires', hourCycle: 'h23', dateStyle: 'short', timeStyle: 'short' }) : '';
         if (d.status !== 'completed') return 'Publicando… (' + when + ')';
         return (d.conclusion === 'success' ? 'Última publicación correcta' : 'La última publicación falló') + ' · ' + when;
       }
