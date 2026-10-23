@@ -1,0 +1,13 @@
+---
+// Thin red "belt stripe" divider with a dark tip. Decorative only.
+interface Props {
+  class?: string;
+}
+
+const { class: className = '' } = Astro.props;
+---
+
+<div aria-hidden="true" class:list={['flex h-2', className]}>
+  <div class="flex-1 bg-brand-red"></div>
+  <div class="w-[18%] tone-dark"></div>
+</div>

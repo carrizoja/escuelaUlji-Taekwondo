@@ -86,3 +86,14 @@ All text SHALL meet WCAG AA contrast of at least 4.5:1 against its background in
 #### Scenario: Eyebrow in dark mode
 - **WHEN** an eyebrow label is shown in dark mode on a flipped light section
 - **THEN** its color `#F87171` has at least 4.5:1 contrast with the section background
+
+### Requirement: Mobile layout
+Every redesigned page SHALL be usable from 360px wide upward without horizontal scrolling, with tap targets of at least 44px and readable body text.
+
+#### Scenario: Phone width
+- **WHEN** any page is viewed at 360px wide in either mode
+- **THEN** no content overflows horizontally and navigation, CTAs and the theme toggle remain reachable
+
+#### Scenario: Watermark on small screens
+- **WHEN** a dark section with a watermark is viewed below 640px wide
+- **THEN** the watermark does not overlap or reduce the legibility of text

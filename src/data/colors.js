@@ -123,3 +123,17 @@ export const tailwindColors = {
     950: '#052E16'
   }
 }
+
+// Semantic tone colors. They resolve to the CSS variables defined per tone
+// (.tone-dark, .tone-light, .dark .tone-light) in src/styles/global.css,
+// which is the single source of the hex values.
+export const toneColors = {
+  bg: 'var(--bg)',
+  surface: 'var(--surface)',
+  card: 'var(--card)',
+  line: 'var(--border)',
+  fg: 'var(--text)',
+  muted: 'var(--muted)',
+  eyebrow: 'var(--eyebrow)',
+  status: 'var(--status)'
+}

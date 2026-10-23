@@ -1,5 +1,5 @@
 /** @type {import('tailwindcss').Config} */
-import { tailwindColors } from './src/data/colors.js'
+import { tailwindColors, toneColors } from './src/data/colors.js'
 
 export default {
   content: ['./src/**/*.{astro,html,js,jsx,md,mdx,svelte,ts,tsx,vue}'],
@@ -13,6 +13,7 @@ export default {
       },
       colors: {
         ...tailwindColors,
+        ...toneColors,
         // Alias for easier usage
         primary: tailwindColors['ulji-red'],
         secondary: tailwindColors['ulji-green'],

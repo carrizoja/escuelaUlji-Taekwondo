@@ -31,6 +31,55 @@
   --gradient-hero: linear-gradient(135deg, #000000 0%, #810000 25%, #A00000 50%, #111827 100%);
 }
 
+/*
+ * Tone tokens. A section picks one tone (.tone-dark or .tone-light).
+ * Only light-tone sections flip when the `dark` class is on <html>.
+ * This file is the single source of truth for these values; the contrast
+ * test (tests/themeContrast.test.js) reads them from here.
+ */
+.tone-dark {
+  --bg: #0B0B0C;
+  --surface: #141416;
+  --card: #17171A;
+  --border: #222226;
+  --text: #FFFFFF;
+  --muted: #A8A8AD;
+  --eyebrow: #F87171;
+  --status: #5FB77E;
+  background-color: var(--bg);
+  color: var(--text);
+}
+
+.tone-light {
+  --bg: #FAF7F2;
+  --surface: #FFFFFF;
+  --card: #FFFFFF;
+  --border: #E7E2D9;
+  --text: #141416;
+  --muted: #55555B;
+  --eyebrow: #B91C1C;
+  --status: #2F7A4B;
+  --btn-solid-bg: #141416;
+  --btn-solid-fg: #FFFFFF;
+  --btn-solid-hover: #374151;
+  background-color: var(--bg);
+  color: var(--text);
+}
+
+.dark .tone-light {
+  --bg: #121214;
+  --surface: #1A1A1D;
+  --card: #232327;
+  --border: #2E2E33;
+  --text: #F5F5F5;
+  --muted: #A8A8AD;
+  --eyebrow: #F87171;
+  --status: #6FBF8B;
+  --btn-solid-bg: #F5F5F5;
+  --btn-solid-fg: #141416;
+  --btn-solid-hover: #D4D4D8;
+}
+
 /* Utility classes for custom colors */
 @layer utilities {
   .text-brand-red {
@@ -99,4 +148,48 @@
   .brand-heading {
     @apply text-brand-red-deep font-bold;
   }
+}
+
+/*
+ * Tone-based headings: Poppins bold UPPERCASE on dark tone, Poppins semibold
+ * sentence case on light tone. Body text stays Barlow (set on <html>).
+ */
+@layer components {
+  .heading-dark,
+  .tone-dark .heading {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 700;
+    text-transform: uppercase;
+  }
+
+  .heading-light,
+  .tone-light .heading {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600;
+    text-transform: none;
+  }
+
+  .eyebrow {
+    color: var(--eyebrow);
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+  }
+}
+
+/*
+ * Solid dark button that inverts to a light appearance on flipped light
+ * sections. Opt in with class="btn-solid-dark" on a PrimaryButton/
+ * FourthButton etc. It only sets colors; transitions, shine and hover
+ * motion stay in the button components. !important is needed to win over
+ * the component's own bg-gray-* utilities (same approach as the mockup).
+ */
+.btn-solid-dark {
+  background-color: var(--btn-solid-bg) !important;
+  color: var(--btn-solid-fg) !important;
+}
+
+.btn-solid-dark:hover {
+  background-color: var(--btn-solid-hover) !important;
 }

@@ -1,6 +1,6 @@
 <template>
   <div class="navbar-container">
-    <nav class="bg-white/95 dark:bg-gray-900/95 backdrop-blur-md shadow-lg transition-all duration-300 border-b border-gray-200/50 dark:border-gray-700/50 fixed top-0 left-0 right-0 z-50 w-full">
+    <nav class="tone-dark backdrop-blur-md shadow-lg transition-all duration-300 border-b border-line fixed top-0 left-0 right-0 z-50 w-full">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="flex justify-between h-20">
         
@@ -24,8 +24,8 @@
             :class="[
               'nav-link px-3 py-2 rounded-md text-sm font-medium transition-colors duration-300',
               isCurrentPage(link.href) 
-                ? 'text-brand-red dark:text-ulji-red-400' 
-                : 'text-gray-700 dark:text-gray-300 hover:text-brand-red dark:hover:text-ulji-red-400'
+                ? 'text-ulji-red-400' 
+                : 'text-gray-300 hover:text-ulji-red-400'
             ]"
           >
             {{ link.name }}
@@ -38,7 +38,7 @@
           <!-- Dark Mode Toggle -->
           <button 
             @click="toggleTheme"
-            class="theme-toggle-btn p-2 text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200 rounded-lg transition-colors duration-300 focus:outline-none"
+            class="theme-toggle-btn p-2 text-gray-300 hover:text-white rounded-lg transition-colors duration-300 focus:outline-none"
             :aria-label="isDark ? 'Switch to light mode' : 'Switch to dark mode'"
           >
             <!-- Sun Icon (Show in dark mode) -->
@@ -66,7 +66,7 @@
           <!-- Mobile Menu Button -->
         <button 
           @click.stop="toggleMobileMenu"
-          class="md:hidden p-2 text-gray-600 dark:text-gray-300 hover:text-brand-red dark:hover:text-ulji-red-400 transition-all duration-300 focus:outline-none rounded-lg"
+          class="md:hidden p-2 text-gray-300 hover:text-ulji-red-400 transition-all duration-300 focus:outline-none rounded-lg"
           aria-label="Toggle mobile menu"
         >
           <div class="w-6 h-6 relative flex flex-col justify-center items-center">
@@ -114,7 +114,7 @@
     >
       <div 
         v-if="isMobileMenuOpen" 
-        class="md:hidden bg-white dark:bg-gray-900 border-t border-gray-200 dark:border-gray-700 shadow-lg"
+        class="md:hidden tone-dark border-t border-line shadow-lg"
         @click.stop
       >
         <div class="px-2 pt-2 pb-3 space-y-1">
@@ -126,8 +126,8 @@
             :class="[
               'mobile-nav-link block px-3 py-2 text-base font-medium rounded-md transition-colors duration-300',
               isCurrentPage(link.href) 
-                ? 'text-brand-red dark:text-ulji-red-400 bg-ulji-red-50 dark:bg-ulji-red-900/20' 
-                : 'text-gray-700 dark:text-gray-300 hover:text-brand-red dark:hover:text-ulji-red-400 hover:bg-gray-50 dark:hover:bg-gray-800'
+                ? 'text-ulji-red-400 bg-ulji-red-900/20' 
+                : 'text-gray-300 hover:text-ulji-red-400 hover:bg-surface'
             ]"
           >
             {{ link.name }}
