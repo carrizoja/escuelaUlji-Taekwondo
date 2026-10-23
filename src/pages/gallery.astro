@@ -1,12 +1,9 @@
 ---
 import Layout from '../layouts/Layout.astro';
-
+import Section from '../components/Section.astro';
+import BeltStripe from '../components/BeltStripe.astro';
 import GalleryWrapper from '../components/gallery/GalleryWrapper.vue';
-import VideoShowcase from '../components/gallery/VideoShowcase.astro';
-
-import AchievementGallery from '../components/gallery/AchievementGallery.astro';
-import VideoPlaylist from '../components/blocks/VideoPlaylist.astro';
-import { featuredVideo, relatedVideos } from '../data/videos.js';
+import { WATERMARKS } from '../utils/watermark.js';
 ---
 
 <Layout 
@@ -14,50 +11,47 @@ import { featuredVideo, relatedVideos } from '../data/videos.js';
 	description="Explora nuestra galería de fotos y videos de entrenamientos, competiciones, exámenes y eventos especiales de la Escuela Ul-ji. Momentos memorables de nuestros estudiantes."
 	keywords="galería taekwondo, fotos entrenamientos, videos competiciones, exámenes cinturones, eventos escuela, técnicas taekwondo, competiciones, logros estudiantes"
 >
-  <main class="bg-white dark:bg-gray-900 min-h-screen">
-    
-    <!-- Hero Section -->
-    <section class="bg-gradient-to-br from-purple-600 to-blue-600 dark:from-purple-800 dark:to-blue-800 py-20">
-      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-        <h1 class="text-4xl md:text-6xl font-bold text-white mb-6">
+  <main class="min-h-screen">
+
+    <!-- Hero (dark tone) -->
+    <Section tone="dark" class="py-20" watermark={WATERMARKS.events} watermarkPosition="top-left">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <span aria-hidden="true" class="mb-4 block h-1 w-10 bg-brand-red"></span>
+        <h1 class="heading text-4xl md:text-6xl mb-6">
           Galería
         </h1>
-        <p class="text-xl text-purple-100 max-w-2xl mx-auto">
+        <p class="text-xl text-muted max-w-2xl">
           Descubrí momentos inigualables, técnicas perfectas y el espíritu del Taekwon-Do en Ul-Ji
         </p>
       </div>
-    </section>
+    </Section>
+    <BeltStripe />
 
     <!-- Navigation Tabs -->
-    <section class="bg-white dark:bg-gray-900 border-b border-gray-200 dark:border-gray-700 sticky top-0 z-50">
+    <div class="tone-dark sticky top-20 z-40 border-b border-line !bg-surface">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <nav class="flex space-x-8">
-          <button 
-            data-tab="fotos" 
-            class="tab-button py-4 px-1 border-b-2 border-red-500 text-red-600 dark:text-red-400 font-medium text-sm uppercase tracking-wide transition-colors duration-300"
+          <button
+            data-tab="fotos"
+            class="tab-button py-4 px-1 border-b-2 border-eyebrow text-eyebrow font-medium text-sm uppercase tracking-wide transition-colors duration-300"
           >
             Fotos
           </button>
-          <button 
-            data-tab="videos" 
-            class="tab-button py-4 px-1 border-b-2 border-transparent text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-300 hover:border-gray-300 dark:hover:border-gray-600 font-medium text-sm uppercase tracking-wide transition-colors duration-300"
+          <button
+            data-tab="videos"
+            class="tab-button py-4 px-1 border-b-2 border-transparent text-muted hover:text-fg hover:border-line font-medium text-sm uppercase tracking-wide transition-colors duration-300"
           >
             Videos
           </button>
         </nav>
       </div>
-    </section>
+    </div>
 
     <!-- Fotos Section -->
     <div id="fotos-section" class="tab-content">
       <!-- Gallery with integrated filtering -->
       <GalleryWrapper client:load />
-      
-      <!-- Achievement Gallery -->
-      
     </div>
-
-    <!-- Videos Section -->
 
   </main>
 </Layout>
@@ -75,12 +69,10 @@ import { featuredVideo, relatedVideos } from '../data/videos.js';
         const tabValue = buttonElement.getAttribute('data-tab');
         const isActive = tabValue === targetTab;
         
-        buttonElement.classList.toggle('border-red-500', isActive);
-        buttonElement.classList.toggle('text-red-600', isActive);
-        buttonElement.classList.toggle('dark:text-red-400', isActive);
+        buttonElement.classList.toggle('border-eyebrow', isActive);
+        buttonElement.classList.toggle('text-eyebrow', isActive);
         buttonElement.classList.toggle('border-transparent', !isActive);
-        buttonElement.classList.toggle('text-gray-500', !isActive);
-        buttonElement.classList.toggle('dark:text-gray-400', !isActive);
+        buttonElement.classList.toggle('text-muted', !isActive);
       });
 
       // Update content

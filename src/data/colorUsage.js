@@ -7,13 +7,10 @@ USAGE EXAMPLES:
 1. Using Tailwind classes with custom colors:
    - text-ulji-red-500 (Main red)
    - text-ulji-red-700 (Deep red)
-   - text-ulji-green-500 (Main green)
    - bg-brand-red (Primary red background)
-   - bg-brand-green (Primary green background)
 
 2. Using custom gradient classes:
    - bg-gradient-primary (Red gradient)
-   - bg-gradient-secondary (Green gradient) 
    - bg-gradient-hero (Hero section gradient)
 
 3. Using CSS custom properties:
@@ -23,7 +20,6 @@ USAGE EXAMPLES:
 4. Using utility classes:
    - brand-button (Pre-styled button)
    - brand-button-outline (Outline button)
-   - brand-accent (Green accent text)
    - brand-heading (Red heading text)
 
 COLOR PALETTE REFERENCE:
@@ -54,16 +50,13 @@ Button Examples:
 
 Text Examples:
 <h1 class="brand-heading">Main Heading</h1>
-<span class="brand-accent">Accent Text</span>
 
 Background Examples:
 <div class="bg-gradient-primary">Primary Gradient</div>
-<div class="bg-gradient-secondary">Secondary Gradient</div>
 <div class="bg-gradient-hero">Hero Gradient</div>
 
 Custom Color Examples:
 <div class="bg-ulji-red-500 text-white">Main Red Background</div>
-<div class="bg-ulji-green-500 text-white">Main Green Background</div>
 <div class="text-ulji-red-700">Deep Red Text</div>
 <div class="border-ulji-red-400">Red Border</div>
 
@@ -72,19 +65,16 @@ Custom Color Examples:
 export const colorUsageExamples = {
   buttons: {
     primary: 'bg-brand-red hover:bg-brand-red-deep text-white',
-    secondary: 'bg-brand-green hover:bg-brand-green-deep text-white',
     outline: 'border-2 border-brand-red text-brand-red hover:bg-brand-red hover:text-white'
   },
   
   text: {
     heading: 'text-ulji-red-700 dark:text-ulji-red-400',
-    accent: 'text-ulji-green-500 dark:text-ulji-green-400',
     muted: 'text-gray-600 dark:text-gray-400'
   },
   
   backgrounds: {
     primary: 'bg-gradient-primary',
-    secondary: 'bg-gradient-secondary', 
     hero: 'bg-gradient-hero',
     card: 'bg-white dark:bg-gray-900',
     surface: 'bg-gray-50 dark:bg-gray-800'
@@ -92,7 +82,6 @@ export const colorUsageExamples = {
   
   borders: {
     primary: 'border-ulji-red-400',
-    secondary: 'border-ulji-green-400',
     neutral: 'border-gray-200 dark:border-gray-700'
   }
 }

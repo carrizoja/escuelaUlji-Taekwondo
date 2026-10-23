@@ -1,5 +1,5 @@
 <template>
-  <section class="bg-white dark:bg-gray-900 py-4 md:py-8 sticky top-16 z-40 shadow-sm border-b border-gray-200 dark:border-gray-700">
+  <section class="tone-dark !bg-surface py-4 md:py-8 sticky top-20 z-30 shadow-sm border-b border-line">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="flex flex-col space-y-4">
         
@@ -13,8 +13,8 @@
               :class="[
                 'px-3 md:px-4 py-2 rounded-lg text-sm font-medium transition-all duration-300 whitespace-nowrap',
                 activeCategory === category.id
-                  ? 'bg-red-600 text-white shadow-lg'
-                  : 'bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 hover:bg-red-50 dark:hover:bg-gray-700 hover:text-red-600 dark:hover:text-red-400'
+                  ? 'bg-brand-red-deep text-white shadow-lg'
+                  : 'bg-card text-fg hover:bg-bg hover:text-eyebrow'
               ]"
             >
               <span class="block md:inline">{{ category.name }}</span>
@@ -27,27 +27,27 @@
         <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between space-y-3 sm:space-y-0 sm:space-x-4">
           <!-- Search Input -->
           <div class="relative flex-1 sm:max-w-xs">
-            <svg class="absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <svg class="absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-muted" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
             </svg>
             <input
               v-model="searchQuery"
               type="text"
               placeholder="Buscar en galería..."
-              class="w-full pl-10 pr-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 placeholder-gray-500 dark:placeholder-gray-400 focus:ring-2 focus:ring-red-500 focus:border-transparent text-sm"
+              class="w-full pl-10 pr-4 py-2 border border-line rounded-lg bg-card text-fg placeholder-muted focus:ring-2 focus:ring-red-500 focus:border-transparent text-sm"
             />
           </div>
 
           <div class="flex items-center justify-between sm:justify-start space-x-3">
             <!-- View Toggle -->
-            <div class="flex items-center bg-gray-100 dark:bg-gray-800 rounded-lg p-1">
+            <div class="flex items-center bg-card rounded-lg p-1">
               <button
                 @click="setViewMode('grid')"
                 :class="[
                   'p-2 rounded-md transition-colors duration-200',
                   viewMode === 'grid'
-                    ? 'bg-white dark:bg-gray-700 text-red-600 dark:text-red-400 shadow-sm'
-                    : 'text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-300'
+                    ? 'bg-bg text-eyebrow shadow-sm'
+                    : 'text-muted hover:text-fg'
                 ]"
                 title="Vista en cuadrícula"
               >
@@ -60,8 +60,8 @@
                 :class="[
                   'p-2 rounded-md transition-colors duration-200',
                   viewMode === 'masonry'
-                    ? 'bg-white dark:bg-gray-700 text-red-600 dark:text-red-400 shadow-sm'
-                    : 'text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-300'
+                    ? 'bg-bg text-eyebrow shadow-sm'
+                    : 'text-muted hover:text-fg'
                 ]"
                 title="Vista mosaico"
               >
@@ -74,7 +74,7 @@
             <!-- Sort Dropdown -->
             <select
               v-model="sortBy"
-              class="px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 focus:ring-2 focus:ring-red-500 focus:border-transparent text-sm min-w-0 flex-shrink-0"
+              class="px-3 py-2 border border-line rounded-lg bg-card text-fg focus:ring-2 focus:ring-red-500 focus:border-transparent text-sm min-w-0 flex-shrink-0"
             >
               <option value="newest">Más recientes</option>
               <option value="oldest">Más antiguos</option>
@@ -86,14 +86,14 @@
 
         <!-- Active Filters Display -->
         <div v-if="hasActiveFilters" class="flex flex-col sm:flex-row sm:items-center space-y-2 sm:space-y-0 sm:space-x-3">
-          <span class="text-sm text-gray-600 dark:text-gray-400 flex-shrink-0">Filtros activos:</span>
+          <span class="text-sm text-muted flex-shrink-0">Filtros activos:</span>
           <div class="flex flex-wrap gap-2">
             <span
               v-if="searchQuery"
-              class="inline-flex items-center px-3 py-1 rounded-full text-xs bg-red-100 dark:bg-red-900/30 text-red-700 dark:text-red-400"
+              class="inline-flex items-center px-3 py-1 rounded-full text-xs border border-line bg-card text-eyebrow"
             >
               <span class="truncate max-w-32">"{{ searchQuery }}"</span>
-              <button @click="searchQuery = ''" class="ml-1 hover:text-red-900 dark:hover:text-red-300 flex-shrink-0">
+              <button @click="searchQuery = ''" class="ml-1 hover:text-fg flex-shrink-0">
                 <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
                 </svg>
@@ -101,10 +101,10 @@
             </span>
             <span
               v-if="activeCategory !== 'all'"
-              class="inline-flex items-center px-3 py-1 rounded-full text-xs bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-400"
+              class="inline-flex items-center px-3 py-1 rounded-full text-xs border border-line bg-card text-fg"
             >
               {{ getCategoryName(activeCategory) }}
-              <button @click="setActiveCategory('all')" class="ml-1 hover:text-blue-900 dark:hover:text-blue-300 flex-shrink-0">
+              <button @click="setActiveCategory('all')" class="ml-1 hover:text-eyebrow flex-shrink-0">
                 <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
                 </svg>
@@ -113,7 +113,7 @@
           </div>
           <button
             @click="clearAllFilters"
-            class="text-xs text-red-600 dark:text-red-400 hover:text-red-800 dark:hover:text-red-300 underline flex-shrink-0"
+            class="text-xs text-eyebrow hover:text-fg underline flex-shrink-0"
           >
             Limpiar todo
           </button>
