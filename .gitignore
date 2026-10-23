@@ -27,3 +27,6 @@ pnpm-debug.log*
 test-config.js
 test-photos.js
 .atl/
+
+# Playwright MCP artifacts
+.playwright-mcp/
