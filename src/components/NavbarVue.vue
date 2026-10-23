@@ -275,7 +275,7 @@ nav {
   height: 2px;
   bottom: -2px;
   left: 50%;
-  background-color: #F73434; /* brand-red */
+  background-color: #DC2626; /* brand-red */
   transition: all 0.3s ease;
   transform: translateX(-50%);
 }
@@ -300,7 +300,7 @@ button:focus {
 }
 
 button:focus-visible {
-  box-shadow: 0 0 0 2px rgba(247, 52, 52, 0.5); /* brand-red with opacity */
+  box-shadow: 0 0 0 2px rgba(220, 38, 38, 0.5); /* brand-red with opacity */
 }
 
 /* Smooth hover effects for mobile menu button */

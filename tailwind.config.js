@@ -17,14 +17,14 @@ export default {
         // Alias for easier usage
         primary: tailwindColors['ulji-red'],
         brand: {
-          red: '#F73434',      // Main red from palette
+          red: '#DC2626',      // Accent red (AA with white text)
           'red-deep': '#A00000', // Deep red from palette
           'red-light': '#FF6666', // Light red from palette
           'red-dark': '#810000',  // Dark red from palette
         }
       },
       backgroundImage: {
-        'gradient-primary': 'linear-gradient(135deg, #A00000 0%, #F73434 50%, #FF6666 100%)',
+        'gradient-primary': 'linear-gradient(135deg, #A00000 0%, #DC2626 50%, #FF6666 100%)',
         'gradient-hero': 'linear-gradient(135deg, #111827 0%, #810000 25%, #A00000 75%, #000000 100%)',
         'gradient-dark': 'linear-gradient(135deg, #000000 0%, #810000 50%, #A00000 100%)',
       }
