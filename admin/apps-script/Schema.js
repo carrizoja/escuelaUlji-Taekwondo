@@ -96,7 +96,8 @@ const CONFIG_KEYS = [
  * @throws {Error} Naming the missing key (never the value)
  */
 function getConfig(key) {
-  const value = PropertiesService.getScriptProperties().getProperty(key);
+  // Trim: a space or line break copied along with a key makes it invalid
+  const value = String(PropertiesService.getScriptProperties().getProperty(key) || '').trim();
   if (!value) {
     throw new Error('Falta la propiedad de script "' + key + '". Configurala en Configuración del proyecto > Propiedades de la secuencia de comandos.');
   }

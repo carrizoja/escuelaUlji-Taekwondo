@@ -29,3 +29,10 @@ test('getConfig returns the stored value', () => {
   const { get: g } = loadAppsScript(['Schema.js'], { PropertiesService: { getScriptProperties: () => props } });
   assert.equal(g('getConfig')('GITHUB_REPO'), 'a/b');
 });
+
+test('getConfig trims whitespace pasted around a value', () => {
+  const props = { getProperty: k => (k === 'CLOUDINARY_API_KEY' ? ' 123456789012345\n' : k === 'BLANK' ? '  \n' : null) };
+  const { get: g } = loadAppsScript(['Schema.js'], { PropertiesService: { getScriptProperties: () => props } });
+  assert.equal(g('getConfig')('CLOUDINARY_API_KEY'), '123456789012345');
+  assert.throws(() => g('getConfig')('BLANK'), /BLANK/);
+});
