@@ -17,21 +17,6 @@ export const colors = {
       800: '#810000',  // Dark Red (desaturated)
       900: '#7F1D1D',  // Very dark red
       950: '#450A0A'   // Darkest red
-    },
-    
-    // Green variants (accent color)
-    green: {
-      50: '#F0FDF4',   // Very light green
-      100: '#DCFCE7',  // Light green
-      200: '#BBF7D0',  // Lighter green
-      300: '#C2F0CE',  // Light Green (desaturated)
-      400: '#95F9AF',  // Light Green (plenos)
-      500: '#49F57A',  // Green (plenos) - Main green
-      600: '#34BC5B',  // Green (desaturated)
-      700: '#16A34A',  // Medium green
-      800: '#166534',  // Dark green
-      900: '#14532D',  // Very dark green
-      950: '#052E16'   // Darkest green
     }
   },
 
@@ -56,7 +41,7 @@ export const colors = {
 
   // Semantic Colors
   semantic: {
-    success: '#49F57A',    // Green (plenos)
+    success: '#5FB77E',    // Muted status green (--status)
     warning: '#F59E0B',    
     error: '#F73434',      // Red (plenos)
     info: '#3B82F6'
@@ -80,17 +65,11 @@ export const cssVariables = {
   '--color-red-dark': '#810000',
   '--color-red-pink': '#F79292',
 
-  '--color-green-primary': '#49F57A',
-  '--color-green-deep': '#34BC5B',
-  '--color-green-light': '#95F9AF',
-  '--color-green-pale': '#C2F0CE',
-
   '--color-white': '#FFFFFF',
   '--color-black': '#000000',
 
   // Gradients
   '--gradient-primary': 'linear-gradient(135deg, #A00000 0%, #F73434 50%, #FF6666 100%)',
-  '--gradient-secondary': 'linear-gradient(135deg, #34BC5B 0%, #49F57A 50%, #95F9AF 100%)',
   '--gradient-hero': 'linear-gradient(135deg, #111827 0%, #810000 25%, #A00000 75%, #000000 100%)'
 }
 
@@ -108,19 +87,6 @@ export const tailwindColors = {
     800: '#810000',
     900: '#7F1D1D',
     950: '#450A0A'
-  },
-  'ulji-green': {
-    50: '#F0FDF4',
-    100: '#DCFCE7',
-    200: '#BBF7D0', 
-    300: '#C2F0CE',
-    400: '#95F9AF',
-    500: '#49F57A',
-    600: '#34BC5B',
-    700: '#16A34A',
-    800: '#166534',
-    900: '#14532D',
-    950: '#052E16'
   }
 }
 

@@ -11,17 +11,11 @@
   --color-red-dark: #810000;
   --color-red-pink: #F79292;
 
-  --color-green-primary: #49F57A;
-  --color-green-deep: #34BC5B;
-  --color-green-light: #95F9AF;
-  --color-green-pale: #C2F0CE;
-
   --color-white: #FFFFFF;
   --color-black: #000000;
 
   /* Custom Gradients */
   --gradient-primary: linear-gradient(135deg, #A00000 0%, #F73434 50%, #FF6666 100%);
-  --gradient-secondary: linear-gradient(135deg, #34BC5B 0%, #49F57A 50%, #95F9AF 100%);
   --gradient-hero: linear-gradient(135deg, #111827 0%, #810000 25%, #A00000 75%, #000000 100%);
   --gradient-dark: linear-gradient(135deg, #000000 0%, #810000 50%, #A00000 100%);
 }
@@ -90,10 +84,6 @@
     color: var(--color-red-deep);
   }
   
-  .text-brand-green {
-    color: var(--color-green-primary);
-  }
-  
   .bg-brand-red {
     background-color: var(--color-red-primary);
   }
@@ -102,16 +92,8 @@
     background-color: var(--color-red-deep);
   }
   
-  .bg-brand-green {
-    background-color: var(--color-green-primary);
-  }
-  
   .bg-gradient-primary {
     background-image: var(--gradient-primary);
-  }
-  
-  .bg-gradient-secondary {
-    background-image: var(--gradient-secondary);
   }
   
   .bg-gradient-hero {
@@ -126,9 +108,6 @@
     border-color: var(--color-red-primary);
   }
   
-  .border-brand-green {
-    border-color: var(--color-green-primary);
-  }
 }
 
 /* Enhanced animations for brand colors */
@@ -139,10 +118,6 @@
   
   .brand-button-outline {
     @apply border-2 border-brand-red text-brand-red hover:bg-brand-red hover:text-white font-bold py-3 px-6 rounded-lg transition-all duration-300;
-  }
-  
-  .brand-accent {
-    @apply text-brand-green font-semibold;
   }
   
   .brand-heading {
