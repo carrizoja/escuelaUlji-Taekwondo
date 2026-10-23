@@ -2,19 +2,20 @@
 // History component - Taekwondo timeline with milestones
 import GradientLine from "../ui/GradientLine.astro";
 import { taekwondoMilestones, getIcon } from "../../data/milestones.js";
+import Section from "../Section.astro";
 ---
 
 <!-- Historia Section -->
-<section id="historia" class="py-16 bg-white dark:bg-gray-900">
+<Section tone="light" id="historia" class="py-16">
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
     <div class="text-center mb-12">
       <h2
-        class="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-6"
+        class="heading text-3xl md:text-4xl mb-6"
       >
         Historia del Taekwon-do
       </h2>
       <GradientLine />
-      <p class="text-lg text-gray-600 dark:text-gray-400 max-w-3xl mx-auto">
+      <p class="text-lg text-muted max-w-3xl mx-auto">
         El Taekwon-do es mucho más que un arte marcial, es una filosofía de
         vida que combina técnicas de combate con desarrollo espiritual y
         mental.
@@ -25,12 +26,12 @@ import { taekwondoMilestones, getIcon } from "../../data/milestones.js";
     <div class="relative">
       <!-- Desktop timeline line -->
       <div
-        class="hidden md:block absolute left-1/2 transform -translate-x-px h-full w-1 bg-ulji-red-200 dark:bg-ulji-red-800"
+        class="hidden md:block absolute left-1/2 transform -translate-x-px h-full w-1 bg-brand-red/30"
       >
       </div>
       <!-- Mobile timeline line -->
       <div
-        class="md:hidden absolute left-8 h-full w-1 bg-ulji-red-200 dark:bg-ulji-red-800"
+        class="md:hidden absolute left-8 h-full w-1 bg-brand-red/30"
       >
       </div>
 
@@ -40,7 +41,7 @@ import { taekwondoMilestones, getIcon } from "../../data/milestones.js";
             <div class="relative">
               {/* Mobile Layout */}
               <div class="md:hidden flex items-start">
-                <div class="absolute left-8 transform -translate-x-1/2 w-8 h-8 bg-ulji-red-500 rounded-full border-4 border-white dark:border-gray-900 flex items-center justify-center flex-shrink-0">
+                <div class="absolute left-8 transform -translate-x-1/2 w-8 h-8 bg-ulji-red-500 rounded-full border-4 border-bg flex items-center justify-center flex-shrink-0">
                   <svg
                     class="w-4 h-4 text-white"
                     fill="currentColor"
@@ -50,11 +51,11 @@ import { taekwondoMilestones, getIcon } from "../../data/milestones.js";
                   </svg>
                 </div>
                 <div class="ml-16 pb-8">
-                  <div class="bg-white dark:bg-gray-800 p-4 rounded-xl shadow-lg">
-                    <h3 class="text-lg font-bold text-gray-900 dark:text-white mb-2">
+                  <div class="bg-card p-4 rounded-xl shadow-lg">
+                    <h3 class="text-lg font-bold text-fg mb-2">
                       {milestone.title} ({milestone.year})
                     </h3>
-                    <p class="text-sm text-gray-600 dark:text-gray-400">
+                    <p class="text-sm text-muted">
                       {milestone.description}
                     </p>
                   </div>
@@ -66,17 +67,17 @@ import { taekwondoMilestones, getIcon } from "../../data/milestones.js";
                 {milestone.position === "left" ? (
                   <>
                     <div class="flex-1 pr-8 text-right">
-                      <div class="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-lg">
-                        <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-2">
+                      <div class="bg-card p-6 rounded-xl shadow-lg">
+                        <h3 class="text-xl font-bold text-fg mb-2">
                           {milestone.title} ({milestone.year})
                         </h3>
-                        <p class="text-gray-600 dark:text-gray-400">
+                        <p class="text-muted">
                           {milestone.description}
                         </p>
                       </div>
                     </div>
                     <div
-                      class={`absolute left-1/2 transform -translate-x-1/2 w-12 h-12 bg-${milestone.color} rounded-full border-4 border-white dark:border-gray-900 flex items-center justify-center`}
+                      class={`absolute left-1/2 transform -translate-x-1/2 w-12 h-12 bg-${milestone.color} rounded-full border-4 border-bg flex items-center justify-center`}
                     >
                       <svg
                         class="w-6 h-6 text-white"
@@ -92,7 +93,7 @@ import { taekwondoMilestones, getIcon } from "../../data/milestones.js";
                   <>
                     <div class="flex-1 pr-8" />
                     <div
-                      class={`absolute left-1/2 transform -translate-x-1/2 w-12 h-12 bg-${milestone.color} rounded-full border-4 border-white dark:border-gray-900 flex items-center justify-center`}
+                      class={`absolute left-1/2 transform -translate-x-1/2 w-12 h-12 bg-${milestone.color} rounded-full border-4 border-bg flex items-center justify-center`}
                     >
                       <svg
                         class="w-6 h-6 text-white"
@@ -103,11 +104,11 @@ import { taekwondoMilestones, getIcon } from "../../data/milestones.js";
                       </svg>
                     </div>
                     <div class="flex-1 pl-8">
-                      <div class="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-lg">
-                        <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-2">
+                      <div class="bg-card p-6 rounded-xl shadow-lg">
+                        <h3 class="text-xl font-bold text-fg mb-2">
                           {milestone.title} ({milestone.year})
                         </h3>
-                        <p class="text-gray-600 dark:text-gray-400">
+                        <p class="text-muted">
                           {milestone.description}
                         </p>
                       </div>
@@ -121,4 +122,4 @@ import { taekwondoMilestones, getIcon } from "../../data/milestones.js";
       </div>
     </div>
   </div>
-</section>
+</Section>

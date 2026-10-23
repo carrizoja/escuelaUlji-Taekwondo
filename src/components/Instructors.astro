@@ -3,9 +3,10 @@
 import MainInstructor from './blocks/MainInstructor.astro';
 import AssistantInstructor from './blocks/AssistantInstructor.astro';
 import { assistantInstructors } from '../data/assistant_instructors.js';
+import Section from "./Section.astro";
 ---
 
-<section id="instructores" class="py-12 bg-gray-50 dark:bg-gray-800 transition-colors duration-300">
+<Section tone="light" id="instructores" class="py-12 !bg-surface">
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
     
     <!-- Section Header -->
@@ -15,11 +16,11 @@ import { assistantInstructors } from '../data/assistant_instructors.js';
         alt="Logo Escuela Ul-ji"
         class="w-24 h-24 mx-auto mb-6 transition-transform duration-300 hover:scale-105"
       />
-      <h2 class="text-4xl md:text-5xl font-heading font-bold text-gray-900 dark:text-white mb-6 transition-colors duration-300">
+      <h2 class="heading text-4xl md:text-5xl mb-6 transition-colors duration-300">
         Nuestros Instructores
       </h2>
       <div class="w-24 h-1 bg-gradient-primary mx-auto mb-8"></div>
-      <p class="text-xl font-text text-gray-600 dark:text-gray-300 max-w-3xl mx-auto transition-colors duration-300">
+      <p class="text-xl font-text text-muted max-w-3xl mx-auto transition-colors duration-300">
         Conocé a nuestro equipo de instructores altamente calificados, dedicados a formar personas tanto en el dojang (도장) como en la vida.
       </p>
     </div>
@@ -46,10 +47,10 @@ import { assistantInstructors } from '../data/assistant_instructors.js';
       ))}
     </div>
     <div>
-      <h2 class="text-4xl md:text-5xl font-heading font-bold text-gray-900 text-center dark:text-white mb-4 transition-colors duration-300">
+      <h2 class="heading text-4xl md:text-5xl text-center mb-4 transition-colors duration-300">
         Mención Honorífica
       </h2>
-      <p class="text-xl font-text text-center text-gray-600 dark:text-gray-400 p-4">
+      <p class="text-xl font-text text-center text-muted p-4">
         Reconocimiento a la dedicación y esfuerzo en la enseñanza del Taekwon-do.
       </p>
       <!-- Main Instructor Component -->
@@ -69,8 +70,8 @@ import { assistantInstructors } from '../data/assistant_instructors.js';
     </div>
 
     <!-- Certifications & Credentials -->
-    <div class="bg-white dark:bg-gray-900 rounded-3xl shadow-xl p-8 lg:p-12 transition-colors duration-300">
-      <h3 class="text-3xl font-heading font-bold text-gray-900 dark:text-white text-center mb-12 transition-colors duration-300">
+    <div class="bg-card border border-line rounded-3xl shadow-xl p-8 lg:p-12 transition-colors duration-300">
+      <h3 class="heading text-3xl text-center mb-12 transition-colors duration-300">
         Certificaciones y Reconocimientos
       </h3>
       
@@ -81,8 +82,8 @@ import { assistantInstructors } from '../data/assistant_instructors.js';
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z"></path>
             </svg>
           </div>
-          <h4 class="font-heading font-semibold text-gray-900 dark:text-white mb-2">ITF Certificado</h4>
-          <p class="font-text text-sm text-gray-600 dark:text-gray-400">International Taekwondo Federation</p>
+          <h4 class="font-heading font-semibold text-fg mb-2">ITF Certificado</h4>
+          <p class="font-text text-sm text-muted">International Taekwondo Federation</p>
         </div>
 
         <div class="text-center group">
@@ -91,8 +92,8 @@ import { assistantInstructors } from '../data/assistant_instructors.js';
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.246 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path>
             </svg>
           </div>
-          <h4 class="font-heading font-semibold text-gray-900 dark:text-white mb-2">ACIT Afiliado</h4>
-          <p class="font-text text-sm text-gray-600 dark:text-gray-400">Asociación Centro Internacional de Taekwondo</p>
+          <h4 class="font-heading font-semibold text-fg mb-2">ACIT Afiliado</h4>
+          <p class="font-text text-sm text-muted">Asociación Centro Internacional de Taekwondo</p>
         </div>
 
         <div class="text-center group">
@@ -101,8 +102,8 @@ import { assistantInstructors } from '../data/assistant_instructors.js';
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path>
             </svg>
           </div>
-          <h4 class="font-heading font-semibold text-gray-900 dark:text-white mb-2">Primeros Auxilios</h4>
-          <p class="font-text text-sm text-gray-600 dark:text-gray-400">Certificación de Seguridad</p>
+          <h4 class="font-heading font-semibold text-fg mb-2">Primeros Auxilios</h4>
+          <p class="font-text text-sm text-muted">Certificación de Seguridad</p>
         </div>
 
         <div class="text-center group">
@@ -111,10 +112,10 @@ import { assistantInstructors } from '../data/assistant_instructors.js';
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
             </svg>
           </div>
-          <h4 class="font-heading font-semibold text-gray-900 dark:text-white mb-2">Didáctica Inclusiva</h4>
-          <p class="font-text text-sm text-gray-600 dark:text-gray-400">Actualización Permanente</p>
+          <h4 class="font-heading font-semibold text-fg mb-2">Didáctica Inclusiva</h4>
+          <p class="font-text text-sm text-muted">Actualización Permanente</p>
         </div>
       </div>
     </div>
   </div>
-</section>
+</Section>

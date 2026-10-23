@@ -1,31 +1,44 @@
 ---
 import { schoolTimeline } from '../../data/schoolTime.js';
+import Section from "../Section.astro";
+
+// Literal class names so Tailwind can see them (dynamic `bg-${color}-100`
+// strings are never generated). Tints are decorative per-milestone colors.
+const badgeClasses = {
+  red: 'bg-red-100 text-red-700 dark:bg-red-900/30 dark:text-red-300',
+  blue: 'bg-blue-100 text-blue-700 dark:bg-blue-900/30 dark:text-blue-300',
+  yellow: 'bg-yellow-100 text-yellow-800 dark:bg-yellow-900/30 dark:text-yellow-300',
+  green: 'bg-green-100 text-green-800 dark:bg-green-900/30 dark:text-green-300',
+  purple: 'bg-purple-100 text-purple-700 dark:bg-purple-900/30 dark:text-purple-300',
+};
 ---
 
-<section class="mb-16">
-  <h3 class="text-2xl font-bold text-gray-900 dark:text-white mb-8 text-center">
-    Historia de la Escuela
-  </h3>
-  
-  <div class="bg-white dark:bg-gray-900 rounded-2xl p-8 shadow-lg">
-    <div class="space-y-8">
-      {schoolTimeline.map((milestone) => (
-        <div class="flex items-start">
-          <div class={`flex-shrink-0 w-16 h-16 bg-${milestone.color}-100 dark:bg-${milestone.color}-900/30 rounded-full flex items-center justify-center mr-6`}>
-            <span class={`text-${milestone.color}-600 dark:text-${milestone.color}-400 font-bold text-sm`}>
-              {milestone.year}
-            </span>
+<Section tone="light" id="escuela" class="py-16 !bg-surface">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <h3 class="heading text-2xl md:text-3xl mb-8 text-center">
+      Historia de la Escuela
+    </h3>
+
+    <div class="bg-card border border-line rounded-2xl p-8 shadow-lg">
+      <div class="space-y-8">
+        {schoolTimeline.map((milestone) => (
+          <div class="flex items-start">
+            <div class={`flex-shrink-0 w-16 h-16 ${badgeClasses[milestone.color]} rounded-full flex items-center justify-center mr-6`}>
+              <span class="font-bold text-sm">
+                {milestone.year}
+              </span>
+            </div>
+            <div>
+              <h4 class="text-xl font-bold text-fg mb-2">
+                {milestone.title}
+              </h4>
+              <p class="text-muted">
+                {milestone.description}
+              </p>
+            </div>
           </div>
-          <div>
-            <h4 class="text-xl font-bold text-gray-900 dark:text-white mb-2">
-              {milestone.title}
-            </h4>
-            <p class="text-gray-600 dark:text-gray-400">
-              {milestone.description}
-            </p>
-          </div>
-        </div>
-      ))}
+        ))}
+      </div>
     </div>
   </div>
-</section>
+</Section>
