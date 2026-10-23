@@ -5,7 +5,7 @@
 - [x] 1.3 Add FTP deploy step with pinned SamKirkland/FTP-Deploy-Action using FTP secrets
 - [x] 1.4 Confirm failure notification behavior and document it
 - [x] 1.5 Owner: create GitHub secrets FTP_SERVER, FTP_USERNAME, FTP_PASSWORD, FTP_SERVER_DIR, PUBLIC_GOOGLE_API_KEY, sheet ids
-- [x] 1.6 Run the workflow manually and verify the live site updates
+- [x] 1.6 Run the workflow manually and verify the live site updates (verified 2026-10-23: FTP_SERVER_DIR corrected to ./ — deploys had gone to a nested public_html/; live site now serves CI builds)
 - [x] 1.7 Verify no credentials appear in the repo or logs
 
 ## 2. Phase 2: Data hardening
