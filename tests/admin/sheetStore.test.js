@@ -12,7 +12,7 @@ function setup(extraGlobals = {}) {
 }
 
 /** Minimal in-memory Sheet implementing only what SheetStore uses. */
-function fakeSheet(values) {
+function fakeSheet(values, typedColumns = []) {
   const writes = [];
   const formats = [];
   return {
@@ -21,7 +21,12 @@ function fakeSheet(values) {
     getLastRow: () => values.length,
     getRange(row, col) {
       return {
-        setNumberFormat(f) { formats.push({ row, col, f }); return this; },
+        setNumberFormat(f) {
+          // Google Sheets Tables reject format changes on typed columns
+          if (typedColumns.includes(col)) throw new Error("You can't set the number format of cells in a typed column.");
+          formats.push({ row, col, f });
+          return this;
+        },
         setValue(v) {
           writes.push({ row, col, v });
           while (values.length < row) values.push([]);
@@ -126,4 +131,20 @@ test('photo dates stay text', () => {
   get('appendRecord')(sheet, get('PHOTO_SCHEMA'), { title: 't', date: '2025-05-01T12:00:00Z' });
   assert.equal(sheet.values[2][5], '2025-05-01T12:00:00Z');
   assert.equal(sheet.formats.find(f => f.col === 6).f, '@');
+});
+
+test('appendRecord still writes every value when columns are typed (Sheets Tables)', () => {
+  const { get, schemas } = setup();
+  // fecha (col 1) is a typed Date column, nombre..modalidad (cols 2-9) typed Text
+  const sheet = fakeSheet([torneoHeaders, torneoRow], [1, 2, 3, 4, 5, 6, 7, 8, 9]);
+  const saved = plain(get('appendRecord')(sheet, schemas.torneos, {
+    fecha: '11/20/2026', nombre: 'Copa', categoria: 'Todas', lugar: 'Club', inscripcion: '',
+    premio: '', costo: '', nivel: '', modalidad: '', estado: ''
+  }));
+  const row3 = sheet.writes.filter(w => w.row === 3);
+  assert.equal(saved.id, 'new-uuid');
+  assert.equal(row3.length, torneoHeaders.length);
+  assert.equal(Object.prototype.toString.call(row3.find(w => w.col === 1).v), '[object Date]');
+  assert.equal(row3.find(w => w.col === 2).v, 'Copa');
+  assert.equal(row3.find(w => w.col === 11).v, 'new-uuid');
 });
