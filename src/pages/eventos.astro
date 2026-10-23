@@ -6,6 +6,12 @@ import BeltStripe from '../components/BeltStripe.astro';
 import PrimaryButton from '../components/ui/PrimaryButton.astro';
 import { WATERMARKS } from '../utils/watermark.js';
 import { fetchEventData, formatDate, isUpcoming, isPastDate } from '../utils/googleSheets.js';
+import { getMainDojang, getWhatsAppLink } from '../data/dojangs.js';
+import { buildRegistrationMessage } from '../utils/eventRegistration.js';
+
+const mainDojang = getMainDojang();
+const registrationLink = (name, fecha) =>
+  getWhatsAppLink(mainDojang, buildRegistrationMessage({ name, date: formatDate(fecha) }));
 
 // Get configuration from environment variables
 const SHEET_ID = import.meta.env.PUBLIC_GOOGLE_SHEETS_ID_EVENTOS || import.meta.env.GOOGLE_SHEETS_ID_EVENTOS || '1koYz8Tvd6oEMFB8nBsVQIpNeIYS1dBmrL8jRdSrI_kg';
@@ -276,7 +282,7 @@ const displaySeminarios = upcomingSeminarios.length > 0 ? upcomingSeminarios : u
                     </span>
                     {/* Only show "Inscribirse" button if tournament is not finished */}
                     {torneo.estado !== 'Finalizado' && !isPastDate(torneo.fecha) && (
-                      <PrimaryButton text="Inscribirse" size="sm" icon="arrow" />
+                      <PrimaryButton text="Inscribirse" size="sm" icon="arrow" href={registrationLink(torneo.nombre, torneo.fecha)} target="_blank" />
                     )}
                   </div>
                 )}
@@ -382,7 +388,7 @@ const displaySeminarios = upcomingSeminarios.length > 0 ? upcomingSeminarios : u
                         {formatDate(seminario.fecha)}
                       </div>
                       {!isPastDate(seminario.fecha) && (
-                        <PrimaryButton text="Inscribirse" size="sm" icon="arrow" variant="outline" />
+                        <PrimaryButton text="Inscribirse" size="sm" icon="arrow" variant="outline" href={registrationLink(seminario.titulo, seminario.fecha)} target="_blank" />
                       )}
                       {isPastDate(seminario.fecha) && (
                         <div class="text-muted font-heading font-semibold px-6 py-2">
