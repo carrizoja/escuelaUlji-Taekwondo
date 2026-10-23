@@ -36,6 +36,6 @@ Delivery: one PR per slice. Slice 1 = sections 1-2, slice 2 = section 3, slice 3
 
 - [ ] 5.1 Compare computed hover styles of buttons, cards, gallery images and links against the pre-change baseline
 - [ ] 5.2 Toggle test: only light sections flip; dark sections unchanged; localStorage and system preference behave as before
-- [ ] 5.3 Run contrast audit on all pages in both modes
+- [x] 5.3 Run contrast audit on all pages in both modes (Playwright: 5 pages x 360/1440 x light/dark, 0 failures; photo/gradient/translucent backgrounds not measurable)
 - [ ] 5.4 Check responsive layouts (mobile, tablet, desktop) and reduced watermark impact
 - [ ] 5.5 Run `npm run build` and review the output visually
