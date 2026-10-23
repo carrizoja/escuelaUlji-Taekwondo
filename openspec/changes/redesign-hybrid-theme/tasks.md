@@ -26,7 +26,7 @@
 
 ## 4. Other pages
 
-- [x] 4.1 Apply light tone to taekwondo, institucional, schedule and contacto (covers taekwondo + institucional only; schedule/contacto are empty files, pending owner decision)
+- [x] 4.1 Apply light tone to taekwondo, institucional, schedule and contacto (covers taekwondo + institucional only; empty schedule/contacto pages deleted by owner decision; their links now point to /#horarios and the footer contact block)
 - [ ] 4.2 Apply dark tone to eventos and gallery
 - [ ] 4.3 Remove obsolete `dark:` classes from dark-tone sections
 
