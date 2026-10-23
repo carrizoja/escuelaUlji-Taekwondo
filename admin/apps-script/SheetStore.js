@@ -2,9 +2,13 @@
  * Sheet access layer. Columns are found by header name (case and surrounding
  * spaces ignored), never by position, so reordering columns is safe.
  *
- * Writes only touch known columns (unknown columns are preserved) and write
- * text, so the spreadsheet locale cannot reinterpret dates or numbers.
+ * Writes only touch known columns (unknown columns are preserved). Values are
+ * written as text so the spreadsheet locale cannot reinterpret them, except
+ * event dates: those cells are real dates (shown as M/D/YYYY) like the
+ * existing rows. Photo dates are ISO text (the gallery parses them).
  */
+
+const EVENT_DATE_FORMAT = 'M/d/yyyy';
 
 function normalizeHeader(value) {
   return String(value === null || value === undefined ? '' : value).trim().toLowerCase();
@@ -68,12 +72,23 @@ function readRecords(sheet, schema) {
   return records;
 }
 
-/** Writes values into the known columns of a row as text. */
-function writeCells(sheet, rowNumber, columns, values) {
+/** Builds a date in the script time zone from M/D/YYYY. */
+function sheetDateToDate(text) {
+  const p = text.split('/');
+  return new Date(+p[2], +p[0] - 1, +p[1]);
+}
+
+/** Writes values into the known columns of a row. */
+function writeCells(sheet, schema, rowNumber, columns, values) {
   Object.keys(values).forEach(function (field) {
     const index = columns[field];
     if (index === undefined || index === -1) return;
-    sheet.getRange(rowNumber, index + 1).setNumberFormat('@').setValue(values[field]);
+    const cell = sheet.getRange(rowNumber, index + 1);
+    if (schema !== PHOTO_SCHEMA && field === 'fecha' && toSheetDate(values[field])) {
+      cell.setNumberFormat(EVENT_DATE_FORMAT).setValue(sheetDateToDate(toSheetDate(values[field])));
+    } else {
+      cell.setNumberFormat('@').setValue(values[field]);
+    }
   });
 }
 
@@ -95,7 +110,7 @@ function findRowNumber(sheet, schema, id) {
 function appendRecord(sheet, schema, values) {
   const mapped = mapHeaders(schema.tab, sheet.getDataRange().getDisplayValues()[0], schema);
   const record = Object.assign({}, values, { id: Utilities.getUuid() });
-  writeCells(sheet, sheet.getLastRow() + 1, mapped.columns, record);
+  writeCells(sheet, schema, sheet.getLastRow() + 1, mapped.columns, record);
   return record;
 }
 
@@ -106,7 +121,7 @@ function updateRecord(sheet, schema, id, values) {
   const found = findRowNumber(sheet, schema, id);
   const changes = Object.assign({}, values);
   delete changes.id;
-  writeCells(sheet, found.rowNumber, found.columns, changes);
+  writeCells(sheet, schema, found.rowNumber, found.columns, changes);
   return Object.assign({}, changes, { id: id });
 }
 

@@ -7,7 +7,7 @@ const torneoHeaders = ['fecha', 'nombre', 'categoria', 'lugar', 'inscripcion', '
 const torneoRow = ['10/15/2025', 'Copa Ul-ji', 'Todas', 'Club', 'Hasta 10/10', 'Medallas', '$15.000', 'Todos', 'Combate', 'Abiertas', 'a1b2'];
 
 function setup(extraGlobals = {}) {
-  const loaded = loadAppsScript(FILES, { Utilities: { getUuid: () => 'new-uuid' }, ...extraGlobals });
+  const loaded = loadAppsScript(FILES.concat('Validation.js'), { Utilities: { getUuid: () => 'new-uuid' }, ...extraGlobals });
   return { ...loaded, schemas: loaded.get('EVENT_SCHEMAS') };
 }
 
@@ -71,7 +71,8 @@ test('appendRecord writes a new uuid, text-formatted cells, and only known colum
   const rec = plain(get('appendRecord')(sheet, schemas.torneos, { fecha: '1/2/2026', nombre: 'Nuevo' }));
   assert.equal(rec.id, 'new-uuid');
   assert.ok(sheet.writes.every(w => w.row === 3 && w.col <= torneoHeaders.length));
-  assert.ok(sheet.formats.length > 0 && sheet.formats.every(f => f.f === '@'));
+  const fechaCol = torneoHeaders.indexOf('fecha') + 1;
+  assert.ok(sheet.formats.filter(f => f.col !== fechaCol).every(f => f.f === '@'));
   assert.equal(sheet.values[2][torneoHeaders.indexOf('id')], 'new-uuid');
 });
 
@@ -106,4 +107,23 @@ test('a broken header writes nothing', () => {
   const sheet = fakeSheet([torneoHeaders.filter(h => h !== 'premio'), torneoRow.slice(0, 10)]);
   assert.throws(() => get('appendRecord')(sheet, schemas.torneos, { nombre: 'x' }), /premio/);
   assert.equal(sheet.writes.length, 0);
+});
+
+test('event dates are written as real date cells with the M/d/yyyy format', () => {
+  const { get, schemas } = setup();
+  const sheet = fakeSheet([torneoHeaders, torneoRow]);
+  get('appendRecord')(sheet, schemas.torneos, { fecha: '3/7/2026', nombre: 'Nuevo' });
+  const col = torneoHeaders.indexOf('fecha') + 1;
+  const value = sheet.values[2][col - 1];
+  assert.equal(Object.prototype.toString.call(value), '[object Date]');
+  assert.deepEqual([value.getFullYear(), value.getMonth(), value.getDate()], [2026, 2, 7]);
+  assert.equal(sheet.formats.find(f => f.col === col).f, 'M/d/yyyy');
+});
+
+test('photo dates stay text', () => {
+  const { get } = setup();
+  const sheet = fakeSheet([['id', 'title', 'thumbnail', 'alt', 'category', 'date', 'description', 'fullSize', 'nivel', 'tags'], []]);
+  get('appendRecord')(sheet, get('PHOTO_SCHEMA'), { title: 't', date: '2025-05-01T12:00:00Z' });
+  assert.equal(sheet.values[2][5], '2025-05-01T12:00:00Z');
+  assert.equal(sheet.formats.find(f => f.col === 6).f, '@');
 });

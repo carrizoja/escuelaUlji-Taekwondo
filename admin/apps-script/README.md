@@ -64,6 +64,7 @@ latest pushed code, only for you.)
 
 ## 5. Using it
 
+- Date formats: event dates are saved as real date cells (shown `M/D/YYYY`); photo dates as ISO text (`YYYY-MM-DDT12:00:00Z`), as the site expects.
 - Event saves/deletes ask GitHub to rebuild; the site updates in about 2 minutes. The header shows
   the last deploy status and has a refresh button.
 - Photos upload straight from the browser to Cloudinary with a signature made by the script.

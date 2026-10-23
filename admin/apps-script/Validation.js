@@ -24,14 +24,14 @@ const REQUIRED_PHOTO_FIELDS = {
 
 /**
  * Converts a date to the sheet format M/D/YYYY (no leading zeros).
- * Accepts YYYY-MM-DD (date input) or M/D/YYYY.
+ * Accepts YYYY-MM-DD (date input), an ISO timestamp (date part used) or M/D/YYYY.
  * @param {*} input
  * @returns {string|null} null when not a real calendar date
  */
 function toSheetDate(input) {
   const text = String(input === null || input === undefined ? '' : input).trim();
   let year, month, day;
-  let match = /^(\d{4})-(\d{1,2})-(\d{1,2})$/.exec(text);
+  let match = /^(\d{4})-(\d{1,2})-(\d{1,2})(?:T.*)?$/.exec(text);
   if (match) {
     year = +match[1]; month = +match[2]; day = +match[3];
   } else if ((match = /^(\d{1,2})\/(\d{1,2})\/(\d{4})$/.exec(text))) {
@@ -125,8 +125,9 @@ function validatePhoto(data) {
   }
 
   if (values.date && !errors.date) {
-    const date = toSheetDate(values.date);
-    if (date) values.date = date;
+    const iso = sheetDateToInput(values.date);
+    // Noon UTC never shows as the previous day in Argentina (UTC-3)
+    if (iso) values.date = iso + 'T12:00:00Z';
     else errors.date = 'La fecha no es válida. Usá el formato día/mes/año del selector.';
   }
   return { ok: Object.keys(errors).length === 0, errors: errors, values: values };

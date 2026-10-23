@@ -24,6 +24,17 @@ test('dates: impossible or malformed dates are rejected', () => {
   }
 });
 
+test('dates: ISO strings and sheet dates convert to the date input format', () => {
+  assert.equal(sheetDateToInput('2024-11-10T16:00:00Z'), '2024-11-10');
+  assert.equal(sheetDateToInput('2025-05-01'), '2025-05-01');
+  assert.equal(sheetDateToInput('11/20/2024'), '2024-11-20');
+});
+
+test('photo date accepts an existing ISO value and rejects impossible ones', () => {
+  assert.equal(validatePhoto({ ...photo, date: '2024-11-10T16:00:00Z' }).values.date, '2024-11-10T12:00:00Z');
+  assert.ok(validatePhoto({ ...photo, date: '2025-02-30' }).errors.date);
+});
+
 test('dates: sheet format converts back to the date input format', () => {
   assert.equal(sheetDateToInput('3/7/2025'), '2025-03-07');
   assert.equal(sheetDateToInput('nope'), '');
@@ -79,10 +90,10 @@ const photo = {
   tags: 'dojang, clase'
 };
 
-test('valid photo converts the date', () => {
+test('valid photo stores the date as ISO noon UTC', () => {
   const r = validatePhoto(photo);
   assert.equal(r.ok, true);
-  assert.equal(r.values.date, '5/1/2025');
+  assert.equal(r.values.date, '2025-05-01T12:00:00Z');
   assert.equal(r.values.category, 'training');
 });
 
