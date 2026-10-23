@@ -1,0 +1,67 @@
+---
+// Home hero (dark tone): action photo, scrim, two CTAs and the ITF/ACIT strip.
+// All copy and the photo come from content already used on the site
+// (blocks/Hero.astro, ui/Carousel.astro, Instructors.astro, data/dojangs.js).
+import Section from '../Section.astro';
+import PrimaryButton from '../ui/PrimaryButton.astro';
+import SecondaryButton from '../ui/SecondaryButton.astro';
+import { getMainDojang, getWhatsAppLink } from '../../data/dojangs.js';
+
+// Same action photo as the "Competencias y Torneos" carousel slide.
+const heroImage = 'https://res.cloudinary.com/dgvje1bpw/image/upload/v1757619590/torneo2_gmovck.jpg';
+const trialLink = getWhatsAppLink(
+  getMainDojang(),
+  '¡Hola! Me interesa agendar una clase de prueba gratis en Escuela Ul-ji Taekwondo'
+);
+---
+
+<Section tone="dark" id="inicio">
+  <img
+    src={heroImage}
+    alt=""
+    aria-hidden="true"
+    fetchpriority="high"
+    class="absolute inset-0 h-full w-full object-cover opacity-40"
+  />
+  <!-- Scrim keeps the text above 4.5:1 over any part of the photo -->
+  <div aria-hidden="true" class="absolute inset-0 bg-bg/60"></div>
+
+  <div class="relative mx-auto flex max-w-7xl flex-col gap-6 px-4 pb-16 pt-32 sm:px-6 md:pb-24 md:pt-44 lg:px-8">
+    <div class="flex items-center gap-3">
+      <span aria-hidden="true" class="h-1 w-10 bg-brand-red"></span>
+      <span class="font-heading text-xs font-semibold uppercase tracking-[0.18em] text-muted sm:text-sm">
+        Taekwon-do ITF · Buenos Aires
+      </span>
+    </div>
+
+    <h1 class="heading max-w-3xl text-4xl font-extrabold leading-[1.05] sm:text-6xl lg:text-7xl">
+      Escuela <span class="text-eyebrow">Ul-ji</span>
+    </h1>
+    <p class="font-heading text-xl font-semibold tracking-wide text-eyebrow md:text-2xl">Siempre en crecimiento</p>
+
+    <p class="max-w-2xl text-lg leading-relaxed text-fg/90 md:text-xl">
+      Desde 2020, buscando mejorar el bienestar integral de las niños, niñas, juveniles y adultos mediante la
+      práctica del Taekwon-do ITF. No sólo son las técnicas de combate, sino también el carácter, la confianza y
+      la resiliencia del verdadero artista marcial.
+    </p>
+
+    <div class="mt-2 flex flex-col gap-4 sm:flex-row">
+      <PrimaryButton
+        href={trialLink}
+        target="_blank"
+        text="Reservá tu clase de prueba"
+        icon="arrow"
+        size="lg"
+        variant="primary"
+        class="min-h-[48px]"
+      />
+      <SecondaryButton href="#horarios" text="Ver horarios" icon="calendar" size="lg" class="min-h-[48px]" />
+    </div>
+
+    <ul class="mt-8 flex flex-wrap gap-x-10 gap-y-3 border-t border-white/20 pt-6 text-sm text-fg sm:text-base">
+      <li><strong class="font-semibold text-fg">ITF</strong> Certificado</li>
+      <li><strong class="font-semibold text-fg">ACIT</strong> Afiliado</li>
+      <li><strong class="font-semibold text-fg">Niños · Adolescentes · Adultos</strong></li>
+    </ul>
+  </div>
+</Section>

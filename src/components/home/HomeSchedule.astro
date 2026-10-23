@@ -1,0 +1,93 @@
+---
+// "Horarios" (light tone, white surface): table built from data/dojangs.js
+// through buildScheduleRows, plus a WhatsApp CTA with the existing link.
+import Section from '../Section.astro';
+import PrimaryButton from '../ui/PrimaryButton.astro';
+import { getActiveDojangs, getMainDojang, getWhatsAppLink } from '../../data/dojangs.js';
+import { buildScheduleRows } from '../../utils/homePreview.js';
+
+const rows = buildScheduleRows(getActiveDojangs());
+const whatsappLink = getWhatsAppLink(getMainDojang());
+---
+
+<Section tone="light" id="horarios" class="!bg-surface border-t border-line">
+  <div class="mx-auto flex max-w-7xl flex-col gap-10 px-4 py-16 sm:px-6 md:py-24 lg:flex-row lg:items-start lg:gap-14 lg:px-8">
+    <div class="flex flex-col gap-4 lg:w-1/3">
+      <p class="eyebrow text-xs sm:text-sm">Horarios</p>
+      <h2 class="heading text-3xl leading-tight md:text-5xl">Encontrá tu clase</h2>
+      <p class="text-lg text-muted">
+        Elegí sede y horario. Si tenés dudas sobre el nivel, escribinos y te orientamos.
+      </p>
+      <PrimaryButton
+        href={whatsappLink}
+        target="_blank"
+        text="Consultar por WhatsApp"
+        icon="arrow"
+        size="lg"
+        variant="secondary"
+        class="btn-solid-dark mt-2 self-start min-h-[48px]"
+      />
+    </div>
+
+    <div class="min-w-0 flex-1 overflow-hidden rounded-xl border border-line">
+      <table class="schedule-table w-full border-collapse text-left text-base">
+        <caption class="sr-only">Horarios de clases por sede</caption>
+        <thead>
+          <tr class="bg-bg">
+            <th scope="col" class="px-5 py-4 font-heading text-sm font-semibold">Grupo</th>
+            <th scope="col" class="px-5 py-4 font-heading text-sm font-semibold">Días</th>
+            <th scope="col" class="px-5 py-4 font-heading text-sm font-semibold">Horario</th>
+            <th scope="col" class="px-5 py-4 font-heading text-sm font-semibold">Sede</th>
+          </tr>
+        </thead>
+        <tbody>
+          {rows.map((row) => (
+            <tr class="border-t border-line">
+              <td data-label="Grupo" class="px-5 py-4 font-semibold">
+                {row.group}
+                <span class="block text-sm font-normal text-muted">{row.ageRange}</span>
+              </td>
+              <td data-label="Días" class="px-5 py-4 text-muted">{row.days}</td>
+              <td data-label="Horario" class="px-5 py-4 text-muted">{row.time}</td>
+              <td data-label="Sede" class="px-5 py-4 text-muted">
+                {row.venue}
+                <span class="block text-sm">{row.neighborhood}</span>
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+  </div>
+</Section>
+
+<style>
+  /* Stacked rows on phones so the table never scrolls sideways */
+  @media (max-width: 639px) {
+    .schedule-table thead {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      overflow: hidden;
+      clip: rect(0 0 0 0);
+    }
+    .schedule-table tr,
+    .schedule-table td {
+      display: block;
+    }
+    .schedule-table td {
+      padding: 0.5rem 1.25rem;
+    }
+    .schedule-table td:first-child {
+      padding-top: 1rem;
+    }
+    .schedule-table td:last-child {
+      padding-bottom: 1rem;
+    }
+    .schedule-table td:not(:first-child)::before {
+      content: attr(data-label) ': ';
+      font-weight: 600;
+      color: var(--text);
+    }
+  }
+</style>

@@ -1,0 +1,59 @@
+---
+// Contact CTA (light tone): WhatsApp link and the active sedes, all from
+// data/dojangs.js. Keeps the anchors the site already links to:
+// #contact (navbar) and #sedes / #contacto (footer).
+import Section from '../Section.astro';
+import PrimaryButton from '../ui/PrimaryButton.astro';
+import { getActiveDojangs, getMainDojang, getWhatsAppLink } from '../../data/dojangs.js';
+
+const dojangs = getActiveDojangs();
+const whatsappLink = getWhatsAppLink(getMainDojang());
+---
+
+<Section tone="light" id="contact">
+  <span id="contacto" class="block"></span>
+  <div class="mx-auto flex max-w-7xl flex-col gap-12 px-4 py-16 sm:px-6 md:py-24 lg:px-8">
+    <div class="flex flex-col gap-8 md:flex-row md:items-center md:justify-between">
+      <div class="max-w-2xl">
+        <h2 class="heading text-3xl leading-tight md:text-5xl">Tu primera clase te está esperando</h2>
+        <p class="mt-4 text-lg text-muted md:text-xl">
+          Escribinos por WhatsApp y coordinamos día y sede. Primeras dos clases gratuitas.
+        </p>
+      </div>
+      <div class="flex flex-col gap-4 sm:flex-row sm:items-center">
+        <PrimaryButton
+          href={whatsappLink}
+          target="_blank"
+          text="Escribir por WhatsApp"
+          icon="arrow"
+          size="lg"
+          variant="primary"
+          class="min-h-[48px]"
+        />
+        <a
+          href="/contacto"
+          class="inline-flex min-h-[44px] items-center px-2 font-heading text-base font-semibold underline underline-offset-4 transition-colors duration-300 hover:text-red-400"
+        >
+          Más formas de contacto
+        </a>
+      </div>
+    </div>
+
+    <div id="sedes" class="grid grid-cols-1 gap-4 md:grid-cols-2">
+      {dojangs.map((d) => (
+        <div class="rounded-xl border border-line bg-card p-6">
+          <h3 class="heading text-lg md:text-xl">{d.name}</h3>
+          <p class="mt-1 text-muted">{d.address.street}, {d.address.neighborhood}, {d.address.city}</p>
+          <a
+            href={d.location.googleMapsUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="mt-3 inline-flex min-h-[44px] items-center font-semibold text-eyebrow underline underline-offset-4 transition-colors duration-300 hover:text-red-400"
+          >
+            Ver en Maps
+          </a>
+        </div>
+      ))}
+    </div>
+  </div>
+</Section>

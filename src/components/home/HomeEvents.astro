@@ -1,0 +1,79 @@
+---
+// "Eventos" (dark tone): next events from the same Google Sheets pipeline
+// used by /eventos. The page fetches the data and passes the already
+// selected items (see utils/homePreview.js).
+import Section from '../Section.astro';
+
+interface PreviewEvent {
+  id: string;
+  type: string;
+  title: string;
+  detail: string;
+  date: Date;
+  status: string;
+  statusOpen: boolean;
+}
+
+interface Props {
+  events: PreviewEvent[];
+}
+
+const { events } = Astro.props;
+
+const day = (d: Date) => d.getDate();
+const month = (d: Date) => d.toLocaleDateString('es-AR', { month: 'short' }).replace('.', '');
+---
+
+<Section tone="dark" id="eventos">
+  <div class="mx-auto flex max-w-7xl flex-col gap-10 px-4 py-16 sm:px-6 md:py-24 lg:px-8">
+    <div class="flex flex-wrap items-end justify-between gap-4">
+      <div class="flex flex-col gap-3">
+        <div class="flex items-center gap-3">
+          <span aria-hidden="true" class="h-1 w-10 bg-brand-red"></span>
+          <p class="eyebrow text-xs sm:text-sm">Eventos</p>
+        </div>
+        <h2 class="heading text-3xl leading-tight md:text-5xl">Exámenes, torneos<br />y seminarios</h2>
+      </div>
+      <a
+        href="/eventos"
+        class="inline-flex min-h-[44px] items-center font-heading text-sm font-semibold underline underline-offset-4 transition-colors duration-300 hover:text-red-400"
+      >
+        Ver todos los eventos
+      </a>
+    </div>
+
+    {events.length > 0 ? (
+      <ul class="grid grid-cols-1 gap-6 md:grid-cols-3">
+        {events.map((event) => (
+          <li>
+            <article class="group flex h-full flex-col gap-4 rounded-xl border border-line bg-card p-6 shadow-lg transition-all duration-300 hover:-translate-y-1 hover:shadow-xl">
+              <div class="flex items-start gap-4">
+                <time
+                  datetime={event.date.toISOString().slice(0, 10)}
+                  class="flex w-16 shrink-0 flex-col items-center rounded-md bg-white px-2 py-2 text-center font-heading leading-none text-bg"
+                >
+                  <span class="text-2xl font-bold">{day(event.date)}</span>
+                  <span class="mt-1 text-xs font-semibold uppercase">{month(event.date)}</span>
+                </time>
+                <div class="flex flex-col gap-1">
+                  <span class="eyebrow text-xs tracking-[0.12em]">{event.type}</span>
+                  {event.status && (
+                    <span class:list={['text-sm font-semibold', event.statusOpen ? 'text-status' : 'text-muted']}>
+                      {event.statusOpen ? '● ' : ''}{event.status}
+                    </span>
+                  )}
+                </div>
+              </div>
+              <h3 class="heading text-lg leading-snug transition-colors duration-300 group-hover:text-red-500 md:text-xl">
+                {event.title}
+              </h3>
+              {event.detail && <p class="text-base text-muted">{event.detail}</p>}
+            </article>
+          </li>
+        ))}
+      </ul>
+    ) : (
+      <p class="text-lg text-muted">Los próximos eventos se anunciarán pronto.</p>
+    )}
+  </div>
+</Section>
