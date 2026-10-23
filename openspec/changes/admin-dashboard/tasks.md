@@ -27,16 +27,16 @@
 
 ## 4. Phase 3: Dashboard implementation
 
-- [ ] 4.1 Scaffold `admin/apps-script/` with `appsscript.json`, clasp config (no secrets) and `.gitignore`
-- [ ] 4.2 Implement sheet access layer: header validation, header-name mapping, find by id
-- [ ] 4.3 Implement LockService wrapper for all writes
-- [ ] 4.4 Implement server-side validators per event type and for photos
-- [ ] 4.5 Implement events list/create/edit/delete endpoints
-- [ ] 4.6 Implement photos list/create/edit/delete endpoints
-- [ ] 4.7 Implement Cloudinary signature endpoint and optional asset deletion
-- [ ] 4.8 Implement GitHub dispatch after event saves and deploy status lookup
-- [ ] 4.9 Build the HtmlService UI with Vue (pinned CDN version): forms, validation messages, deploy status, ~2 minute notice
-- [ ] 4.10 Style the UI to match the new brand
+- [x] 4.1 Scaffold `admin/apps-script/` with `appsscript.json`, clasp config (no secrets) and `.gitignore`
+- [x] 4.2 Implement sheet access layer: header validation, header-name mapping, find by id
+- [x] 4.3 Implement LockService wrapper for all writes
+- [x] 4.4 Implement server-side validators per event type and for photos
+- [x] 4.5 Implement events list/create/edit/delete endpoints
+- [x] 4.6 Implement photos list/create/edit/delete endpoints
+- [x] 4.7 Implement Cloudinary signature endpoint and optional asset deletion
+- [x] 4.8 Implement GitHub dispatch after event saves and deploy status lookup
+- [x] 4.9 Build the HtmlService UI with Vue (pinned CDN version): forms, validation messages, deploy status, ~2 minute notice
+- [x] 4.10 Style the UI to match the new brand
 
 ## 5. Verification and docs
 
@@ -46,4 +46,4 @@
 - [ ] 5.4 Test that another Google account is denied access
 - [ ] 5.5 Test end to end: save event, dispatch, deploy, site shows event
 - [ ] 5.6 Confirm Cloudinary secret and token are absent from page source and repo
-- [ ] 5.7 Write admin setup guide including secret rotation steps
+- [x] 5.7 Write admin setup guide including secret rotation steps
