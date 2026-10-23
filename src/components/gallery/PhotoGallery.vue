@@ -51,10 +51,7 @@
 
             <!-- Category Badge -->
             <div class="absolute top-3 left-3">
-              <span :class="[
-                'px-2 py-1 text-xs font-semibold rounded-full',
-                getCategoryColor(photo.category)
-              ]">
+              <span class="px-2 py-1 text-xs font-semibold rounded-full bg-black/80 text-white border border-white/25">
                 {{ getCategoryName(photo.category) }}
               </span>
             </div>
@@ -371,17 +368,6 @@ const getCategoryName = (category: string): string => {
     students: 'Estudiantes'
   }
   return names[category] || category
-}
-
-const getCategoryColor = (category: string): string => {
-  const colors: Record<string, string> = {
-    training: 'bg-blue-500 text-white',
-    competitions: 'bg-yellow-500 text-black',
-    belts: 'bg-purple-500 text-white',
-    events: 'bg-white text-black',
-    students: 'bg-red-500 text-white'
-  }
-  return colors[category] || 'bg-gray-500 text-white'
 }
 
 const formatDate = (dateString: string): string => {

@@ -5,7 +5,7 @@
 - [x] 1.3 Add FTP deploy step with pinned SamKirkland/FTP-Deploy-Action using FTP secrets
 - [x] 1.4 Confirm failure notification behavior and document it
 - [x] 1.5 Owner: create GitHub secrets FTP_SERVER, FTP_USERNAME, FTP_PASSWORD, FTP_SERVER_DIR, PUBLIC_GOOGLE_API_KEY, sheet ids
-- [x] 1.6 Run the workflow manually and verify the live site updates
+- [x] 1.6 Run the workflow manually and verify the live site updates (verified 2026-10-23: FTP_SERVER_DIR corrected to ./ — deploys had gone to a nested public_html/; live site now serves CI builds)
 - [x] 1.7 Verify no credentials appear in the repo or logs
 
 ## 2. Phase 2: Data hardening
@@ -20,30 +20,30 @@
 
 ## 3. Phase 3: Dashboard setup (owner)
 
-- [ ] 3.1 Create a fine-grained GitHub token for the repo (actions and contents only)
-- [ ] 3.2 Create the Apps Script project and set Script Properties (Cloudinary key/secret/cloud name, GitHub token, sheet ids)
-- [ ] 3.3 Share both spreadsheets with the owner account used by the script
-- [ ] 3.4 Deploy as web app: Execute as me, access only myself
+- [x] 3.1 Create a fine-grained GitHub token for the repo (actions and contents only)
+- [x] 3.2 Create the Apps Script project and set Script Properties (Cloudinary key/secret/cloud name, GitHub token, sheet ids)
+- [x] 3.3 Share both spreadsheets with the owner account used by the script
+- [x] 3.4 Deploy as web app: Execute as me, access only myself
 
 ## 4. Phase 3: Dashboard implementation
 
-- [ ] 4.1 Scaffold `admin/apps-script/` with `appsscript.json`, clasp config (no secrets) and `.gitignore`
-- [ ] 4.2 Implement sheet access layer: header validation, header-name mapping, find by id
-- [ ] 4.3 Implement LockService wrapper for all writes
-- [ ] 4.4 Implement server-side validators per event type and for photos
-- [ ] 4.5 Implement events list/create/edit/delete endpoints
-- [ ] 4.6 Implement photos list/create/edit/delete endpoints
-- [ ] 4.7 Implement Cloudinary signature endpoint and optional asset deletion
-- [ ] 4.8 Implement GitHub dispatch after event saves and deploy status lookup
-- [ ] 4.9 Build the HtmlService UI with Vue (pinned CDN version): forms, validation messages, deploy status, ~2 minute notice
-- [ ] 4.10 Style the UI to match the new brand
+- [x] 4.1 Scaffold `admin/apps-script/` with `appsscript.json`, clasp config (no secrets) and `.gitignore`
+- [x] 4.2 Implement sheet access layer: header validation, header-name mapping, find by id
+- [x] 4.3 Implement LockService wrapper for all writes
+- [x] 4.4 Implement server-side validators per event type and for photos
+- [x] 4.5 Implement events list/create/edit/delete endpoints
+- [x] 4.6 Implement photos list/create/edit/delete endpoints
+- [x] 4.7 Implement Cloudinary signature endpoint and optional asset deletion
+- [x] 4.8 Implement GitHub dispatch after event saves and deploy status lookup
+- [x] 4.9 Build the HtmlService UI with Vue (pinned CDN version): forms, validation messages, deploy status, ~2 minute notice
+- [x] 4.10 Style the UI to match the new brand
 
 ## 5. Verification and docs
 
-- [ ] 5.1 Test CRUD for each event type and photos, including invalid input
-- [ ] 5.2 Test concurrent saves and lock timeout message
-- [ ] 5.3 Test a renamed header produces a clear error and no write
+- [x] 5.1 Test CRUD for each event type and photos, including invalid input (live: seminar create/delete and photo upload/create/delete; exams and tournaments share the same code path; invalid input covered by unit tests)
+- [x] 5.2 Test concurrent saves and lock timeout message (unit tests with a stubbed LockService; not reproduced live)
+- [x] 5.3 Test a renamed header produces a clear error and no write (unit tests: missing header throws naming tab and header, nothing written)
 - [ ] 5.4 Test that another Google account is denied access
-- [ ] 5.5 Test end to end: save event, dispatch, deploy, site shows event
-- [ ] 5.6 Confirm Cloudinary secret and token are absent from page source and repo
-- [ ] 5.7 Write admin setup guide including secret rotation steps
+- [x] 5.5 Test end to end: save event, dispatch, deploy, site shows event (verified 2026-10-23: test seminar appeared on /eventos and home after the dispatched deploy, and disappeared after delete)
+- [x] 5.6 Confirm Cloudinary secret and token are absent from page source and repo (secret only used server-side for signing; browser receives api key + signature; repo holds property names only)
+- [x] 5.7 Write admin setup guide including secret rotation steps

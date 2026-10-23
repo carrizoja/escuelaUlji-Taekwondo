@@ -7,9 +7,9 @@ import { WATERMARKS } from '../utils/watermark.js';
 ---
 
 <Layout 
-	title="Galería - Fotos y Videos | Escuela Ul-ji Taekwondo"
-	description="Explora nuestra galería de fotos y videos de entrenamientos, competiciones, exámenes y eventos especiales de la Escuela Ul-ji. Momentos memorables de nuestros estudiantes."
-	keywords="galería taekwondo, fotos entrenamientos, videos competiciones, exámenes cinturones, eventos escuela, técnicas taekwondo, competiciones, logros estudiantes"
+	title="Galería de Fotos | Escuela Ul-ji Taekwondo"
+	description="Explora nuestra galería de fotos de entrenamientos, competiciones, exámenes y eventos especiales de la Escuela Ul-ji. Momentos memorables de nuestros estudiantes."
+	keywords="galería taekwondo, fotos entrenamientos, fotos competiciones, exámenes cinturones, eventos escuela, técnicas taekwondo, competiciones, logros estudiantes"
 >
   <main class="min-h-screen">
 
@@ -27,82 +27,11 @@ import { WATERMARKS } from '../utils/watermark.js';
     </Section>
     <BeltStripe />
 
-    <!-- Navigation Tabs -->
-    <div class="tone-dark sticky top-20 z-40 border-b border-line !bg-surface">
-      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <nav class="flex space-x-8">
-          <button
-            data-tab="fotos"
-            class="tab-button py-4 px-1 border-b-2 border-eyebrow text-eyebrow font-medium text-sm uppercase tracking-wide transition-colors duration-300"
-          >
-            Fotos
-          </button>
-          <button
-            data-tab="videos"
-            class="tab-button py-4 px-1 border-b-2 border-transparent text-muted hover:text-fg hover:border-line font-medium text-sm uppercase tracking-wide transition-colors duration-300"
-          >
-            Videos
-          </button>
-        </nav>
-      </div>
-    </div>
-
     <!-- Fotos Section -->
-    <div id="fotos-section" class="tab-content">
+    <div id="fotos-section">
       <!-- Gallery with integrated filtering -->
       <GalleryWrapper client:load />
     </div>
 
   </main>
 </Layout>
-
-<script>
-  // Tab functionality
-  document.addEventListener('DOMContentLoaded', function() {
-    const tabButtons = document.querySelectorAll('.tab-button');
-    const tabContents = document.querySelectorAll('.tab-content');
-
-    function switchTab(targetTab: string): void {
-      // Update buttons
-      tabButtons.forEach(button => {
-        const buttonElement = button as HTMLElement;
-        const tabValue = buttonElement.getAttribute('data-tab');
-        const isActive = tabValue === targetTab;
-        
-        buttonElement.classList.toggle('border-eyebrow', isActive);
-        buttonElement.classList.toggle('text-eyebrow', isActive);
-        buttonElement.classList.toggle('border-transparent', !isActive);
-        buttonElement.classList.toggle('text-muted', !isActive);
-      });
-
-      // Update content
-      tabContents.forEach(content => {
-        const isActive = content.id === `${targetTab}-section`;
-        content.classList.toggle('hidden', !isActive);
-      });
-    }
-
-    tabButtons.forEach(button => {
-      button.addEventListener('click', (e: Event) => {
-        const target = e.currentTarget;
-        if (target instanceof HTMLElement) {
-          const tabValue = target.getAttribute('data-tab');
-          if (tabValue) {
-            switchTab(tabValue);
-          }
-        }
-      });
-    });
-
-    // Smooth scroll for hash links
-    const handleHashChange = (): void => {
-      const hash = window.location.hash.slice(1);
-      if (hash === 'fotos' || hash === 'videos') {
-        switchTab(hash);
-      }
-    };
-
-    window.addEventListener('hashchange', handleHashChange);
-    handleHashChange(); // Check on load
-  });
-</script>

@@ -1,0 +1,293 @@
+<script>
+(function () {
+  const { createApp } = Vue;
+
+  const TABS = [
+    { key: 'examenes', label: 'Exámenes', singular: 'examen', titleKey: 'tipo' },
+    { key: 'torneos', label: 'Torneos', singular: 'torneo', titleKey: 'nombre' },
+    { key: 'seminarios', label: 'Seminarios', singular: 'seminario', titleKey: 'titulo' },
+    { key: 'photos', label: 'Fotos', singular: 'foto', titleKey: 'title' }
+  ];
+
+  const text = (key, label, extra) => Object.assign({ key, label, type: 'text' }, extra);
+  const date = (key, label) => ({ key, label, type: 'date', required: true });
+
+  // Field order = form order. Keys are the sheet headers (see Schema.js).
+  const CATEGORIES = [
+    { value: 'training', label: 'Entrenamiento' },
+    { value: 'competitions', label: 'Competencias' },
+    { value: 'belts', label: 'Cintas' },
+    { value: 'events', label: 'Eventos' },
+    { value: 'students', label: 'Alumnos' }
+  ];
+
+  const FIELDS = {
+    examenes: [
+      date('fecha', 'Fecha'),
+      text('tipo', 'Tipo', { required: true, placeholder: 'Presencial' }),
+      text('grado', 'Grado'),
+      text('lugar', 'Lugar', { required: true }),
+      text('hora', 'Hora', { placeholder: '18:30 h' }),
+      { key: 'requisitos', label: 'Requisitos', type: 'textarea' },
+      text('estado', 'Estado', { placeholder: 'Programado (por defecto)' })
+    ],
+    torneos: [
+      date('fecha', 'Fecha'),
+      text('nombre', 'Nombre', { required: true }),
+      text('categoria', 'Categorías'),
+      text('lugar', 'Lugar', { required: true }),
+      text('inscripcion', 'Inscripción'),
+      text('premio', 'Premios'),
+      text('costo', 'Costo'),
+      text('nivel', 'Nivel'),
+      text('modalidad', 'Modalidad'),
+      text('estado', 'Estado', { placeholder: 'Inscripciones Abiertas (por defecto)' })
+    ],
+    seminarios: [
+      date('fecha', 'Fecha'),
+      text('titulo', 'Título', { required: true }),
+      text('maestro', 'Maestro'),
+      text('tema', 'Tema'),
+      text('duracion', 'Duración'),
+      text('costo', 'Costo'),
+      text('lugar', 'Lugar', { required: true }),
+      text('cupos', 'Cupos'),
+      text('nivel', 'Nivel'),
+      { key: 'descripcion', label: 'Descripción', type: 'textarea' }
+    ],
+    photos: [
+      text('title', 'Título', { required: true }),
+      text('alt', 'Texto alternativo (describe la imagen)', { required: true }),
+      { key: 'category', label: 'Categoría', type: 'select', required: true, options: CATEGORIES },
+      date('date', 'Fecha'),
+      { key: 'description', label: 'Descripción', type: 'textarea' },
+      text('nivel', 'Nivel'),
+      text('tags', 'Etiquetas (separadas por coma)')
+    ]
+  };
+
+  // Promise wrapper around google.script.run; strips the "Error: " prefix Apps Script adds.
+  function call(name, ...args) {
+    return new Promise((resolve, reject) => {
+      google.script.run
+        .withSuccessHandler(resolve)
+        .withFailureHandler(err => reject(new Error(String((err && err.message) || err).replace(/^(Error|Exception):\s*/, ''))))
+        [name](...args);
+    });
+  }
+
+  const POLL_MS = 20000;
+  const POLL_MAX = 15; // ~5 minutes after a save
+
+  createApp({
+    data() {
+      return {
+        tabs: TABS,
+        tab: 'examenes',
+        items: [],
+        loading: false,
+        busy: false,
+        saving: false,
+        uploading: false,
+        error: '',
+        warning: '',
+        notice: '',
+        form: null,
+        errors: {},
+        toDelete: null,
+        alsoDeleteAsset: false,
+        deploy: null,
+        deployLoading: false,
+        pollTimer: null,
+        pollCount: 0
+      };
+    },
+    computed: {
+      currentTab() { return TABS.find(t => t.key === this.tab); },
+      isPhotos() { return this.tab === 'photos'; },
+      fields() { return FIELDS[this.tab]; },
+      sortedItems() {
+        const key = this.isPhotos ? 'date' : 'fecha';
+        return [...this.items].sort((a, b) => (b.dateInput || '').localeCompare(a.dateInput || '') || String(a[key]).localeCompare(String(b[key])));
+      },
+      deleteLabel() {
+        return this.toDelete ? (this.toDelete[this.currentTab.titleKey] || '(sin título)') : '';
+      },
+      deployClass() {
+        const d = this.deploy;
+        if (!d) return '';
+        if (d.status === 'completed') return d.conclusion === 'success' ? 'ok' : 'fail';
+        return d.status === 'none' ? '' : 'run';
+      },
+      deployText() {
+        const d = this.deploy;
+        if (!d) return this.deployLoading ? 'Consultando publicación…' : 'Publicación: sin datos';
+        if (d.status === 'none') return 'Todavía no hubo publicaciones';
+        const when = d.createdAt ? new Date(d.createdAt).toLocaleString('es-AR', { timeZone: 'America/Argentina/Buenos_Aires', hourCycle: 'h23', dateStyle: 'short', timeStyle: 'short' }) : '';
+        if (d.status !== 'completed') return 'Publicando… (' + when + ')';
+        return (d.conclusion === 'success' ? 'Última publicación correcta' : 'La última publicación falló') + ' · ' + when;
+      }
+    },
+    mounted() {
+      this.load();
+      this.refreshDeploy();
+      window.addEventListener('keydown', e => {
+        if (e.key !== 'Escape') return;
+        if (this.toDelete) this.toDelete = null;
+        else if (this.form && !this.saving) this.closeForm();
+      });
+    },
+    methods: {
+      categoryLabel(value) {
+        const c = CATEGORIES.find(x => x.value === value);
+        return c ? c.label : value;
+      },
+      clearMessages() { this.error = ''; this.warning = ''; this.notice = ''; },
+      selectTab(key) {
+        if (key === this.tab || this.busy) return;
+        this.tab = key;
+        this.clearMessages();
+        this.load();
+      },
+      async load() {
+        this.loading = true;
+        this.items = [];
+        try {
+          this.items = this.isPhotos ? await call('listPhotos') : await call('listEvents', this.tab);
+        } catch (e) {
+          this.error = e.message;
+        } finally {
+          this.loading = false;
+        }
+      },
+      startCreate() {
+        this.clearMessages();
+        this.errors = {};
+        const blank = {};
+        this.fields.forEach(f => { blank[f.key] = ''; });
+        this.form = this.isPhotos ? Object.assign(blank, { fullSize: '', thumbnail: '' }) : blank;
+      },
+      startEdit(item) {
+        this.clearMessages();
+        this.errors = {};
+        const copy = {};
+        this.fields.forEach(f => { copy[f.key] = item[f.key] || ''; });
+        copy.id = item.id;
+        const dateKey = this.isPhotos ? 'date' : 'fecha';
+        copy[dateKey] = item.dateInput || '';
+        if (!item.dateInput && item[dateKey]) copy.rawDate = item[dateKey];
+        if (this.isPhotos) { copy.fullSize = item.fullSize; copy.thumbnail = item.thumbnail; }
+        this.form = copy;
+      },
+      closeForm() { this.form = null; this.errors = {}; },
+
+      async onFile(event) {
+        const file = event.target.files[0];
+        if (!file) return;
+        this.uploading = true;
+        this.errors = Object.assign({}, this.errors, { thumbnail: '', fullSize: '' });
+        try {
+          const sig = await call('getUploadSignature');
+          const body = new FormData();
+          body.append('file', file);
+          body.append('api_key', sig.apiKey);
+          body.append('timestamp', sig.timestamp);
+          body.append('signature', sig.signature);
+          body.append('folder', sig.folder);
+          const res = await fetch('https://api.cloudinary.com/v1_1/' + sig.cloudName + '/image/upload', { method: 'POST', body });
+          const data = await res.json();
+          if (!res.ok || !data.secure_url) throw new Error((data.error && data.error.message) || 'No se pudo subir la imagen.');
+          // Empty thumbnail tells the server to derive it from the uploaded image
+          this.form.fullSize = data.secure_url;
+          this.form.thumbnail = '';
+        } catch (e) {
+          this.errors = Object.assign({}, this.errors, { thumbnail: 'Falló la subida: ' + e.message });
+        } finally {
+          this.uploading = false;
+        }
+      },
+
+      async save() {
+        this.saving = true;
+        this.errors = {};
+        this.clearMessages();
+        try {
+          const payload = Object.assign({}, this.form);
+          delete payload.rawDate;
+          const result = this.isPhotos ? await call('savePhoto', payload) : await call('saveEvent', this.tab, payload);
+          if (!result.ok) {
+            this.errors = result.errors;
+            return;
+          }
+          this.form = null;
+          if (this.isPhotos) {
+            this.notice = 'Foto guardada. Ya se ve en la galería.';
+          } else if (result.publish && result.publish.triggered) {
+            this.notice = 'Guardado. Los cambios aparecerán en el sitio en unos 2 minutos.';
+            this.startPolling();
+          } else {
+            this.warning = (result.publish && result.publish.warning) || 'Guardado, pero no se pidió la publicación.';
+          }
+          await this.load();
+        } catch (e) {
+          this.error = e.message;
+        } finally {
+          this.saving = false;
+        }
+      },
+
+      askDelete(item) {
+        this.clearMessages();
+        this.alsoDeleteAsset = false;
+        this.toDelete = item;
+      },
+      async confirmDelete() {
+        const item = this.toDelete;
+        this.busy = true;
+        try {
+          const result = this.isPhotos
+            ? await call('deletePhoto', item.id, this.alsoDeleteAsset)
+            : await call('deleteEvent', this.tab, item.id);
+          this.toDelete = null;
+          if (result.warning) this.warning = result.warning;
+          else if (!this.isPhotos && result.publish && result.publish.triggered) {
+            this.notice = 'Eliminado. Los cambios aparecerán en el sitio en unos 2 minutos.';
+            this.startPolling();
+          } else if (!this.isPhotos && result.publish) {
+            this.warning = result.publish.warning;
+          } else this.notice = 'Foto eliminada.';
+          await this.load();
+        } catch (e) {
+          this.toDelete = null;
+          this.error = e.message;
+        } finally {
+          this.busy = false;
+        }
+      },
+
+      async refreshDeploy() {
+        this.deployLoading = true;
+        try {
+          this.deploy = await call('getDeployStatus');
+        } catch (e) {
+          this.deploy = null;
+          this.warning = 'No se pudo consultar el estado de la publicación: ' + e.message;
+        } finally {
+          this.deployLoading = false;
+        }
+      },
+      // Poll the deploy status for a few minutes after an event save
+      startPolling() {
+        clearInterval(this.pollTimer);
+        this.pollCount = 0;
+        this.pollTimer = setInterval(async () => {
+          this.pollCount++;
+          await this.refreshDeploy();
+          const done = this.deploy && this.deploy.status === 'completed';
+          if ((done && this.pollCount > 2) || this.pollCount >= POLL_MAX) clearInterval(this.pollTimer);
+        }, POLL_MS);
+      }
+    }
+  }).mount('#app');
+})();
+</script>
