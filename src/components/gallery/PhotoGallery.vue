@@ -1,5 +1,5 @@
 <template>
-  <section id="gallery" class="bg-gray-50 dark:bg-gray-900 py-16">
+  <section id="gallery" class="tone-dark py-16">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       
       <!-- Loading State -->
@@ -7,7 +7,7 @@
         <div 
           v-for="n in 12" 
           :key="n"
-          class="bg-gray-200 dark:bg-gray-800 rounded-lg animate-shimmer"
+          class="bg-card rounded-lg animate-shimmer"
           :style="{ height: `${getSkeletonHeight(n)}px` }"
         ></div>
       </div>
@@ -26,14 +26,14 @@
           v-for="(photo, index) in filteredPhotos"
           :key="photo.id"
           :class="[
-            'group cursor-pointer overflow-hidden rounded-lg bg-white dark:bg-gray-800 shadow-lg hover:shadow-xl transition-all duration-300 transform',
+            'group cursor-pointer overflow-hidden rounded-lg border border-line bg-card shadow-lg hover:shadow-xl transition-all duration-300 transform',
             viewMode === 'masonry' ? 'break-inside-avoid' : ''
           ]"
           @click="openLightbox(index)"
         >
           <div class="relative overflow-hidden">
             <img
-              :src="photo.thumbnail"
+              :src="thumbnailUrl(photo.thumbnail)"
               :alt="photo.alt"
               class="w-full h-auto object-cover group-hover:scale-105 transition-transform duration-300"
               loading="lazy"
@@ -69,13 +69,13 @@
 
           <!-- Photo Info -->
           <div class="p-4">
-            <h3 class="font-semibold text-gray-900 dark:text-white text-sm mb-1 line-clamp-2">
+            <h3 class="font-semibold text-fg text-sm mb-1 line-clamp-2">
               {{ photo.title }}
             </h3>
-            <p class="text-gray-600 dark:text-gray-400 text-xs line-clamp-2">
+            <p class="text-muted text-xs line-clamp-2">
               {{ photo.description }}
             </p>
-            <p v-if="photo.tags && photo.tags.length > 0" class="text-gray-600 dark:text-gray-400 text-xs line-clamp-2">
+            <p v-if="photo.tags && photo.tags.length > 0" class="text-muted text-xs line-clamp-2">
               {{ Array.isArray(photo.tags) ? photo.tags.join(', ') : '' }}
             </p>
             <div class="flex items-center justify-between mt-3">
@@ -83,11 +83,11 @@
                 <svg class="w-4 h-4 text-red-500" fill="currentColor" viewBox="0 0 20 20">
                   <path fill-rule="evenodd" d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z" clip-rule="evenodd"></path>
                 </svg>
-                <span class="text-xs text-gray-500 dark:text-gray-400">{{ photo.likes }}</span>
+                <span class="text-xs text-muted">{{ photo.likes }}</span>
               </div>
               <button 
                 @click.stop="sharePhoto(photo)"
-                class="text-gray-400 hover:text-red-500 transition-colors duration-200"
+                class="text-muted hover:text-red-500 transition-colors duration-200"
               >
                 <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.367 2.684 3 3 0 00-5.367-2.684z"></path>
@@ -115,14 +115,14 @@
 
       <!-- No Results -->
       <div v-if="!loading && filteredPhotos.length === 0" class="text-center py-16">
-        <svg class="w-16 h-16 text-gray-400 mx-auto mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <svg class="w-16 h-16 text-muted mx-auto mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
         </svg>
-        <h3 class="text-lg font-semibold text-gray-900 dark:text-white mb-2">No se encontraron fotos</h3>
-        <p class="text-gray-600 dark:text-gray-400 mb-4">Intenta con diferentes filtros o términos de búsqueda</p>
+        <h3 class="text-lg font-semibold text-fg mb-2">No se encontraron fotos</h3>
+        <p class="text-muted mb-4">Intenta con diferentes filtros o términos de búsqueda</p>
         <button
           @click="clearFilters"
-          class="text-red-600 dark:text-red-400 hover:text-red-800 dark:hover:text-red-300 font-medium"
+          class="text-eyebrow hover:text-fg font-medium"
         >
           Limpiar filtros
         </button>
@@ -265,6 +265,7 @@
 <script setup lang="ts">
 import { ref, computed, onMounted, onUnmounted, watch } from 'vue'
 import { getPhotos } from '../../data/photos.js'
+import { cloudinaryWidth } from '../../utils/cloudinary.js'
 
 // Props
 interface Props {
@@ -352,6 +353,9 @@ const currentPhoto = computed(() => {
 })
 
 // Methods
+// Grid cards are at most ~600px wide: serve a resized copy (the lightbox keeps fullSize)
+const thumbnailUrl = (url: string): string => cloudinaryWidth(url, 600)
+
 const getSkeletonHeight = (index: number): number => {
   // Use a deterministic height based on index to avoid hydration mismatches
   const heights = [250, 300, 280, 320, 240, 350, 290, 260, 310, 270, 330, 285]
@@ -374,7 +378,7 @@ const getCategoryColor = (category: string): string => {
     training: 'bg-blue-500 text-white',
     competitions: 'bg-yellow-500 text-black',
     belts: 'bg-purple-500 text-white',
-    events: 'bg-green-500 text-white',
+    events: 'bg-white text-black',
     students: 'bg-red-500 text-white'
   }
   return colors[category] || 'bg-gray-500 text-white'
